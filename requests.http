@@ -17,7 +17,7 @@ Content-Type: application/json
 
 ### Update an Item
 
-PATCH http://localhost:8080/odata/v4/CustomerService/Items('fc2d6951-c2fd-4d1b-b227-1a8fc2ec6b42')
+PATCH http://localhost:8080/odata/v4/CustomerService/Items(fc2d6951-c2fd-4d1b-b227-1a8fc2ec6b42)
 Content-Type: application/json
 
 {
@@ -29,7 +29,7 @@ Content-Type: application/json
 }
 
 ### Delete an Item
-DELETE http://localhost:8080/odata/v4/CustomerService/Items('fc2d6951-c2fd-4d1b-b227-1a8fc2ec6b42')
+DELETE http://localhost:8080/odata/v4/CustomerService/Items(fc2d6951-c2fd-4d1b-b227-1a8fc2ec6b42)
 
 
 ### Create a Bill
@@ -42,12 +42,12 @@ Content-Type: application/json
   "title": "Utility Payment",
   "sumCharge": 150.75,
   "desc": "This bill includes monthly utility charges.",
-  "status": "NOT_PAID"
+  "status": "UNPAID"
 }
 
 ### Update a Bill
 
-PATCH http://localhost:8080/odata/v4/CustomerService/Bills('94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2')
+PATCH http://localhost:8080/odata/v4/CustomerService/Bills(94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2)
 Content-Type: application/json
 
 {
@@ -58,6 +58,6 @@ Content-Type: application/json
 }
 
 ### Delete a bill 
-DELETE http://localhost:8080/odata/v4/CustomerService/Bills('94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2')
+DELETE http://localhost:8080/odata/v4/CustomerService/Bills(94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2)
 
 

@@ -69,8 +69,9 @@
 				<Table
 					id="table"
 					inset="false"
-					items="{ path: '/Bills' }">
-
+					items="{ path: '/Bills' }"
+					mode="MultiSelect"
+					>
 					<columns>
 						<Column id="columnTitle" minScreenWidth="Tablet" demandPopin="true">
 							<Text id="textColumnTitle" text="Title" />
