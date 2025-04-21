@@ -1,0 +1,1 @@
+using CustomerService as service from '../../srv/bills-service';

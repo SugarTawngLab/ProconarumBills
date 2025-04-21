@@ -1,0 +1,63 @@
+### Create Items
+
+POST http://localhost:8080/odata/v4/CustomerService/Items  
+Content-Type: application/json
+
+{
+  "id": "fc2d6951-c2fd-4d1b-b227-1a8fc2ec6b42",
+  "title": "Electricity Bill",
+  "category": "MonthlyPayment",
+  "charge": 150.75,
+  "amount": 1,
+  "desc": "Monthly electricity charge",
+  "bill": {
+    "id": "94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2"
+  }
+}
+
+### Update an Item
+
+PATCH http://localhost:8080/odata/v4/CustomerService/Items('fc2d6951-c2fd-4d1b-b227-1a8fc2ec6b42')
+Content-Type: application/json
+
+{
+  "title": "Updated Electricity Bill",
+  "category": "UpdatedCategory",
+  "charge": 155.00,
+  "amount": 2,
+  "desc": "Updated monthly electricity charge"
+}
+
+### Delete an Item
+DELETE http://localhost:8080/odata/v4/CustomerService/Items('fc2d6951-c2fd-4d1b-b227-1a8fc2ec6b42')
+
+
+### Create a Bill
+
+POST http://localhost:8080/odata/v4/CustomerService/Bills
+Content-Type: application/json
+
+{
+  "id": "94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2",
+  "title": "Utility Payment",
+  "sumCharge": 150.75,
+  "desc": "This bill includes monthly utility charges.",
+  "status": "NOT_PAID"
+}
+
+### Update a Bill
+
+PATCH http://localhost:8080/odata/v4/CustomerService/Bills('94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2')
+Content-Type: application/json
+
+{
+  "title": "Updated Utility Payment",
+  "sumCharge": 160.00,
+  "desc": "Updated bill for utility charges.",
+  "status": "PAID"
+}
+
+### Delete a bill 
+DELETE http://localhost:8080/odata/v4/CustomerService/Bills('94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2')
+
+
