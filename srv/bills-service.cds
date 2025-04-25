@@ -1,6 +1,7 @@
-using { my.billing as bill } from '../db/bills';
+using { my.bill as bill } from '../db/bills';
 
 service CustomerService {
+  entity Requests as projection on bill.Requests;
   entity Bills as projection on bill.Bills;
-  entity Items as projection on bill.Items;
+  entity Comments as projection on bill.Comments;
 }

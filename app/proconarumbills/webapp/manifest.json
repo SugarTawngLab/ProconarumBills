@@ -98,12 +98,23 @@
           "target": [
             "TargetListBill"
           ]
-        }
+        },
+        {
+          "pattern": "bill",
+          "name": "BillDetail",
+          "target": "BillDetail"
+        }        
       ],
       "targets": {
         "TargetListBill": {
           "id": "ListBill",
-          "name": "ListBill"
+          "viewId": "ListBill",
+          "viewName": "ListBill"
+        },
+        "BillDetail": {
+          "id": "BillDetail",
+          "viewName": "BillDetail",
+          "viewId": "BillDetail"
         }
       }
     },

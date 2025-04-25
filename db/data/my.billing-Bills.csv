@@ -1,8 +1,0 @@
-id,title,sumCharge,desc,status,createdAt,createdBy,modifiedAt,modifiedBy
-"b1a2c3d4-e5f6-7890-abcd-111122223333","Electricity Bill",150.75,"Monthly electricity bill","UNPAID","2025-04-01T10:00:00Z","user1","2025-04-10T09:00:00Z","user1"
-"b2b3c4d5-e6f7-8901-bcde-222233334444","Water Bill",80.50,"Monthly water bill","PAID","2025-03-28T12:30:00Z","user1","2025-04-02T08:15:00Z","user1"
-"b3c4d5e6-f7g8-9012-cdef-333344445555","Internet Bill",60.00,"Home internet service","UNPAID","2025-04-03T14:45:00Z","user1","2025-04-03T14:45:00Z","user1"
-"b4d5e6f7-g8h9-0123-def0-444455556666","Gas Bill",45.25,"Gas usage for the month","PAID","2025-03-25T11:20:00Z","user1","2025-04-01T07:55:00Z","user1"
-"b5e6f7g8-h9i0-1234-ef01-555566667777","Garbage Collection",30.00,"City garbage collection fee","UNPAID","2025-04-05T09:10:00Z","user1","2025-04-05T09:10:00Z","user1"
-"b6f7g8h9-i0j1-2345-f012-666677778888","Lunch",120.00,"Team lunch at restaurant","PAID","2025-04-12T12:00:00Z","user1","2025-04-12T12:30:00Z","user1"
-"b7g8h9i0-j1k2-3456-0123-777788889999","Coffee",15.50,"Office coffee expense","UNPAID","2025-04-13T09:45:00Z","user1","2025-04-13T10:00:00Z","user1"

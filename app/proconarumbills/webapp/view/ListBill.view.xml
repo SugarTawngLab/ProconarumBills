@@ -88,9 +88,9 @@
 					</columns>
 
 					<items>
-						<ColumnListItem id="columnListItem" vAlign="Middle">
+						<ColumnListItem id="columnListItem" vAlign="Middle" type="Active" press=".onItemPress">
 						<cells>
-							<Text id="textCellTitle" text="{title}" />
+							<Text id="textCellTitle" text="{title}"/>
 							<Text id="textCellDesc" text="{desc}" />
 							<ObjectNumber id="objectNumberSumCharge" number="{sumCharge}" unit="USD" />
 							<ObjectStatus id="objectStatusPaid" text="{status}" state="{= ${status} === 'PAID' ? 'Success' : 'Error' }" />

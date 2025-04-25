@@ -1,8 +1,0 @@
-id,title,category,charge,amount,desc,bill_id
-"i1a2b3c4-d5e6-7890-abcd-100100100100","Electricity Usage","Utilities",75.00,1,"Usage charge for April","b1a2c3d4-e5f6-7890-abcd-111122223333"
-"i2b3c4d5-e6f7-8901-bcde-200200200200","Water Usage","Utilities",40.25,1,"Water consumption fee","b2b3c4d5-e6f7-8901-bcde-222233334444"
-"i3c4d5e6-f7g8-9012-cdef-300300300300","Internet Plan","Subscription",60.00,1,"April internet plan","b3c4d5e6-f7g8-9012-cdef-333344445555"
-"i4d5e6f7-g8h9-0123-def0-400400400400","Gas Supply","Utilities",45.25,1,"Monthly gas bill","b4d5e6f7-g8h9-0123-def0-444455556666"
-"i5e6f7g8-h9i0-1234-ef01-500500500500","Garbage Fee","City Services",30.00,1,"Garbage collection service","b5e6f7g8-h9i0-1234-ef01-555566667777"
-"i6f7g8h9-i0j1-2345-f012-600600600600","Lunch Meal","Food",120.00,1,"Team lunch bill","b6f7g8h9-i0j1-2345-f012-666677778888"
-"i7g8h9i0-j1k2-3456-0123-700700700700","Coffee Break","Beverage",15.50,1,"Morning coffee","b7g8h9i0-j1k2-3456-0123-777788889999"

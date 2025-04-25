@@ -1,53 +1,75 @@
-### Create Items
-
-POST http://localhost:8080/odata/v4/CustomerService/Items  
-Content-Type: application/json
-
-{
-  "id": "fc2d6951-c2fd-4d1b-b227-1a8fc2ec6b42",
-  "title": "Electricity Bill",
-  "category": "MonthlyPayment",
-  "charge": 150.75,
-  "amount": 1,
-  "desc": "Monthly electricity charge",
-  "bill": {
-    "id": "94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2"
-  }
-}
-
-### Update an Item
-
-PATCH http://localhost:8080/odata/v4/CustomerService/Items(fc2d6951-c2fd-4d1b-b227-1a8fc2ec6b42)
-Content-Type: application/json
-
-{
-  "title": "Updated Electricity Bill",
-  "category": "UpdatedCategory",
-  "charge": 155.00,
-  "amount": 2,
-  "desc": "Updated monthly electricity charge"
-}
-
-### Delete an Item
-DELETE http://localhost:8080/odata/v4/CustomerService/Items(fc2d6951-c2fd-4d1b-b227-1a8fc2ec6b42)
-
-
 ### Create a Bill
-
 POST http://localhost:8080/odata/v4/CustomerService/Bills
 Content-Type: application/json
 
 {
-  "id": "94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2",
   "title": "Utility Payment",
   "sumCharge": 150.75,
   "desc": "This bill includes monthly utility charges.",
-  "status": "UNPAID"
+  "status": "UNPAID",
+  "items": [
+    {
+      "title"    : "coffee",
+      "category" : "drink",
+      "charge"   : 20.00,
+      "amount"   : 3,
+      "desc"     : "3 ly coffee"
+    },
+    {
+      "title"    : "trasua",
+      "category" : "drink",
+      "charge"   : 25.00,
+      "amount"   : 5,
+      "desc"     : "5 ly coffee"
+    }
+  ]
 }
+
+
+### Retrieve Bill Information by ID
+GET http://localhost:8080/odata/v4/CustomerService/Bills(ID=e2626401-bba4-4607-a690-ce8d715eca7e)?$expand=items
+
+
+
+
+
+### Create items into a particular Bill
+
+POST http://localhost:8080/odata/v4/CustomerService/Items
+Content-Type: application/json
+
+{
+    "title": "nuoc ep",
+      "category": "drink",
+      "charge": 15.00,
+      "amount": 1,
+      "desc": "1 ly nuoc ep",
+      "bill_ID": "e2626401-bba4-4607-a690-ce8d715eca7e"
+}
+
+### Update an Item
+
+PATCH http://localhost:8080/odata/v4/CustomerService/Items(d575d489-7552-4469-b819-72847bbc960a)
+Content-Type: application/json
+
+{
+      "title": "nuoc ep updated",
+      "category": "drink",
+      "charge": 15.00,
+      "amount": 1,
+      "desc": "1 ly nuoc ep updated",
+      "bill_ID": "e2626401-bba4-4607-a690-ce8d715eca7e"
+}
+
+### Delete an Item
+DELETE http://localhost:8080/odata/v4/CustomerService/Items(3a3839da-e824-4302-8609-c1f3c0cead04)
+
+
+
 
 ### Update a Bill
 
-PATCH http://localhost:8080/odata/v4/CustomerService/Bills(94e2d03f-8f1a-4a5e-84b7-28cbe3cf94f2)
+PATCH http://localhost:8080/odata/v4/CustomerService/Bills(e2626401-bba4-4607-a690-ce8d715eca7e)
 Content-Type: application/json
 
 {

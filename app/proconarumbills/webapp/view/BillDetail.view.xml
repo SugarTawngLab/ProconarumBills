@@ -1,0 +1,160 @@
+<mvc:View
+	controllerName="ns.proconarumbills.controller.BillDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	height="100%">
+
+	<f:DynamicPage id="dynamicPageId"
+		stickySubheaderProvider="iconTabBar"
+		class="sapUiNoContentPadding"
+		toggleHeaderOnTitleClick="false">
+
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle id="idDynamicPageTitle">
+				<f:heading>
+					<Title id="idTitleHeader" text="Header Title"/>
+				</f:heading>
+				<f:breadcrumbs>
+					<Breadcrumbs id="idBreadcrumbs">
+						<Link id="idLinkHome" text="Home" />
+						<Link id="idLinkPage1" text="Page 1" />
+						<Link id="idLinkPage2" text="Page 2" />
+						<Link id="idLinkPage3" text="Page 3" />
+						<Link id="idLinkPage4" text="Page 4" />
+						<Link id="idLinkPage5" text="Page 5" />
+					</Breadcrumbs>
+				</f:breadcrumbs>
+				<f:expandedContent>
+					<Label id="idExpandedLabel" text="This is a subheading"/>
+				</f:expandedContent>
+				<f:snappedContent>
+					<Label id="idSnappedLabel" text="This is a subheading"/>
+				</f:snappedContent>
+				<f:snappedTitleOnMobile>
+					<Title id="idMobileTitle" text="This is a subheading"/>
+				</f:snappedTitleOnMobile>
+				<f:content>
+					<OverflowToolbar id="idOverflowToolbar">
+						<GenericTag id="idGenericTag" text="SR"
+							status="Error"
+							press="onGenericTagPress"
+							design="StatusIconHidden">
+							<ObjectNumber id="idObjectNumber" number="2"
+								unit="M"
+								emphasized="false"
+								state="Error"/>
+						</GenericTag>
+					</OverflowToolbar>
+				</f:content>
+				<f:actions>
+					<Button id="idBtnEdit" text="Edit" type="Emphasized"/>
+					<Button id="idBtnDelete" text="Delete" type="Transparent"/>
+					<Button id="idBtnCopy" text="Copy" type="Transparent"/>
+					<Button id="idBtnToggleFooter" text="Toggle Footer" type="Transparent" press="onToggleFooter"/>
+					<Button id="idBtnAction" icon="sap-icon://action" type="Transparent"/>
+				</f:actions>
+				<f:navigationActions>
+          <Button id="idBtnBack" icon="sap-icon://nav-back" type="Transparent" press="onNavBack" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader id="idDynamicPageHeader" pinnable="true">
+				<layout:HorizontalLayout id="idHorizontalLayout" allowWrapping="true">
+					<layout:VerticalLayout id="idVerticalLayoutLeft" class="sapUiMediumMarginEnd">
+						<ObjectAttribute id="idAttrLocation" title="Location" text="Warehouse A"/>
+						<ObjectAttribute id="idAttrHallway" title="Halway" text="23L"/>
+						<ObjectAttribute id="idAttrRack" title="Rack" text="34"/>
+					</layout:VerticalLayout>
+
+					<layout:VerticalLayout id="idVerticalLayoutRight">
+						<ObjectAttribute id="idAttrAvailability" title="Availability"/>
+						<ObjectStatus id="idStatusAvailability" text="In Stock" state="Success" />
+					</layout:VerticalLayout>
+				</layout:HorizontalLayout>
+			</f:DynamicPageHeader>
+		</f:header>
+
+		<!-- Content (unchanged) -->
+		<f:content>
+      <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+        <items>
+          <IconTabFilter id="idTabFilterProducts" text="Products">
+            <Table id="idProductsTable"
+              inset="false"
+              sticky="HeaderToolbar,ColumnHeaders"
+              items="{
+                path: '/ProductCollection',
+                sorter: { path: 'Name' }
+              }"
+              class="sapUiSmallNegativeMarginBeginEnd"
+              width="auto">
+              <headerToolbar>
+                <Toolbar id="idToolbarProducts">
+                  <Label id="idLabelCars" text="Cars" />
+                </Toolbar>
+              </headerToolbar>
+              <columns>
+                <Column id="idColumnProduct" width="12em">
+                  <Text id="idColumnHeaderProduct" text="Product" />
+                </Column>
+                <Column id="idColumnSupplier" minScreenWidth="Tablet" demandPopin="true">
+                  <Text id="idColumnHeaderSupplier" text="Supplier" />
+                </Column>
+                <Column id="idColumnDimensions" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                  <Text id="idColumnHeaderDimensions" text="Dimensions" />
+                </Column>
+                <Column id="idColumnPrice" hAlign="End">
+                  <Text id="idColumnHeaderPrice" text="Price" />
+                </Column>
+              </columns>
+              <items>
+                <ColumnListItem id="idColumnListItemProduct">
+                  <cells>
+                    <ObjectIdentifier id="idObjIdentifierProduct" title="{Name}" text="{ProductId}" />
+                    <Text id="idTextSupplierName" text="{SupplierName}" />
+                    <Text id="idTextDimensions" text="{Width} x {Depth} x {Height} {DimUnit}" />
+                    <ObjectNumber
+                      id="idObjNumberPrice"
+                      number="{
+                        parts:[{path:'Price'},{path:'CurrencyCode'}],
+                        type: 'sap.ui.model.type.Currency',
+                        formatOptions: {showMeasure: false}
+                      }"
+                      unit="{CurrencyCode}" />
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </IconTabFilter>
+
+          <IconTabFilter id="idTabFilterAttachments" text="Attachments">
+            <Text id="idTextAttachments" text="Attachments go here ..." />
+          </IconTabFilter>
+
+          <IconTabFilter id="idTabFilterNotes" text="Notes">
+            <Text id="idTextNotes" text="Notes go here ..." />
+          </IconTabFilter>
+
+          <IconTabFilter id="idTabFilterPeople" text="People">
+            <Text id="idTextPeople" text="People content goes here ..." />
+          </IconTabFilter>
+        </items>
+      </IconTabBar>
+    </f:content>
+
+    <f:footer>
+      <OverflowToolbar id="idFooterToolbar">
+        <ToolbarSpacer id="idToolbarSpacer" />
+        <Button id="idBtnAccept" type="Accept" text="Accept" />
+        <Button id="idBtnReject" type="Reject" text="Reject" />
+      </OverflowToolbar>
+    </f:footer>
+
+	</f:DynamicPage>
+</mvc:View>

@@ -1,22 +1,38 @@
-namespace my.billing;
+using { cuid, managed } from '@sap/cds/common';
 
-using { managed } from '@sap/cds/common';
+namespace my.bill;
 
-entity Bills : managed {
-  key id        : UUID;
-      title     : String;
-      sumCharge : Decimal(10,2);
-      desc      : String;
-      status    : String;
-      items     : Association to many Items on items.bill = $self;
+entity Requests : cuid, managed {
+  title       : String;
+  desc        : String;
+  status      : String enum {
+      New;
+      Rejected;
+      Approved;
+      Paid;
+  };
+  urgent      : Boolean;
+  urgentDate  : Date;
+
+  Bills       : Composition of many Bills on Bills.request = $self;
+  Comments    : Composition of many Comments on Comments.request = $self;
 }
 
-entity Items {
-  key id       : UUID;
-      title    : String;
-      category : String;
-      charge   : Decimal(10,2);
-      amount   : Integer;
-      desc     : String;
-      bill     : Association to Bills;
+entity Bills : cuid {
+  title       : String;
+  attachImage : LargeBinary;
+  category    : String enum {
+      Daily_Meal;
+      Office_M;
+      Others;
+  };
+  charge      : Decimal(10,2);
+  
+  request     : Association to Requests;
+}
+
+entity Comments : cuid, managed {
+  content     : String;
+
+  request     : Association to Requests;
 }
