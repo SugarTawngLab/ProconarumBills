@@ -69,21 +69,27 @@
 				<Table
 					id="table"
 					inset="false"
-					items="{ path: '/Bills' }"
+					items="{ path: '/Requests' }"
 					mode="MultiSelect"
 					>
 					<columns>
 						<Column id="columnTitle" minScreenWidth="Tablet" demandPopin="true">
 							<Text id="textColumnTitle" text="Title" />
 						</Column>
-						<Column id="columnDescription" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnDescription" text="Description" />
+						<Column id="columnRequester" minScreenWidth=" " demandPopin="true">
+							<Text id="textColumnRequester" text="Requester" />
 						</Column>
-						<Column id="columnAmount" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnAmount" text="Amount" />
+						<Column id="columnCreateDate" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnCreateDate" text="Create Date" />
 						</Column>
 						<Column id="columnStatus" minScreenWidth="Tablet" demandPopin="true">
 							<Text id="textColumnStatus" text="Status" />
+						</Column>
+						<Column id="columnUrgent" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnUrgent" text="Urgent" />
+						</Column>
+						<Column id="columnUrgentDate" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnUrgentDate" text="UrgentDate" />
 						</Column>
 					</columns>
 
@@ -91,9 +97,12 @@
 						<ColumnListItem id="columnListItem" vAlign="Middle" type="Active" press=".onItemPress">
 						<cells>
 							<Text id="textCellTitle" text="{title}"/>
-							<Text id="textCellDesc" text="{desc}" />
-							<ObjectNumber id="objectNumberSumCharge" number="{sumCharge}" unit="USD" />
-							<ObjectStatus id="objectStatusPaid" text="{status}" state="{= ${status} === 'PAID' ? 'Success' : 'Error' }" />
+							<Text id="textCellCreateBy" text="{createdBy}" />
+							<Text id="textCellCreateAt" text="{createdAt}" />
+							<!-- <ObjectNumber id="objectNumberSumCharge" number="{sumCharge}" unit="USD" /> -->
+							<ObjectStatus id="objectStatus" text="{status}" state="{= ${status} === 'New' ? 'Error' : 'Success'}" />
+							<ObjectStatus id="objectUrgent" text="{urgent}" state="{= ${status} === 'TRUE' ? 'Error' : 'Success'}" />
+							<Text id="textCellUrgentDate" text="{urgentDate}" />
 						</cells>  
 						</ColumnListItem>
 					</items>
