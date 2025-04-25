@@ -1,29 +1,67 @@
+### Create a Request
+POST http://localhost:8080/odata/v4/CustomerService/Requests
+Content-Type: application/json
+
+{
+  "title": "Phí sinh hoạt hàng tháng của văn phòng.",
+  "desc": "Tiền dien, tien nuoc, tien mang thang 03/2025 văn phòng Cũ",
+  "status": "New",
+  "urgent": false,
+  "Bills": [
+    {
+      "title": "Tien dien",
+      "category": "Office_M",
+      "charge": 500000
+    },
+    {
+      "title": "Tien nuoc",
+      "category": "Office_M",
+      "charge": 500000
+    },
+    {
+      "title": "Tien mang",
+      "category": "Office_M",
+      "charge": 500000
+    }
+  ],
+  "Comments": [
+    {
+      "content": "All information in this request is resonable, I accepted it."
+    },
+    {
+      "content": "I repaid for Ahuy"
+    },
+    {
+      "content": "The refund was sent to my account"
+    }
+  ]
+}
+
+
+
 ### Create a Bill
 POST http://localhost:8080/odata/v4/CustomerService/Bills
 Content-Type: application/json
 
 {
-  "title": "Utility Payment",
-  "sumCharge": 150.75,
-  "desc": "This bill includes monthly utility charges.",
-  "status": "UNPAID",
-  "items": [
-    {
-      "title"    : "coffee",
-      "category" : "drink",
-      "charge"   : 20.00,
-      "amount"   : 3,
-      "desc"     : "3 ly coffee"
-    },
-    {
-      "title"    : "trasua",
-      "category" : "drink",
-      "charge"   : 25.00,
-      "amount"   : 5,
-      "desc"     : "5 ly coffee"
-    }
-  ]
+  "title": "Tiền vận chuyển",
+  "category": "Others",
+  "charge": 2000000.00,
+  "request_ID": "25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3"
 }
+
+
+### Create a Comment
+POST http://localhost:8080/odata/v4/CustomerService/Comments
+Content-Type: application/json
+
+{
+  "content": "Yêu cầu xem lại hóa đơn.",
+  "request_ID": "25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3"
+}
+
+
+### Below is the old version
 
 
 ### Retrieve Bill Information by ID
