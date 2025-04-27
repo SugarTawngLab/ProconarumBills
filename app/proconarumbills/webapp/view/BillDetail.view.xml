@@ -15,26 +15,23 @@
 		<f:title>
 			<f:DynamicPageTitle id="idDynamicPageTitle">
 				<f:heading>
-					<Title id="idTitleHeader" text="Header Title"/>
+					<Title id="idTitleHeader" text="{title}"/>
 				</f:heading>
 				<f:breadcrumbs>
 					<Breadcrumbs id="idBreadcrumbs">
 						<Link id="idLinkHome" text="Home" />
 						<Link id="idLinkPage1" text="Page 1" />
 						<Link id="idLinkPage2" text="Page 2" />
-						<Link id="idLinkPage3" text="Page 3" />
-						<Link id="idLinkPage4" text="Page 4" />
-						<Link id="idLinkPage5" text="Page 5" />
 					</Breadcrumbs>
 				</f:breadcrumbs>
 				<f:expandedContent>
-					<Label id="idExpandedLabel" text="This is a subheading"/>
+					<Label id="idExpandedLabel" text="{desc}"/>
 				</f:expandedContent>
 				<f:snappedContent>
-					<Label id="idSnappedLabel" text="This is a subheading"/>
+					<Label id="idSnappedLabel" text="{desc}"/>
 				</f:snappedContent>
 				<f:snappedTitleOnMobile>
-					<Title id="idMobileTitle" text="This is a subheading"/>
+					<Title id="idMobileTitle" text="{desc}"/>
 				</f:snappedTitleOnMobile>
 				<f:content>
 					<OverflowToolbar id="idOverflowToolbar">
@@ -67,13 +64,14 @@
 			<f:DynamicPageHeader id="idDynamicPageHeader" pinnable="true">
 				<layout:HorizontalLayout id="idHorizontalLayout" allowWrapping="true">
 					<layout:VerticalLayout id="idVerticalLayoutLeft" class="sapUiMediumMarginEnd">
-						<ObjectAttribute id="idAttrLocation" title="Location" text="Warehouse A"/>
-						<ObjectAttribute id="idAttrHallway" title="Halway" text="23L"/>
+						<ObjectAttribute id="idAttrLocation" title="Urgent" text="{urgent}"/>
+						<ObjectAttribute id="idAttrAvailability" title="Requester" text="{createdBy}" />
 						<ObjectAttribute id="idAttrRack" title="Rack" text="34"/>
 					</layout:VerticalLayout>
 
 					<layout:VerticalLayout id="idVerticalLayoutRight">
-						<ObjectAttribute id="idAttrAvailability" title="Availability"/>
+						
+						<ObjectAttribute id="idAttrHallway" title="Urgent Date" text="{urgentDate}"/>
 						<ObjectStatus id="idStatusAvailability" text="In Stock" state="Success" />
 					</layout:VerticalLayout>
 				</layout:HorizontalLayout>
@@ -89,7 +87,7 @@
               inset="false"
               sticky="HeaderToolbar,ColumnHeaders"
               items="{
-                path: '/ProductCollection',
+                path: '/Requests',
                 sorter: { path: 'Name' }
               }"
               class="sapUiSmallNegativeMarginBeginEnd"

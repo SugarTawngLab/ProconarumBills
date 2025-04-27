@@ -70,6 +70,12 @@
           "autoExpandSelect": true,
           "earlyRequests": true
         }
+      },
+      "requests": {
+        "dataSource": "mainService",
+        "settings": {
+          "operationMode": "Server"
+        }
       }
     },
     "resources": {
@@ -100,7 +106,7 @@
           ]
         },
         {
-          "pattern": "bill",
+          "pattern": "bill/{billId}",
           "name": "BillDetail",
           "target": "BillDetail"
         }        

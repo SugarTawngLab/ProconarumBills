@@ -7,41 +7,16 @@ sap.ui.define([
 	"use strict";
 
 	return Controller.extend("ns.proconarumbills.controller.BillDetail", {
-		
-		onInit: function () {
+		onInit() {
 			const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("BillDetail").attachPatternMatched(this._onRouteMatched, this);
+			oRouter.getRoute("BillDetail").attachPatternMatched(this.onObjectMatched, this);
 		},
 
-		_onRouteMatched: function (oEvent) {
-			// const billId = oEvent.getParameter("arguments").billId;
-
-			// // For JSONModel
-			// const oView = this.getView();
-			// const oModel = oView.getModel(); // assuming default model
-
-			// // Optional: show busy indicator while loading
-			// oView.setBusy(true);
-
-			// // Check if the model is a JSONModel and filter data locally
-			// if (oModel && oModel instanceof JSONModel) {
-			// 	const aBills = oModel.getProperty("/Bills") || [];
-			// 	const oSelectedBill = aBills.find(bill => bill.billId === billId);
-
-			// 	if (oSelectedBill) {
-			// 		const oDetailModel = new JSONModel(oSelectedBill);
-			// 		oView.setModel(oDetailModel, "bill");
-			// 	} else {
-			// 		MessageBox.error("Bill not found.");
-			// 	}
-			// 	oView.setBusy(false);
-			// }
-
-			// For ODataModel: bind element directly
-			// oView.bindElement({
-			//     path: "/Bills('" + billId + "')"
-			// });
-
+		onObjectMatched(oEvent) {
+			this.getView().bindElement({
+				path: "/" + window.decodeURIComponent(oEvent.getParameter("arguments").billId),
+				model: undefined
+			});
 		},
 
 		onNavBack: function () {

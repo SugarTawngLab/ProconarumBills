@@ -71,13 +71,13 @@ sap.ui.define([
         },
 
         onItemPress: function (oEvent) {
-            // const oItem = oEvent.getSource();
-            // const oRouter = this.getOwnerComponent().getRouter();
-            // oRouter.navTo("detail", {
-			// 	invoicePath: window.encodeURIComponent(oItem.getBindingContext("bill").getPath().substring(1))
-			// });
+            const oItem = oEvent.getSource();
             const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("BillDetail");
+            oRouter.navTo("BillDetail", {
+				billId: window.encodeURIComponent(oItem.getBindingContext().getPath().substring(1))
+			});
+            // const oRouter = this.getOwnerComponent().getRouter();
+			// oRouter.navTo("BillDetail");
         }  
     });
 });

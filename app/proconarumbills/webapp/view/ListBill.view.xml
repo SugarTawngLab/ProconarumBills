@@ -76,7 +76,7 @@
 						<Column id="columnTitle" minScreenWidth="Tablet" demandPopin="true">
 							<Text id="textColumnTitle" text="Title" />
 						</Column>
-						<Column id="columnRequester" minScreenWidth=" " demandPopin="true">
+						<Column id="columnRequester" minScreenWidth="Tablet" demandPopin="true">
 							<Text id="textColumnRequester" text="Requester" />
 						</Column>
 						<Column id="columnCreateDate" minScreenWidth="Tablet" demandPopin="true">
@@ -96,14 +96,14 @@
 					<items>
 						<ColumnListItem id="columnListItem" vAlign="Middle" type="Active" press=".onItemPress">
 						<cells>
-							<Text id="textCellTitle" text="{title}"/>
-							<Text id="textCellCreateBy" text="{createdBy}" />
-							<Text id="textCellCreateAt" text="{createdAt}" />
+							<Text id="textCellTitle" text="{title}" />
+							<Text id="textCreatedBy" text="{createdBy}" />
+							<Text id="textCreatedAt" text="{createdAt}" />
 							<!-- <ObjectNumber id="objectNumberSumCharge" number="{sumCharge}" unit="USD" /> -->
 							<ObjectStatus id="objectStatus" text="{status}" state="{= ${status} === 'New' ? 'Error' : 'Success'}" />
-							<ObjectStatus id="objectUrgent" text="{urgent}" state="{= ${status} === 'TRUE' ? 'Error' : 'Success'}" />
+							<ObjectStatus id="objectUrgent" text="{urgent}" state="{= ${status} === 'TRUE' ? 'Success': 'Error'}" />
 							<Text id="textCellUrgentDate" text="{urgentDate}" />
-						</cells>  
+						</cells>
 						</ColumnListItem>
 					</items>
 				</Table>
