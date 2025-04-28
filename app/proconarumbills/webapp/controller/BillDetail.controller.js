@@ -15,6 +15,9 @@ sap.ui.define([
 		onObjectMatched(oEvent) {
 			this.getView().bindElement({
 				path: "/" + window.decodeURIComponent(oEvent.getParameter("arguments").billId),
+				parameters: {
+					expand: 'Bills,Comments'
+				  },
 				model: undefined
 			});
 		},

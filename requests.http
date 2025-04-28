@@ -39,7 +39,7 @@ Content-Type: application/json
 
 
 
-### Create a Bill
+### Create a Logistic Bill
 POST http://localhost:8080/odata/v4/CustomerService/Bills
 Content-Type: application/json
 
@@ -50,6 +50,38 @@ Content-Type: application/json
   "request_ID": "25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3"
 }
 
+### Create a Cleaning Bill
+POST http://localhost:8080/odata/v4/CustomerService/Bills
+Content-Type: application/json
+
+{
+  "title": "Tiền vệ sinh",
+  "category": "Others",
+  "charge": 250000.00,
+  "request_ID": "25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3"
+}
+
+### Create a Coffee Bill (daily meal)
+POST http://localhost:8080/odata/v4/CustomerService/Bills
+Content-Type: application/json
+
+{
+  "title": "Tiền cà phê",
+  "category": "Daily meal",
+  "charge": 250000.00,
+  "request_ID": "25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3"
+}
+
+### Create a Buying new chair bill (Office_M)
+POST http://localhost:8080/odata/v4/CustomerService/Bills
+Content-Type: application/json
+
+{
+  "title": "Mua ghế mới",
+  "category": "Office_M",
+  "charge": 2500000.00,
+  "request_ID": "25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3"
+}
 
 ### Create a Comment
 POST http://localhost:8080/odata/v4/CustomerService/Comments

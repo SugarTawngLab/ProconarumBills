@@ -64,15 +64,15 @@
 			<f:DynamicPageHeader id="idDynamicPageHeader" pinnable="true">
 				<layout:HorizontalLayout id="idHorizontalLayout" allowWrapping="true">
 					<layout:VerticalLayout id="idVerticalLayoutLeft" class="sapUiMediumMarginEnd">
-						<ObjectAttribute id="idAttrLocation" title="Urgent" text="{urgent}"/>
+						<ObjectStatus id="idAttrLocation" title="Urgent" text="{= ${urgent} ? 'Yes' : 'No' }" state="{= ${urgent} ? 'Error' : 'Success' }" />
 						<ObjectAttribute id="idAttrAvailability" title="Requester" text="{createdBy}" />
-						<ObjectAttribute id="idAttrRack" title="Rack" text="34"/>
+						<ObjectAttribute id="idAttrRack" title="Reviewer" text="{modifiedBy}"/>
 					</layout:VerticalLayout>
 
 					<layout:VerticalLayout id="idVerticalLayoutRight">
-						
 						<ObjectAttribute id="idAttrHallway" title="Urgent Date" text="{urgentDate}"/>
-						<ObjectStatus id="idStatusAvailability" text="In Stock" state="Success" />
+						<ObjectAttribute id="idAttrCreatedAt" title="Request Date" text="{createdAt}" />
+						<ObjectAttribute id="idAttrUpdatedAt" title="Review Date" text="{modifiedAt}" />
 					</layout:VerticalLayout>
 				</layout:HorizontalLayout>
 			</f:DynamicPageHeader>
@@ -82,65 +82,52 @@
 		<f:content>
       <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
         <items>
-          <IconTabFilter id="idTabFilterProducts" text="Products">
+          <IconTabFilter id="idTabFilterProducts" text="Expenses">
             <Table id="idProductsTable"
               inset="false"
               sticky="HeaderToolbar,ColumnHeaders"
               items="{
-                path: '/Requests',
-                sorter: { path: 'Name' }
+                path: '/Bills',
+                sorter: { path: 'title' }
               }"
               class="sapUiSmallNegativeMarginBeginEnd"
               width="auto">
               <headerToolbar>
                 <Toolbar id="idToolbarProducts">
-                  <Label id="idLabelCars" text="Cars" />
+                  <Label id="idLabelCars" text="Bills" />
                 </Toolbar>
               </headerToolbar>
               <columns>
                 <Column id="idColumnProduct" width="12em">
-                  <Text id="idColumnHeaderProduct" text="Product" />
+                  <Text id="idColumnHeaderProduct" text="Title" />
                 </Column>
-                <Column id="idColumnSupplier" minScreenWidth="Tablet" demandPopin="true">
-                  <Text id="idColumnHeaderSupplier" text="Supplier" />
+                <Column id="idColumnSupplier" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                  <Text id="idColumnHeaderSupplier" text="Category" />
                 </Column>
                 <Column id="idColumnDimensions" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
-                  <Text id="idColumnHeaderDimensions" text="Dimensions" />
-                </Column>
-                <Column id="idColumnPrice" hAlign="End">
-                  <Text id="idColumnHeaderPrice" text="Price" />
+                  <Text id="idColumnHeaderDimensions" text="Charge" />
                 </Column>
               </columns>
               <items>
                 <ColumnListItem id="idColumnListItemProduct">
                   <cells>
-                    <ObjectIdentifier id="idObjIdentifierProduct" title="{Name}" text="{ProductId}" />
-                    <Text id="idTextSupplierName" text="{SupplierName}" />
-                    <Text id="idTextDimensions" text="{Width} x {Depth} x {Height} {DimUnit}" />
+                    <ObjectIdentifier id="idObjIdentifierProduct" title="{title}" text="{ProductId}" />
+                    <Text id="idTextCategory" text="{category}" />
                     <ObjectNumber
-                      id="idObjNumberPrice"
+                      id="idObjNumberCharge"
                       number="{
-                        parts:[{path:'Price'},{path:'CurrencyCode'}],
+                        parts:[{path:'charge'}],
                         type: 'sap.ui.model.type.Currency',
                         formatOptions: {showMeasure: false}
                       }"
-                      unit="{CurrencyCode}" />
+                      unit="VND" />
                   </cells>
                 </ColumnListItem>
               </items>
             </Table>
           </IconTabFilter>
-
-          <IconTabFilter id="idTabFilterAttachments" text="Attachments">
+          <IconTabFilter id="idTabFilterAttachments" text="Comments">
             <Text id="idTextAttachments" text="Attachments go here ..." />
-          </IconTabFilter>
-
-          <IconTabFilter id="idTabFilterNotes" text="Notes">
-            <Text id="idTextNotes" text="Notes go here ..." />
-          </IconTabFilter>
-
-          <IconTabFilter id="idTabFilterPeople" text="People">
-            <Text id="idTextPeople" text="People content goes here ..." />
           </IconTabFilter>
         </items>
       </IconTabBar>
