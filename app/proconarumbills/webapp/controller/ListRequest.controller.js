@@ -73,11 +73,9 @@ sap.ui.define([
         onItemPress: function (oEvent) {
             const oItem = oEvent.getSource();
             const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("BillDetail", {
-				billId: window.encodeURIComponent(oItem.getBindingContext().getPath().substring(1))
+            oRouter.navTo("RequestDetail", {
+				RequestId: window.encodeURIComponent(oItem.getBindingContext().getPath().substring(1))
 			});
-            // const oRouter = this.getOwnerComponent().getRouter();
-			// oRouter.navTo("BillDetail");
         }  
     });
 });

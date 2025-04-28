@@ -6,15 +6,15 @@ sap.ui.define([
 ], function (Controller, JSONModel, MessageToast, MessageBox) {
 	"use strict";
 
-	return Controller.extend("ns.proconarumbills.controller.BillDetail", {
+	return Controller.extend("ns.proconarumbills.controller.RequestDetail", {
 		onInit() {
 			const oRouter = this.getOwnerComponent().getRouter();
-			oRouter.getRoute("BillDetail").attachPatternMatched(this.onObjectMatched, this);
+			oRouter.getRoute("RequestDetail").attachPatternMatched(this.onObjectMatched, this);
 		},
 
 		onObjectMatched(oEvent) {
 			this.getView().bindElement({
-				path: "/" + window.decodeURIComponent(oEvent.getParameter("arguments").billId),
+				path: "/" + window.decodeURIComponent(oEvent.getParameter("arguments").RequestId),
 				parameters: {
 					expand: 'Bills,Comments'
 				  },

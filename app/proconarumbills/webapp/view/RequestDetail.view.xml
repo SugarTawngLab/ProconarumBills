@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="ns.proconarumbills.controller.BillDetail"
+	controllerName="ns.proconarumbills.controller.RequestDetail"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns="sap.m"
 	xmlns:f="sap.f"

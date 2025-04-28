@@ -106,9 +106,9 @@
           ]
         },
         {
-          "pattern": "bill/{billId}",
-          "name": "BillDetail",
-          "target": "BillDetail"
+          "pattern": "RequestDetail/{RequestId}",
+          "name": "RequestDetail",
+          "target": "RequestDetail"
         }        
       ],
       "targets": {
@@ -117,10 +117,10 @@
           "viewId": "ListRequest",
           "viewName": "ListRequest"
         },
-        "BillDetail": {
-          "id": "BillDetail",
-          "viewName": "BillDetail",
-          "viewId": "BillDetail"
+        "RequestDetail": {
+          "id": "RequestDetail",
+          "viewName": "RequestDetail",
+          "viewId": "RequestDetail"
         }
       }
     },
