@@ -111,7 +111,7 @@
               <items>
                 <ColumnListItem id="idColumnListItemProduct">
                   <cells>
-                    <ObjectIdentifier id="idObjIdentifierProduct" title="{title}" text="{ProductId}" />
+                    <Text id="idObjIdentifierProduct" text="{title}"/>
                     <Text id="idTextCategory" text="{category}" />
                     <ObjectNumber
                       id="idObjNumberCharge"
@@ -127,7 +127,37 @@
             </Table>
           </IconTabFilter>
           <IconTabFilter id="idTabFilterAttachments" text="Comments">
-            <Text id="idTextAttachments" text="Attachments go here ..." />
+            <Table id="idProductsTable1"
+              inset="false"
+              sticky="HeaderToolbar,ColumnHeaders"
+              items="{
+                path: '/Comments',
+                sorter: { path: 'createdBy' }
+              }"
+              class="sapUiSmallNegativeMarginBeginEnd"
+              width="auto">
+              <headerToolbar>
+                <Toolbar id="idToolbarProducts1">
+                  <Label id="idLabelCars1" text="Comments table" />
+                </Toolbar>
+              </headerToolbar>
+              <columns>
+                <Column id="idColumnProduct1" width="12em">
+                  <Text id="idColumnHeaderProduct1" text="Person" />
+                </Column>
+                <Column id="idColumnSupplier1" minScreenWidth="Tablet" demandPopin="true" >
+                  <Text id="idColumnHeaderSupplier1" text="Content" />
+                </Column>
+              </columns>
+              <items>
+                <ColumnListItem id="idColumnListItemProduct1">
+                  <cells>
+                    <Text id="idObjIdentifierProduct1" text="{createdBy}" />
+                    <Text id="idTextCategory1" text="{content}" />
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
           </IconTabFilter>
         </items>
       </IconTabBar>
@@ -140,6 +170,5 @@
         <Button id="idBtnReject" type="Reject" text="Reject" />
       </OverflowToolbar>
     </f:footer>
-
 	</f:DynamicPage>
 </mvc:View>

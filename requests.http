@@ -89,8 +89,23 @@ Content-Type: application/json
 
 {
   "content": "Yêu cầu xem lại hóa đơn.",
+  "request_ID": "25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3",
+  "createdBy": "ATrung",
+  "createdAt": "2025-04-20T10:30:00Z"
+}
+
+### Create a Comment
+POST http://localhost:8080/odata/v4/CustomerService/Comments
+Content-Type: application/json
+createdBy: ATrung
+createdAt: 2025-04-20T10:30:00Z
+
+{
+  "content": "Yêu cầu xem lại hóa đơn.",
   "request_ID": "25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3"
 }
+
+
 
 
 ### Below is the old version
