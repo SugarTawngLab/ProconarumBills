@@ -30,7 +30,7 @@ sap.ui.define([
 				window.history.go(-1);
 			} else {
 				const oRouter = this.getOwnerComponent().getRouter();
-				oRouter.navTo("ListBill", {}, true);
+				oRouter.navTo("ListRequest", {}, true);
 			}
 		}
 	});

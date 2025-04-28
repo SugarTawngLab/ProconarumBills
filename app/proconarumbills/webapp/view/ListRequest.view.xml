@@ -1,5 +1,5 @@
 <mvc:View
-	controllerName="ns.proconarumbills.controller.ListBill"
+	controllerName="ns.proconarumbills.controller.ListRequest"
 	height="100%"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"

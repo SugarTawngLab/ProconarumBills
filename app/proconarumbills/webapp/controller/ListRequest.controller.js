@@ -5,7 +5,7 @@ sap.ui.define([
 ], (Controller, MessageToast, MessageBox) => {
     "use strict";
 
-    return Controller.extend("ns.proconarumbills.controller.ListBill", {
+    return Controller.extend("ns.proconarumbills.controller.ListRequest", {
         onInit() {
         },
         

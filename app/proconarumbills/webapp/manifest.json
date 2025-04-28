@@ -99,10 +99,10 @@
       },
       "routes": [
         {
-          "name": "RouteListBill",
+          "name": "ListRequest",
           "pattern": ":?query:",
           "target": [
-            "TargetListBill"
+            "ListRequest"
           ]
         },
         {
@@ -112,10 +112,10 @@
         }        
       ],
       "targets": {
-        "TargetListBill": {
-          "id": "ListBill",
-          "viewId": "ListBill",
-          "viewName": "ListBill"
+        "ListRequest": {
+          "id": "ListRequest",
+          "viewId": "ListRequest",
+          "viewName": "ListRequest"
         },
         "BillDetail": {
           "id": "BillDetail",
