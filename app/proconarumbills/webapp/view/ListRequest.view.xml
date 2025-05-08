@@ -63,8 +63,8 @@
 					<Toolbar id="toolbarActions">
 						<ToolbarSpacer id="toolbarSpacer"/>
 						<Button id="btnCreate" text="Create" icon="sap-icon://add" press=".onCreate" />
-						<Button id="btnDelete" text="Delete" icon="sap-icon://delete" press=".onDelete" />
-						<Button id="btnExport" text="Export to Excel" icon="sap-icon://excel-attachment" press=".onExport" />
+						<!-- <Button id="btnDelete" text="Delete" icon="sap-icon://delete" press=".onDelete" />
+						<Button id="btnExport" text="Export to Excel" icon="sap-icon://excel-attachment" press=".onExport" /> -->
 					</Toolbar>
 				<Table
 					id="table"
@@ -73,36 +73,58 @@
 					mode="MultiSelect"
 					>
 					<columns>
-						<Column id="columnTitle" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnTitle" text="Title" />
-						</Column>
-						<Column id="columnRequester" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnRequester" text="Requester" />
-						</Column>
-						<Column id="columnCreateDate" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnCreateDate" text="Create Date" />
+						<Column id="columnDescription" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnDescription" text="Description" />
 						</Column>
 						<Column id="columnStatus" minScreenWidth="Tablet" demandPopin="true">
 							<Text id="textColumnStatus" text="Status" />
 						</Column>
-						<Column id="columnUrgent" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnUrgent" text="Urgent" />
+						<!-- <Column id="columnTotalAmount" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnTotalAmount" text="Total Amount" />
+						</Column> -->
+						<Column id="columnCreatedBy" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnCreatedBy" text="Created By" />
 						</Column>
-						<Column id="columnUrgentDate" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnUrgentDate" text="UrgentDate" />
+						<Column id="columnCreatedOn" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnCreatedOn" text="Created On" />
+						</Column>
+						<Column id="columnApprovedBy" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnApprovedBy" text="Approved By" />
+						</Column>
+						<Column id="columnPriority" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnPriority" text="Priority" />
+						</Column>
+						<Column id="columnDueDate" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnDueDate" text="Due Date" />
+						</Column>
+						<Column id="columnChangeBy" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnChangeBy" text="Change By" />
+						</Column>
+						<Column id="columnChangeOn" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnChangeOn" text="Change On" />
+						</Column>
+						<Column id="columnApprovalDate" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnApprovalDate" text="Approval Date" />
+						</Column>
+						<Column id="columnAction" minScreenWidth="Tablet" demandPopin="true">
+							<Text id="textColumnAction" text="Action" />
 						</Column>
 					</columns>
 
 					<items>
 						<ColumnListItem id="columnListItem" vAlign="Middle" type="Active" press=".onItemPress">
 						<cells>
-							<Text id="textCellTitle" text="{title}" />
+							<Text id="textDescription" text="{description}" />
+							<ObjectStatus id="objectStatus" text="{status}" state="{= ${status} === 'New' ? 'Error' : 'Success'}" />
 							<Text id="textCreatedBy" text="{createdBy}" />
 							<Text id="textCreatedAt" text="{createdAt}" />
+							<Text id="textApprovedBy" text="{approvedBy}" />
+							<ObjectStatus id="objectPriority" text="{priority}" state="{= ${priority} === 'High' ? 'Error' : 'Success'}" />
+							<Text id="textDueDate" text="{dueDate}" />
+							<Text id="textModifiedBy" text="{modifiedBy}" />
+							<Text id="textModifiedAt" text="{modifiedAt}" />
+							<Text id="textApprovalDate" text="{approvalDate}" />
 							<!-- <ObjectNumber id="objectNumberSumCharge" number="{sumCharge}" unit="USD" /> -->
-							<ObjectStatus id="objectStatus" text="{status}" state="{= ${status} === 'New' ? 'Error' : 'Success'}" />
-							<ObjectStatus id="objectUrgent" text="{urgent}" state="{= ${status} === 'TRUE' ? 'Success': 'Error'}" />
-							<Text id="textCellUrgentDate" text="{urgentDate}" />
 						</cells>
 						</ColumnListItem>
 					</items>

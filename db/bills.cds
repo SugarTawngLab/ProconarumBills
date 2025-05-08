@@ -2,37 +2,63 @@ using { cuid, managed } from '@sap/cds/common';
 
 namespace my.bill;
 
-entity Requests : cuid, managed {
-  title       : String;
-  desc        : String;
-  status      : String enum {
-      New;
-      Rejected;
-      Approved;
-      Paid;
+entity ExpenseRequest: cuid, managed {
+  description: String;
+  longDescription: String;
+  status: String enum {
+    Draft;
+    New;
+    ReOpen;
+    Rejected;
+    Approved;
+    Completed;
   };
-  urgent      : Boolean;
-  urgentDate  : Date;
+  priority: String enum {
+    Low;
+    Enum;
+    High;
+  };
+  dueDate: Date;
+  currency: String;
+  approvedBy: String;
+  approvalDate: Date;
 
-  Bills       : Composition of many Bills on Bills.request = $self;
-  Comments    : Composition of many Comments on Comments.request = $self;
+  expenseItems: Composition of many ExpenseItems on expenseItems.expenseRequest = $self;
+  comments:  Composition of many Comments on comments.expenseRequest = $self;
 }
 
-entity Bills : cuid {
-  title       : String;
-  attachImage : LargeBinary;
-  category    : String enum {
-      Daily_Meal;
-      Office_M;
-      Others;
+
+entity ExpenseItems : cuid, managed {
+  description: String;
+  category: String enum {
+    DailyMeal;
+    OfficeManagement;
+    Others;
   };
-  charge      : Decimal(10,2);
-  
-  request     : Association to Requests;
+  billDate: Date;
+  paymentMethod: String enum {
+    BankTransfer;
+    Cash;
+  };
+  vendor: String;
+  currency: String;
+  ammount: Decimal(10,2);
+  remark: String;
+
+  expenseRequest: Association to ExpenseRequest;
+}
+
+entity Attachments : cuid, managed {
+  description: String;
+  refUUID: UUID;
+  fileId: String;
+  fileName: String;
+  fileSize: Integer;
+  mimeType: String;
 }
 
 entity Comments : cuid, managed {
-  content     : String;
+  content: String;
 
-  request     : Association to Requests;
+  expenseRequest: Association to ExpenseRequest;
 }
