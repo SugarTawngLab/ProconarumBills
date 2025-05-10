@@ -1,135 +1,275 @@
 <mvc:View
-	controllerName="ns.proconarumbills.controller.ListRequest"
-	height="100%"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns:core="sap.ui.core"
-	xmlns="sap.m"
-	xmlns:f="sap.f"
-	xmlns:fb="sap.ui.comp.filterbar"
-	xmlns:svm="sap.ui.comp.smartvariants">
+    controllerName="ns.proconarumbills.controller.ListRequest"
+    height="100%"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:svm="sap.ui.comp.smartvariants">
 
-	<f:DynamicPage id="dynamicPage" >
-		<f:title>
-			<f:DynamicPageTitle id="dynamicPageTitle">
-				<f:heading>
-					<svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" />
-				</f:heading>
-				<f:expandedContent>
-					<Label id="expandedLabel" text="No filters active" />
-				</f:expandedContent>
-				<f:snappedContent>
-					<Label id="snappedLabel" text="No filters active" />
-				</f:snappedContent>
-			</f:DynamicPageTitle>
-		</f:title>
+    <Page id="listRequestPage" showHeader="true" title="Request List" enableScrolling="true">     
+        <!-- Content -->
+        <content>
+            <VBox id="vboxMain">
 
-		<f:header>
-			<f:DynamicPageHeader id="dynamicPageHeader">
-				<f:content>
-					<fb:FilterBar
-						id="filterbar"
-						persistencyKey="myPersKey"
-						useToolbar="false"
-						search=".onSearch"
-						filterChange=".onFilterChange"
-						afterVariantLoad=".onAfterVariantLoad">
+                <!-- Variant Management (equivalent of SmartVariantManagement in title) -->
+                <svm:SmartVariantManagement id="svm" showExecuteOnSelection="true" />
 
-						<fb:filterGroupItems>
+                <!-- Filter Bar -->
+                <fb:FilterBar
+                    id="filterbar"
+                    persistencyKey="myPersKey"
+                    useToolbar="false"
+                    search=".onSearch"
+                    filterChange=".onFilterChange"
+                    afterVariantLoad=".onAfterVariantLoad">
+                    
+                    <fb:filterGroupItems>
 
-							<fb:FilterGroupItem
-								id="filterGroupItemStatus"
-								name="status"
-								label="Status"
-								groupName="Group1"
-								visibleInFilterBar="true">
-								<fb:control>
-									<MultiComboBox
-										id="multiComboBoxStatus"
-										name="status"
-										selectionChange=".onSelectionChange">
-										<core:Item id="itemStatusPaid" key="PAID" text="PAID" />
-										<core:Item id="itemStatusUnPaid" key="UNPAID" text="UNPAID" />
-									</MultiComboBox>
-								</fb:control>
-							</fb:FilterGroupItem>
-						</fb:filterGroupItems>
-					</fb:FilterBar>
-				</f:content>
-			</f:DynamicPageHeader>
-		</f:header>
+                        <fb:FilterGroupItem id="FilterGroupItem"
+                            groupName="Group1"
+                            name="fbDescription"
+                            label="{i18n>filterBarDescription}"
+                            visibleInFilterBar="true">
+                            
+                            <fb:control>
+                                <MultiInput
+                                    id="fbDescription"
+                                    change="onDescriptionChange"
+                                    valueHelpRequest=".onOpenVHDescription"
+                                    maxSuggestionWidth="25rem"
+                                    showSuggestion="false"
+                                    suggestionRows="{
+                                        path: 'cpSrv>/F4HelpDescriptions1',
+                                        templateShareable: false
+                                    }">
 
-		<f:content>
-			<VBox id="vboxMain">
-					<Toolbar id="toolbarActions">
-						<ToolbarSpacer id="toolbarSpacer"/>
-						<Button id="btnCreate" text="Create" icon="sap-icon://add" press=".onCreate" />
-						<!-- <Button id="btnDelete" text="Delete" icon="sap-icon://delete" press=".onDelete" />
-						<Button id="btnExport" text="Export to Excel" icon="sap-icon://excel-attachment" press=".onExport" /> -->
-					</Toolbar>
-				<Table
-					id="table"
-					inset="false"
-					items="{ path: '/Requests' }"
-					mode="MultiSelect"
-					>
-					<columns>
-						<Column id="columnDescription" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnDescription" text="Description" />
-						</Column>
-						<Column id="columnStatus" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnStatus" text="Status" />
-						</Column>
-						<!-- <Column id="columnTotalAmount" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnTotalAmount" text="Total Amount" />
-						</Column> -->
-						<Column id="columnCreatedBy" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnCreatedBy" text="Created By" />
-						</Column>
-						<Column id="columnCreatedOn" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnCreatedOn" text="Created On" />
-						</Column>
-						<Column id="columnApprovedBy" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnApprovedBy" text="Approved By" />
-						</Column>
-						<Column id="columnPriority" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnPriority" text="Priority" />
-						</Column>
-						<Column id="columnDueDate" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnDueDate" text="Due Date" />
-						</Column>
-						<Column id="columnChangeBy" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnChangeBy" text="Change By" />
-						</Column>
-						<Column id="columnChangeOn" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnChangeOn" text="Change On" />
-						</Column>
-						<Column id="columnApprovalDate" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnApprovalDate" text="Approval Date" />
-						</Column>
-						<Column id="columnAction" minScreenWidth="Tablet" demandPopin="true">
-							<Text id="textColumnAction" text="Action" />
-						</Column>
-					</columns>
+                                    <suggestionColumns>
+                                        <Column id="column" hAlign="Begin">
+                                            <Label id="label" text="{i18n>Description}" />
+                                        </Column>
+                                    </suggestionColumns>
 
-					<items>
-						<ColumnListItem id="columnListItem" vAlign="Middle" type="Active" press=".onItemPress">
-						<cells>
-							<Text id="textDescription" text="{description}" />
-							<ObjectStatus id="objectStatus" text="{status}" state="{= ${status} === 'New' ? 'Error' : 'Success'}" />
-							<Text id="textCreatedBy" text="{createdBy}" />
-							<Text id="textCreatedAt" text="{createdAt}" />
-							<Text id="textApprovedBy" text="{approvedBy}" />
-							<ObjectStatus id="objectPriority" text="{priority}" state="{= ${priority} === 'High' ? 'Error' : 'Success'}" />
-							<Text id="textDueDate" text="{dueDate}" />
-							<Text id="textModifiedBy" text="{modifiedBy}" />
-							<Text id="textModifiedAt" text="{modifiedAt}" />
-							<Text id="textApprovalDate" text="{approvalDate}" />
-							<!-- <ObjectNumber id="objectNumberSumCharge" number="{sumCharge}" unit="USD" /> -->
-						</cells>
-						</ColumnListItem>
-					</items>
-				</Table>
-			</VBox>
-		</f:content>
-	</f:DynamicPage>
+                                    <suggestionRows>
+                                        <ColumnListItem id="ColumnListItem">
+                                            <cells>
+                                                <Label id="Label" text="{cpSrv>description1}" />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </suggestionRows>
+                                </MultiInput>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem id="FilterGroupItem2"
+                            groupName="Group1"
+                            name="fbCreatedBy"
+                            label="{i18n>filterBarCreatedBy}"
+                            visibleInFilterBar="true">
+                            
+                            <fb:control>
+                                <MultiInput
+                                    id="fbDescription1"
+                                    change="onDescriptionChange1"
+                                    valueHelpRequest=".onOpenVHDescription1"
+                                    maxSuggestionWidth="25rem"
+                                    showSuggestion="false"
+                                    suggestionRows="{
+                                        path: 'cpSrv>/F4HelpDescriptions2',
+                                        templateShareable: false
+                                    }">
+
+                                    <suggestionColumns>
+                                        <Column id="column1" hAlign="Begin">
+                                            <Label id="label1" text="{i18n>createdBy}" />
+                                        </Column>
+                                    </suggestionColumns>
+
+                                    <suggestionRows>
+                                        <ColumnListItem id="ColumnListItem1">
+                                            <cells>
+                                                <Label id="Label1" text="{cpSrv>description2}" />   
+                                            </cells>
+                                        </ColumnListItem>
+                                    </suggestionRows>
+                                </MultiInput>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem id="FilterGroupItem3"
+                            groupName="Group1"
+                            name="fbChangedBy"
+                            label="{i18n>filterBarChangedBy}"
+                            visibleInFilterBar="true">
+                            
+                            <fb:control>
+                                <MultiInput
+                                    id="fbDescription2"
+                                    change="onDescriptionChange1"
+                                    valueHelpRequest=".onOpenVHDescription3"
+                                    maxSuggestionWidth="25rem"
+                                    showSuggestion="false"
+                                    suggestionRows="{
+                                        path: 'cpSrv>/F4HelpDescriptions2',
+                                        templateShareable: false
+                                    }">
+
+                                    <suggestionColumns>
+                                        <Column id="column2" hAlign="Begin">
+                                            <Label id="label2" text="{i18n>changedBy}" />
+                                        </Column>
+                                    </suggestionColumns>
+
+                                    <suggestionRows>
+                                        <ColumnListItem id="ColumnListItem2">
+                                            <cells>
+                                                <Label id="Label2" text="{cpSrv>description2}" />   
+                                            </cells>
+                                        </ColumnListItem>
+                                    </suggestionRows>
+                                </MultiInput>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem
+                            id="filterGroupItemStatus2"
+                            name="priority"
+                            label="Priority"
+                            groupName="Group1"
+                            visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="multiComboBoxStatus1"
+                                    name="Priority"
+                                    selectionChange=".onSelectionChange">
+                                    <core:Item id="itemStatusPaid1" key="PAID" text="PAID" />
+                                    <core:Item id="itemStatusUnPaid1" key="UNPAID" text="UNPAID" />
+                                </MultiComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem id="FilterGroupItem5"
+                            groupName="Group1"
+                            name="fbApprovedBy"
+                            label="{i18n>filterBarApprovedBy}"
+                            visibleInFilterBar="true">
+                            
+                            <fb:control>
+                                <MultiInput
+                                    id="fbDescription3"
+                                    change="onDescriptionChange1"
+                                    valueHelpRequest=".onOpenVHDescription3"
+                                    maxSuggestionWidth="25rem"
+                                    showSuggestion="false"
+                                    suggestionRows="{
+                                        path: 'cpSrv>/F4HelpDescriptions2',
+                                        templateShareable: false
+                                    }">
+
+                                    <suggestionColumns>
+                                        <Column id="column3" hAlign="Begin">
+                                            <Label id="label3" text="{i18n>approvedBy}" />
+                                        </Column>
+                                    </suggestionColumns>
+
+                                    <suggestionRows>
+                                        <ColumnListItem id="ColumnListItem3">
+                                            <cells>
+                                                <Label id="Label3" text="{cpSrv>description2}" />   
+                                            </cells>
+                                        </ColumnListItem>
+                                    </suggestionRows>
+                                </MultiInput>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
+                        <fb:FilterGroupItem
+                            id="filterGroupItemStatus"
+                            name="status"
+                            label="Status"
+                            groupName="Group1"
+                            visibleInFilterBar="true">
+                            <fb:control>
+                                <MultiComboBox
+                                    id="multiComboBoxStatus"
+                                    name="status"
+                                    selectionChange=".onSelectionChange">
+                                    <core:Item id="itemStatusPaid" key="PAID" text="PAID" />
+                                    <core:Item id="itemStatusUnPaid" key="UNPAID" text="UNPAID" />
+                                </MultiComboBox>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+                    </fb:filterGroupItems>
+                </fb:FilterBar>
+
+                <!-- Toolbar Actions -->
+                <Toolbar id="toolbarActions">
+                    <ToolbarSpacer id="ToolbarSpacer"/>
+                    <Button id="btnCreate" text="Create" icon="sap-icon://add" press=".onCreate" />
+                </Toolbar>
+
+                <!-- Table -->
+                <Table
+                    id="table"
+                    inset="false"
+                    items="{ path: '/Requests' }"
+                    mode="MultiSelect">
+                    
+                    <columns>
+                        <Column id="columnDescription" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnDescription" text="Description" />
+                        </Column>
+                        <Column id="columnStatus" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnStatus" text="Status" />
+                        </Column>
+                        <Column id="columnCreatedBy" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnCreatedBy" text="Created By" />
+                        </Column>
+                        <Column id="columnCreatedOn" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnCreatedOn" text="Created On" />
+                        </Column>
+                        <Column id="columnApprovedBy" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnApprovedBy" text="Approved By" />
+                        </Column>
+                        <Column id="columnPriority" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnPriority" text="Priority" />
+                        </Column>
+                        <Column id="columnDueDate" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnDueDate" text="Due Date" />
+                        </Column>
+                        <Column id="columnChangeBy" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnChangeBy" text="Change By" />
+                        </Column>
+                        <Column id="columnChangeOn" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnChangeOn" text="Change On" />
+                        </Column>
+                        <Column id="columnApprovalDate" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnApprovalDate" text="Approval Date" />
+                        </Column>
+                        <Column id="columnAction" minScreenWidth="Tablet" demandPopin="true">
+                            <Text id="textColumnAction" text="Action" />
+                        </Column>
+                    </columns>
+
+                    <items>
+                        <ColumnListItem id="columnListItem" vAlign="Middle" type="Active" press=".onItemPress">
+                            <cells>
+                                <Text id="textDescription" text="{description}" />
+                                <ObjectStatus id="objectStatus" text="{status}" state="{= ${status} === 'New' ? 'Error' : 'Success'}" />
+                                <Text id="textCreatedBy" text="{createdBy}" />
+                                <Text id="textCreatedAt" text="{createdAt}" />
+                                <Text id="textApprovedBy" text="{approvedBy}" />
+                                <ObjectStatus id="objectPriority" text="{priority}" state="{= ${priority} === 'High' ? 'Error' : 'Success'}" />
+                                <Text id="textDueDate" text="{dueDate}" />
+                                <Text id="textModifiedBy" text="{modifiedBy}" />
+                                <Text id="textModifiedAt" text="{modifiedAt}" />
+                                <Text id="textApprovalDate" text="{approvalDate}" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+
+            </VBox>
+        </content>
+    </Page>
 </mvc:View>

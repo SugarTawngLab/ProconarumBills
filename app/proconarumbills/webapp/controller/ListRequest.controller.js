@@ -7,7 +7,58 @@ sap.ui.define([
 
     return Controller.extend("ns.proconarumbills.controller.ListRequest", {
         onInit() {
+            var oSuggestionModel = new sap.ui.model.json.JSONModel({
+                descriptionSuggestions: [
+                    { description: "Delay in approval" },
+                    { description: "Missing data" },
+                    { description: "Late submission" }
+                ]
+            });
+            this.getView().setModel(oSuggestionModel, "viewModel");
         },
+
+        onOpenVHDescription: function (oEvent) {
+            var oSource = oEvent.getSource();
+            var oInput = oSource; // The MultiInput field
+        
+            if (!this._oDescriptionVHDialog) {
+                this._oDescriptionVHDialog = new sap.m.SelectDialog({
+                    title: this.getModel("i18n").getProperty("valueHelpTitleDescription"),
+                    search: function (oEvt) {
+                        var sValue = oEvt.getParameter("value").toLowerCase();
+                        var oFilter = new sap.ui.model.Filter("description", sap.ui.model.FilterOperator.Contains, sValue);
+                        oEvt.getSource().getBinding("items").filter([oFilter]);
+                    },
+                    liveChange: function (oEvt) {
+                        var sValue = oEvt.getParameter("value").toLowerCase();
+                        var oFilter = new sap.ui.model.Filter("description", sap.ui.model.FilterOperator.Contains, sValue);
+                        oEvt.getSource().getBinding("items").filter([oFilter]);
+                    },
+                    confirm: function (oEvt) {
+                        var aSelectedItems = oEvt.getParameter("selectedItems");
+                        aSelectedItems.forEach(function (oItem) {
+                            oInput.addToken(new sap.m.Token({
+                                key: oItem.getTitle(),
+                                text: oItem.getTitle()
+                            }));
+                        });
+                    },
+                    cancel: function () { /* optional */ }
+                });
+        
+                this._oDescriptionVHDialog.bindAggregation("items", {
+                    path: "viewModel>/descriptionSuggestions",
+                    template: new sap.m.StandardListItem({
+                        title: "{viewModel>description}"
+                    })
+                });
+        
+                this.getView().addDependent(this._oDescriptionVHDialog);
+            }
+        
+            this._oDescriptionVHDialog.open();
+        },
+        
         
         onSelectionChange: function (oEvent) {
             var oMultiComboBox = oEvent.getSource();
