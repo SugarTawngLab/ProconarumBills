@@ -1,0 +1,19 @@
+<mvc:View
+    controllerName="ns.proconarumbills.controller.CreateRequest"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    displayBlock="true">
+
+    <Page
+        id="helloWorldPage"
+        title="Hello World"
+        showHeader="true">
+
+        <content>
+            <VBox id="vbox" class="sapUiSmallMargin">
+                <Text id="text" text="Hello, World!" />
+                <Button id="button" text="Click Me" press="onPressHello" />
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

@@ -7,7 +7,7 @@
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:svm="sap.ui.comp.smartvariants">
 
-    <Page id="listRequestPage" showHeader="true" title="Request List" enableScrolling="true">     
+    <Page id="listRequestPage" showHeader="true" enableScrolling="true">     
         <!-- Content -->
         <content>
             <VBox id="vboxMain">
@@ -23,7 +23,6 @@
                     search=".onSearch"
                     filterChange=".onFilterChange"
                     afterVariantLoad=".onAfterVariantLoad">
-                    
                     <fb:filterGroupItems>
 
                         <fb:FilterGroupItem id="FilterGroupItem"
@@ -141,6 +140,7 @@
                                 <MultiComboBox
                                     id="multiComboBoxStatus1"
                                     name="Priority"
+                                    width="150px"
                                     selectionChange=".onSelectionChange">
                                     <core:Item id="itemStatusPaid1" key="PAID" text="PAID" />
                                     <core:Item id="itemStatusUnPaid1" key="UNPAID" text="UNPAID" />
@@ -199,13 +199,39 @@
                                 </MultiComboBox>
                             </fb:control>
                         </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="filterGroupItemCreatedDate" groupName="group2" name="fbValidFrom" label="Created Date" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <DatePicker id="fbValidFrom" change="onFilterChange" />
+                                    </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="filterGroupItemChangedDate" groupName="group2" name="fbValidFrom2" label="Changed Date" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <DatePicker id="fbValidFrom2" change="onFilterChange" />
+                                    </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="filterGroupItemDueDate" groupName="group2" name="fbValidFrom3" label="Changed Date" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <DatePicker id="fbValidFrom3" change="onFilterChange" />
+                                    </fb:control>
+                            </fb:FilterGroupItem>
+
+                            <fb:FilterGroupItem id="filterGroupItemApprovalDate" groupName="group2" name="fbValidFrom4" label="Changed Date" visibleInFilterBar="true">
+                                    <fb:control>
+                                        <DatePicker id="fbValidFrom4" change="onFilterChange" />
+                                    </fb:control>
+                            </fb:FilterGroupItem>
                     </fb:filterGroupItems>
+                    
                 </fb:FilterBar>
 
                 <!-- Toolbar Actions -->
                 <Toolbar id="toolbarActions">
                     <ToolbarSpacer id="ToolbarSpacer"/>
-                    <Button id="btnCreate" text="Create" icon="sap-icon://add" press=".onCreate" />
+                    <Button id="btnCreate" text="Create New" type="Emphasized" press=".onCreate" />
+                    <Button id="btnDelete" text="Delete" press=".onDelete" type="Reject"/>
                 </Toolbar>
 
                 <!-- Table -->

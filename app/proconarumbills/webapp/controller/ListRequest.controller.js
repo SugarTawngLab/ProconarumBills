@@ -127,6 +127,11 @@ sap.ui.define([
             oRouter.navTo("RequestDetail", {
 				RequestId: window.encodeURIComponent(oItem.getBindingContext().getPath().substring(1))
 			});
-        }  
+        },
+        
+        onCreate: function(){
+            const oRouter = this.getOwnerComponent().getRouter();
+			oRouter.navTo("CreateRequest");
+        }
     });
 });
