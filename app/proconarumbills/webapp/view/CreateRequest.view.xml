@@ -15,67 +15,43 @@
                 <uxap:headerTitle>
                     <uxap:ObjectPageDynamicHeaderTitle id="ObjectPageDynamicHeaderTitle">
                         <uxap:expandedHeading>
-                            <Title id="Title" text="{i18n>auditScoreDetailAuditScore}" wrapping="true"/>
+                            <Title id="Title" text="{i18n>createExpenseRequest}" wrapping="true"/>
                         </uxap:expandedHeading>
                         <uxap:snappedHeading>
                             <FlexBox id="FlexBox" fitContainer="true" alignItems="Center">
-                                <Title id="Title2" text="{i18n>auditScoreDetailAuditScore}" wrapping="true" />
+                                <Title id="Title2" text="{i18n>createExpenseRequest}" wrapping="true" />
                             </FlexBox>
                         </uxap:snappedHeading>
-
-                        <uxap:snappedContent>
-                            <HBox id="HBox6">
-                                <Title id="Title8" text="{i18n>auditScoreDetailStatus}: " class="sapUiTinyMarginEnd" />
-                                <ObjectStatus id="ObjectStatus4" text="{auditScoreItemModel>/statusText}" state="{path:'auditScoreItemModel>/statusId', formatter:'.formatter.getAuditScoreStatusState'}" />
-                            </HBox>
-                            
-                            <HBox id="HBox7">
-                                <Title id="Title9" text="{i18n>auditScoreDetailSupplier}: " class="sapUiTinyMarginEnd"/>
-                                <ObjectStatus id="ObjectStatus5" text="{= ${auditScoreItemModel>/supplierId} === '' ? '' : ${auditScoreItemModel>/erpSystemId} + ' - ' + ${path: 'auditScoreItemModel>/supplierId', formatter: '.formatter.fnFormatSupplierId'} + ' - ' + ${auditScoreItemModel>/supplierName}}" />
-                            </HBox>
-
-                            <HBox id="HBox8">
-                                <Title id="Title10" text="{i18n>auditScoreDetailAuditType}: " class="sapUiTinyMarginEnd"/>
-                                <ObjectStatus id="ObjectStatus6" text="{auditScoreItemModel>/auditTypeText}" />
-                            </HBox>
-                        </uxap:snappedContent>
-
-                        <uxap:actions>
-                            <Button id="button1" text="{i18n>auditScoreDetailCreateActivity}" tooltip="{i18n>auditScoreDetailCreateActivity}" press="onOpenCreateActivityDialog" 
-                                    visible="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_CREATE_ACTIVITY'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnShowHide'}" />
-                            <Button id="button2" type="Reject" text="{i18n>auditScoreDetailDeleteAuditScore}" press="onDeleteAuditScore" 
-                                    visible="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_DELETE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnShowHide'}" />
-                        </uxap:actions>
 
                     </uxap:ObjectPageDynamicHeaderTitle>
                 </uxap:headerTitle>
 
                 <uxap:sections>
-                    <uxap:ObjectPageSection titleUppercase="false" id="goalsSection" title="{i18n>auditScoreDetailBasicDataTitle}">
+                    <uxap:ObjectPageSection titleUppercase="false" id="goalsSection" title="{i18n>requestHeader}">
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection id="goalsSectionSS1">
+                            <VBox id="VBoxFormContainer" width="100%">
                                 <f:SimpleForm id="editAuditScoreBasicData" editable="true" layout="ColumnLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="2" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
                                     <f:content>
-                                        <Label id="Label13" text="{i18n>auditScoreDetailValidFrom}" required="true"/>
+                                        <Label id="Label13" text="Request Description" required="true"/>
+                                        <Input id="requestDescription"
+                                            placeholder="Transfer Office"
+                                            ariaLabelledBy="InputNumberLabel"
+                                            value="{auditScoreItemModel>/auditScore}"
+                                            class="sapUiSmallMarginBottom"
+                                            change="onBasicDataValidation" 
+                                            editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_AUDIT_SCORE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}" />
 
-                                        <DatePicker id="auditScoreDetailValidFrom" change="onBasicDataValidation" 
-                                        editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_VALID_FROM'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
-                                        placeholder="{i18n>enterDatePlaceHolder}" value="{
-                                                            'path':'auditScoreItemModel>/validFrom',
-                                                            'type':'sap.ui.model.type.Date'
-                                                        }" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScoreValidFromStage}"/>
+                                        <Label id="Label3" text="Currency" required="true"/>
+                                        <Select id="currency" 
+                                                selectedKey="{auditScoreItemModel>/auditLabel}" 
+                                                editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_AUDIT_LABEL'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
+                                                items="{susF4HelpSrv>/F4Help_RiskScoreAuditLabel}" 
+                                                class="sapUiSmallMarginBottom">
+                                            <core:Item id="currencyItems" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                                        </Select>
 
-                                        <Label id="Label3" text="{i18n>auditScoreDetailValidTo}" required="true"/>
-
-                                        <DatePicker id="auditScoreDetailValidTo" change="onBasicDataValidation" 
-                                        editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_VALID_TO'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
-                                        placeholder="{i18n>enterDatePlaceHolder}" value="{
-                                                            'path':'auditScoreItemModel>/validTo',
-                                                            'type':'sap.ui.model.type.Date'
-                                                        }" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScoreValidToStage}"/> 
-
-                                        <Label id="Label2" text="{i18n>auditScoreDetailAuditLabel}" required="false"/>
-
+                                        <Label id="Label2" text="Priority" required="false"/>
                                         <Select id="auditScoreDetailAuditLabel" 
                                                 selectedKey="{auditScoreItemModel>/auditLabel}" 
                                                 editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_AUDIT_LABEL'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
@@ -84,101 +60,32 @@
                                             <core:Item id="Item4" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
                                         </Select>
 
-                                        <Label id="Label1" text="{i18n>auditScoreDetailAuditScore}" required="true" />
-
-                                        <Input id="auditScoreDetailAuditScore"
-                                            type="Number"
-                                            placeholder="{i18n>auditScoreDetailEnterNumber}"
-                                            ariaLabelledBy="InputNumberLabel"
-                                            value="{auditScoreItemModel>/auditScore}"
-                                            class="sapUiSmallMarginBottom"
-                                            change="onBasicDataValidation" 
-                                            editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_AUDIT_SCORE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}" />
+                                        <Label id="Label1" text="Due date" required="true" />
+                                        <DatePicker id="auditScoreDetailValidTo" change="onBasicDataValidation" 
+                                        editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_VALID_TO'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
+                                        placeholder="23/04/2025" value="{
+                                                            'path':'auditScoreItemModel>/validTo',
+                                                            'type':'sap.ui.model.type.Date'
+                                                        }" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScoreValidToStage}"/>
                                         <Button id="Button1" width="0.5rem" icon="sap-icon://information" type="Transparent" press="onShowValidInputRequiredInformation"/>
-
-                                        <TextArea editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_DESCRIPTION'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
-                                                  id="auditScoreDetailLongText" value="{auditScoreItemModel>/longText}" width="100%" rows="2" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
                                     </f:content>
                                 </f:SimpleForm>
-                            </uxap:ObjectPageSubSection>
-                        </uxap:subSections>
-                    </uxap:ObjectPageSection>
 
-                    <uxap:ObjectPageSection id="ObjectPageSection3" titleUppercase="false" title="{i18n>auditScoreDetailDescriptionTitle}">
-                        <uxap:subSections>
-                            <uxap:ObjectPageSubSection id="ObjectPageSubSection4">
-                                <f:SimpleForm id="SimpleForm2" editable="true" layout="ResponsiveGridLayout" >
+                                <f:SimpleForm id="SimpleForm" editable="true" layout="ResponsiveGridLayout" >
                                     <f:content>
+                                        <Label id="Label20" text="Request Information" required="true" />
                                         <TextArea editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_DESCRIPTION'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
-                                                  id="auditScoreDetailLongText2" value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
+                                                id="auditScoreDetailLongText" value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="Describe more detail your request" maxLength="5000"/>
                                     </f:content>
                                 </f:SimpleForm>
+                            </VBox>
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
 
-                    <uxap:ObjectPageSection id="ObjectPageSection" titleUppercase="false" title="{i18n>auditScoreDetailDocumentsTitle}">
+                    <uxap:ObjectPageSection id="ObjectPageSection3" titleUppercase="false" title="{i18n>requestItems}">
                         <uxap:subSections>
-                            <uxap:ObjectPageSubSection id="ObjectPageSubSection" >
-                                <upload:UploadSet   id="AuditScoreDetailUploadCollection" 
-                                                    mode = "None" 
-                                                    instantUpload="true"  
-                                                    terminationEnabled="true" 
-                                                    fileTypeMismatch="onTypeMissmatch" 
-                                                    fileTypes="txt,doc,pdf,xlsx,png,jpg" 
-                                                    sameFilenameAllowed="true" 
-                                                    items="{auditScoreItemModel>/attachments}" 
-                                                    fileNameLengthExceeded="onFileNameLength" 
-                                                    fileSizeExceeded="onFileSizeExceeded" 
-                                                    beforeItemEdited="onHandleBeforeEdit" 
-                                                    afterItemEdited="onHandleAfterEditFile" 
-                                                    beforeItemRemoved="onHandleBeforeRemoveFileUploadForAuditScore" 
-                                                    afterItemRemoved="onHandleAfterRemoveFileUploadForAuditScore" 
-                                                    afterItemAdded="onUploadAttachmentChangeForAuditScore"
-                                                    uploadCompleted="onUploadCompleted"
-                                                    uploadEnabled="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_UPLOAD_FILE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}">
-                                    <upload:items>
-                                        <upload:UploadSetItem id="UploadSetItem" fileName="{auditScoreItemModel>fileName}" 
-                                                                openPressed="onDownloadAttachment" 
-                                                                url="#" 
-                                                                enabledRemove="true" 
-                                                                visibleEdit="false" 
-                                                                visibleRemove="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_REMOVE_FILE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}">
-                                                <upload:statuses>
-                                                    <ObjectStatus id="ObjectStatus2" title="{i18n>uploadedBy}" text="{auditScoreItemModel>createdBy}" active="false"/>
-                                                    <ObjectStatus id="ObjectStatus3" title="{i18n>uploadedOn}" 
-                                                                    text="{
-                                                                        path: 'auditScoreItemModel>createdAt',
-                                                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
-                                                                        constraints: {
-                                                                            precision: 3,
-                                                                            v4: true
-                                                                        }
-                                                                    }" active="false"/>
-                                                    <!-- //#170225-kiennt-Ticket521 - correct german date format -->
-                                                    <!-- <ObjectStatus title="{i18n>uploadedOn}" 
-                                                                    text="{
-                                                                        path: 'auditScoreItemModel>createdAt',
-                                                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
-                                                                        constraints: {
-                                                                            precision: 3,
-                                                                            v4: true
-                                                                        },
-                                                                        formatOptions: {
-                                                                            pattern: 'dd/MM/yyyy HH:mm:ss'
-                                                                        }
-                                                                    }" active="false"/> -->
-                                                </upload:statuses>                
-                                        </upload:UploadSetItem>
-                                    </upload:items>
-                                </upload:UploadSet>
-                            </uxap:ObjectPageSubSection>
-                        </uxap:subSections>
-                    </uxap:ObjectPageSection>
-
-                    <uxap:ObjectPageSection id="ObjectPageSection2" titleUppercase="false" title="{i18n>auditScoreDetailActivitiesTitle}">
-                        <uxap:subSections>
-                            <uxap:ObjectPageSubSection id="ObjectPageSubSection2" >
+                        	<uxap:ObjectPageSubSection id="ObjectPageSubSection2" >
                                 <Table busyIndicatorDelay="0" id="idActivityWorklistTable" growing="true" growingThreshold="100" growingScrollToLoad="true" updateFinished="setPoTableHeader" mode="None" sticky="ColumnHeaders,HeaderToolbar" width="auto" items="{
                                         path: 'auditScoreItemModel>/activities',
                                         sorter: {
@@ -306,19 +213,90 @@
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection id="ObjectPageSection" titleUppercase="false" title="{i18n>requestAttachments}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="ObjectPageSubSection" >
+                                <upload:UploadSet   id="AuditScoreDetailUploadCollection" 
+                                                    mode = "None" 
+                                                    instantUpload="true"  
+                                                    terminationEnabled="true" 
+                                                    fileTypeMismatch="onTypeMissmatch" 
+                                                    fileTypes="txt,doc,pdf,xlsx,png,jpg" 
+                                                    sameFilenameAllowed="true" 
+                                                    items="{auditScoreItemModel>/attachments}" 
+                                                    fileNameLengthExceeded="onFileNameLength" 
+                                                    fileSizeExceeded="onFileSizeExceeded" 
+                                                    beforeItemEdited="onHandleBeforeEdit" 
+                                                    afterItemEdited="onHandleAfterEditFile" 
+                                                    beforeItemRemoved="onHandleBeforeRemoveFileUploadForAuditScore" 
+                                                    afterItemRemoved="onHandleAfterRemoveFileUploadForAuditScore" 
+                                                    afterItemAdded="onUploadAttachmentChangeForAuditScore"
+                                                    uploadCompleted="onUploadCompleted"
+                                                    uploadEnabled="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_UPLOAD_FILE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}">
+                                    <upload:items>
+                                        <upload:UploadSetItem id="UploadSetItem" fileName="{auditScoreItemModel>fileName}" 
+                                                                openPressed="onDownloadAttachment" 
+                                                                url="#" 
+                                                                enabledRemove="true" 
+                                                                visibleEdit="false" 
+                                                                visibleRemove="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_REMOVE_FILE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}">
+                                                <upload:statuses>
+                                                    <ObjectStatus id="ObjectStatus2" title="{i18n>uploadedBy}" text="{auditScoreItemModel>createdBy}" active="false"/>
+                                                    <ObjectStatus id="ObjectStatus3" title="{i18n>uploadedOn}" 
+                                                                    text="{
+                                                                        path: 'auditScoreItemModel>createdAt',
+                                                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                                                        constraints: {
+                                                                            precision: 3,
+                                                                            v4: true
+                                                                        }
+                                                                    }" active="false"/>
+                                                    <!-- //#170225-kiennt-Ticket521 - correct german date format -->
+                                                    <!-- <ObjectStatus title="{i18n>uploadedOn}" 
+                                                                    text="{
+                                                                        path: 'auditScoreItemModel>createdAt',
+                                                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                                                        constraints: {
+                                                                            precision: 3,
+                                                                            v4: true
+                                                                        },
+                                                                        formatOptions: {
+                                                                            pattern: 'dd/MM/yyyy HH:mm:ss'
+                                                                        }
+                                                                    }" active="false"/> -->
+                                                </upload:statuses>                
+                                        </upload:UploadSetItem>
+                                    </upload:items>
+                                </upload:UploadSet>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection id="ObjectPageSection2" titleUppercase="false" title="{i18n>requestComments}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="ObjectPageSubSection4">
+                                <f:SimpleForm id="SimpleForm2" editable="true" layout="ResponsiveGridLayout" >
+                                    <f:content>
+                                        <TextArea editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_DESCRIPTION'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
+                                                  id="auditScoreDetailLongText2" value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
+                                    </f:content>
+                                </f:SimpleForm>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
                 </uxap:sections>
 
                 <uxap:footer>
                     <OverflowToolbar id="overflowToolbarFooter">
-                        <Button id="btnMessagePopover" icon="sap-icon://alert" text="{=${messagePopoverModel>/message}.length}" type="Emphasized" press="onMessagePopoverPress" />
                         <ToolbarSpacer id="toolbarSpacerFooter" />
-                        <Button id="btnSubmitAuditScore" type="Emphasized" text="{i18n>auditScoreDetailSubmitBtn}" press="onSubmitAuditScore" 
+                        <Button id="btnSubmitAuditScore" type="Default" text="Save Draft" press="onSubmitAuditScore"
                             enabled="{=${auditScoreModel>/bAuditScoreValidInDetailView}}"
                             visible="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_SUBMIT'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnShowHide'}" />
-                        <Button id="btnSaveAuditScore" type="Default" text="{i18n>auditScoreDetailSaveBtn}" press="onUpdateAuditScore" 
+                        <Button id="btnSaveAuditScore" type="Emphasized" text="Submit" press="onUpdateAuditScore" 
                             enabled="{=${auditScoreModel>/bAuditScoreValidInDetailView}}"
                             visible="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_SAVE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnShowHide'}" />
-                        <Button id="btnCancelAuditScore" type="Default" text="{i18n>auditScoreDetailCancelBtn}" press="onBackToAuditScoreList" />
+                        <Button id="btnCancelAuditScore" type="Default" text="Cancel" press="onBackToAuditScoreList" />
                     </OverflowToolbar>
                 </uxap:footer>
             </uxap:ObjectPageLayout>
