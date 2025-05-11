@@ -56,7 +56,6 @@
                             <uxap:ObjectPageSubSection id="goalsSectionSS1">
                                 <f:SimpleForm id="editAuditScoreBasicData" editable="true" layout="ColumnLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="2" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
                                     <f:content>
-
                                         <!-- <Label text="{i18n>auditScoreDetailSupplier}" required="false"/> -->
                                         <!-- <Select id="auditScoreDetailSupplier" selectedKey="{auditScoreItemModel>/supplierId}" items="{global>/activitySuppliers}" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScoreSupplierStage}">
                                             <core:Item key="{global>erpSupplier}" text="{global>supplierName}" />
@@ -115,25 +114,24 @@
                                             editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_AUDIT_SCORE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}" />
                                         <Button id="Button1" width="0.5rem" icon="sap-icon://information" type="Transparent" press="onShowValidInputRequiredInformation"/>
 
-                                    </f:content>
-                                </f:SimpleForm>
-                            </uxap:ObjectPageSubSection>
-
-                            <uxap:ObjectPageSubSection id="ObjectPageSubSection3">
-                                <f:SimpleForm id="SimpleForm" editable="true" layout="ResponsiveGridLayout" >
-                                    <f:content>
                                         <TextArea editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_DESCRIPTION'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
                                                   id="auditScoreDetailLongText" value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
                                     </f:content>
                                 </f:SimpleForm>
                             </uxap:ObjectPageSubSection>
-                            
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
 
                     <uxap:ObjectPageSection id="ObjectPageSection3" titleUppercase="false" title="{i18n>auditScoreDetailDescriptionTitle}">
                         <uxap:subSections>
-                            
+                            <uxap:ObjectPageSubSection id="ObjectPageSubSection4">
+                                <f:SimpleForm id="SimpleForm2" editable="true" layout="ResponsiveGridLayout" >
+                                    <f:content>
+                                        <TextArea editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_DESCRIPTION'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
+                                                  id="auditScoreDetailLongText2" value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
+                                    </f:content>
+                                </f:SimpleForm>
+                            </uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
 
@@ -322,7 +320,6 @@
                                             </cells>
                                         </ColumnListItem>
                                     </items>
-
                                 </Table>
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
