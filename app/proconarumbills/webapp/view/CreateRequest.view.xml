@@ -1,304 +1,348 @@
 <mvc:View controllerName="ns.proconarumbills.controller.CreateRequest"
-    xmlns:core="sap.ui.core"
     xmlns:mvc="sap.ui.core.mvc"
-    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
     xmlns:uxap="sap.uxap"
-    xmlns:layout="sap.ui.layout"
-    xmlns:fb="sap.ui.comp.filterbar"
-    xmlns:p13n="sap.m.p13n"
-    xmlns:v="sap.ui.comp.variants"
-    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiSizeCompact">
-    <Page id="AuditScoreWorklist" navButtonPress="onNavBack" showHeader="false" showNavButton="false" title="{i18n>auditScoreWorklist}" enableScrolling="true">
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:upload="sap.m.upload"
+    xmlns:goals="sap.uxap.sample.SharedBlocks.goals"
+    xmlns:personal="sap.uxap.sample.SharedBlocks.personal"
+    xmlns:employment="sap.uxap.sample.SharedBlocks.employment" height="100%">
+    <Page id="auditScoreDetailPage" showHeader="false" enableScrolling="true">
         <content>
-            <ScrollContainer id="idAuditScoreScrollContainer" height="100%" width="100%" vertical="true" horizontal="true" focusable="true">
-                <layout:VerticalLayout id="VerticalLayout" width="100%" class="sapUiSmallMarginBottom">
-                    <v:VariantManagement standardItemAuthor="" id="variant" class="sapUiSmallMarginBegin" select="onSelectVar" save="onSaveVar"  manage="onManageVar" showShare="false" variantItems="{VariantModel>/AUDITSCORE_WORKLIST}">
-                        <v:variantItems>
-                            <v:VariantItem id="VariantItem" app:ID="{VariantModel>ID}" key="{VariantModel>variantKey}" text="{VariantModel>variantName}" author=""/>
-                        </v:variantItems>
-                    </v:VariantManagement>
-                    <fb:FilterBar id="FilterBar" reset="onReset" filterChange="onFilterChange" beforeVariantFetch="onFilterChange" search="onSearchAuditScoreList" showRestoreButton="true" showClearOnFB="true" clear="onClearFilter">
-                        <fb:filterGroupItems>
-                            <fb:FilterGroupItem id="FilterGroupItem4" groupName="group1" name="fbErpSupplier" label="{i18n>auditScoreListFilterBarSupplierId}" visibleInFilterBar="true">
-                                <fb:control>
-                                    <MultiInput id="fbErpSupplier" change="onSupplierChange" valueHelpRequest=".onOpenVHERPSup" maxSuggestionWidth="25rem" showSuggestion="false" suggestionRows="{
-                                                path: 'cpSrv>/F4HelpErpSupplierAssignments',
-                                                templateShareable:false
-                                            }">
-                                        <suggestionColumns>
-                                            <Column id="Column" hAlign="Begin" popinDisplay="Inline" demandPopin="true">
-                                                <Label id="Label5" text="{i18n>ERPSystem}" />
-                                            </Column>
-                                            <Column id="Column1" hAlign="Center" popinDisplay="Inline" demandPopin="true" minScreenWidth="Tablet">
-                                                <Label id="Label6" text="{i18n>ERPSupplier}" />
-                                            </Column>
-                                            <Column id="Column2" hAlign="Center" popinDisplay="Inline" demandPopin="true" minScreenWidth="Tablet">
-                                                <Label id="Label7" text="{i18n>SupplierName}" />
-                                            </Column>
-                                        </suggestionColumns>
-                                        <suggestionRows>
-                                            <ColumnListItem id="ColumnListItem5">
-                                                <cells>
-                                                    <Label id="Label8" text="{cpSrv>systemID}" />
-                                                    <Label id="Label9" text="{path : 'cpSrv>erpSupplier', 
-                                                        type : 'sap.ui.model.odata.type.String', 
-                                                        constraints: { 
-                                                            isDigitSequence : true,
-                                                            maxLength : 10}
-                                                        }" />
-                                                    <Label id="Label10" text="{cpSrv>supplierName}" />
-                                                </cells>
-                                            </ColumnListItem>
-                                        </suggestionRows>
-                                    </MultiInput>
-                                </fb:control>
-                            </fb:FilterGroupItem>
+            <uxap:ObjectPageLayout id="ObjectPageLayout" showTitleInHeaderContent="true" showEditHeaderButton="false" editHeaderButtonPress="handleEditBtnPress" upperCaseAnchorBar="false" showFooter="true">
+                <uxap:headerTitle>
+                    <uxap:ObjectPageDynamicHeaderTitle id="ObjectPageDynamicHeaderTitle">
+                        <uxap:expandedHeading>
+                            <Title id="Title" text="{i18n>auditScoreDetailAuditScore}" wrapping="true"/>
+                        </uxap:expandedHeading>
+                        <uxap:snappedHeading>
+                            <FlexBox id="FlexBox" fitContainer="true" alignItems="Center">
+                                <Title id="Title2" text="{i18n>auditScoreDetailAuditScore}" wrapping="true" />
+                            </FlexBox>
+                        </uxap:snappedHeading>
 
-                            <fb:FilterGroupItem id="FilterGroupItem6" groupName="group1" name="fbAuditType" label="{i18n>auditScoreListFilterBarAuditType}" visibleInFilterBar="true">
-                                <fb:control>
-                                    <MultiComboBox id="fbAuditType" change="onFilterChange" width="150px" items="{path: 'susF4HelpSrv>/F4Help_RiskScoreAuditType'}">
-                                        <core:Item id="Item" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
-                                    </MultiComboBox>
-                                </fb:control>
-                            </fb:FilterGroupItem>
-
-                            <fb:FilterGroupItem id="FilterGroupItem7" groupName="group1" name="fbAuditScore" label="{i18n>auditScoreListFilterBarAuditScore}" visibleInFilterBar="true">
-                                <fb:control>
-                                    <RangeSlider id="fbAuditScore" change="onFilterChange" showAdvancedTooltip="true" range="0,100" min="0" max="100" showHandleTooltip="false" inputsAsTooltips="true" />
-                                </fb:control>
-                            </fb:FilterGroupItem>
+                        <uxap:snappedContent>
+                            <HBox id="HBox6">
+                                <Title id="Title8" text="{i18n>auditScoreDetailStatus}: " class="sapUiTinyMarginEnd" />
+                                <ObjectStatus id="ObjectStatus4" text="{auditScoreItemModel>/statusText}" state="{path:'auditScoreItemModel>/statusId', formatter:'.formatter.getAuditScoreStatusState'}" />
+                            </HBox>
                             
-                            <fb:FilterGroupItem id="FilterGroupItem8" groupName="group1" name="fbAuditLabel" label="{i18n>auditScoreListFilterBarAuditLabel}" visibleInFilterBar="true">
-                                <fb:control>
-                                    <MultiComboBox id="fbAuditLabel" change="onFilterChange" width="150px" items="{path: 'susF4HelpSrv>/F4Help_RiskScoreAuditLabel'}">
-                                        <core:Item id="Item2" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
-                                    </MultiComboBox>
-                                </fb:control>
-                            </fb:FilterGroupItem>
+                            <HBox id="HBox7">
+                                <Title id="Title9" text="{i18n>auditScoreDetailSupplier}: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="ObjectStatus5" text="{= ${auditScoreItemModel>/supplierId} === '' ? '' : ${auditScoreItemModel>/erpSystemId} + ' - ' + ${path: 'auditScoreItemModel>/supplierId', formatter: '.formatter.fnFormatSupplierId'} + ' - ' + ${auditScoreItemModel>/supplierName}}" />
+                            </HBox>
 
-                            <fb:FilterGroupItem id="FilterGroupItem9" groupName="group1" name="fbAuditStatus" label="{i18n>auditScoreListFilterBarAuditStatus}" visibleInFilterBar="true">
-                                <fb:control>
-                                    <!-- <MultiInput id="fbAuditStatus" showValueHelp="true" valueHelpRequest="onAuditStatusValueHelp"></MultiInput> -->
-                                    <MultiComboBox id="fbAuditStatus" change="onFilterChange"
-                                            items="{
-                                                    path: 'susF4HelpSrv>/F4Help_RiskScoreAuditStatus',
-                                                    sorter: { path: 'fieldValue' }
-                                                }">
-                                        <core:Item id="Item3" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
-                                    </MultiComboBox>    
-                                </fb:control>                        
-                            </fb:FilterGroupItem>
+                            <HBox id="HBox8">
+                                <Title id="Title10" text="{i18n>auditScoreDetailAuditType}: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="ObjectStatus6" text="{auditScoreItemModel>/auditTypeText}" />
+                            </HBox>
+                        </uxap:snappedContent>
 
-                            <fb:FilterGroupItem id="FilterGroupItem10" groupName="group1" name="fbValidFrom" label="{i18n>auditScoreListFilterBarValidFrom}" visibleInFilterBar="true">
-                                <fb:control>
-                                    <!-- <DateRangeSelection id="fbValidFrom" change="onFilterChange" /> -->
-                                    <DatePicker id="fbValidFrom10" change="onFilterChange" />
-                                </fb:control>
-                            </fb:FilterGroupItem>
+                        <uxap:actions>
+                            <Button id="button1" text="{i18n>auditScoreDetailCreateActivity}" tooltip="{i18n>auditScoreDetailCreateActivity}" press="onOpenCreateActivityDialog" 
+                                    visible="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_CREATE_ACTIVITY'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnShowHide'}" />
+                            <Button id="button2" type="Reject" text="{i18n>auditScoreDetailDeleteAuditScore}" press="onDeleteAuditScore" 
+                                    visible="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_DELETE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnShowHide'}" />
+                        </uxap:actions>
 
-                            <fb:FilterGroupItem id="FilterGroupItem11" groupName="group1" name="fbValidTo" label="{i18n>auditScoreListFilterBarValidTo}" visibleInFilterBar="true">
-                                <fb:control>
-                                    <!-- <DateRangeSelection id="fbValidTo" change="onFilterChange" /> -->
-                                    <DatePicker id="fbValidTo" change="onFilterChange" />
-                                </fb:control>
-                            </fb:FilterGroupItem>
+                    </uxap:ObjectPageDynamicHeaderTitle>
+                </uxap:headerTitle>
 
-                            <!-- <fb:FilterGroupItem groupName="group1" name="fbAuditDate" label="{i18n>auditScoreListFilterBarAuditDate}" visibleInFilterBar="true">
-                                <fb:control>
-                                    <DateRangeSelection id="fbAuditDate" />
-                                </fb:control>
-                            </fb:FilterGroupItem> -->
+                <uxap:sections>
+                    <uxap:ObjectPageSection titleUppercase="false" id="goalsSection" title="{i18n>auditScoreDetailBasicDataTitle}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="goalsSectionSS1">
+                                <f:SimpleForm id="editAuditScoreBasicData" editable="true" layout="ColumnLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="2" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+                                    <f:content>
 
+                                        <!-- <Label text="{i18n>auditScoreDetailSupplier}" required="false"/> -->
+                                        <!-- <Select id="auditScoreDetailSupplier" selectedKey="{auditScoreItemModel>/supplierId}" items="{global>/activitySuppliers}" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScoreSupplierStage}">
+                                            <core:Item key="{global>erpSupplier}" text="{global>supplierName}" />
+                                        </Select>
 
-                        </fb:filterGroupItems>
-                    </fb:FilterBar>
-                </layout:VerticalLayout>
+                                        <Label text="{i18n>auditScoreDetailAuditType}" required="false"/>
+                                        <Select id="auditScoreDetailAuditType" editable="false" selectedKey="{auditScoreItemModel>/auditType}" items="{global>/activitySuppliers}" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScorePriorityStage}">
+                                            <core:Item key="{fieldValue}" text="{valueDescription}" />
+                                        </Select> -->
 
-                <layout:VerticalLayout id="VerticalLayout2" width="100%" class="sapUiSmallMarginBottom">
-                    
-                    <Table busyIndicatorDelay="0" id="tblAuditScore" mode="MultiSelect" growing="true" growingThreshold="1000" growingScrollToLoad="true" updateFinished="onUpdateFinished" sticky="ColumnHeaders,HeaderToolbar" width="auto" items="{
-                                    path: '/AuditScores_view',
-                                    parameters : {
-                                        $select: 'erpSystemId,ID,auditLabelText,auditScore,auditTypeText,createdAt,createdBy,statusId,statusText,supplierId,supplierName,validFrom,validTo',
-                                        $count : true,
-                                        $orderby : 'createdAt desc'
-                                    }
-                                }">
-                        <headerToolbar>
-                            <OverflowToolbar id="OverflowToolbar2">
-                                <content>
-                                    <Title id="auditScoreListTitle" level="H2"/>
-                                    <ToolbarSpacer id="ToolbarSpacer3"/>
-                                    <Button id="Button5" visible="{parts: [{path: 'global>/objectAction/AUDIT_SCORE_CREATE'}], formatter: '.formatter.fnIsUserGrandtedAction'}" text="{i18n>auditScoreListCreateBtn}" tooltip="{i18n>auditScoreListCreateBtn}" type="Emphasized" icon="sap-icon://create" press="onCreateAuditScore" />
-                                    <!-- <Button text="{i18n>auditScoreListDeleteBtn}" tooltip="{i18n>auditScoreListDeleteBtn}" type="Reject" icon="sap-icon://delete" press="onDeleteMultipleAuditScore" /> -->
-                                    <ToolbarSeparator id="ToolbarSeparator"/>
-                                    <Button id="print" visible="false" tooltip="{i18n>auditScoreListExportExcelBtn}" icon="sap-icon://print" type="Transparent" press="onExportExcel" />
-                                    <Button id="exportExcel" tooltip="{i18n>auditScoreListExportExcelBtn}" icon="sap-icon://excel-attachment" type="Transparent" press="onExportExcel" />
-                                    <Button id="Button4" tooltip="{i18n>auditScoreListOpenSortOptionsBtn}" icon="sap-icon://sort" press="onSort" />
-                                    <Button id="Button3" tooltip="{i18n>auditScoreListGroupBtn}" icon="sap-icon://group-2" press="onGroup"/>
-                                    <!-- <Button tooltip="{i18n>auditScoreListBackTotTopBtn}" icon="sap-icon://back-to-top" press="onBackToTop"/> -->
-                                    <Button id="Button2" visible="true" icon="sap-icon://action-settings" press="onPersonalization">
-                                        <layoutData>
-                                            <OverflowToolbarLayoutData id="OverflowToolbarLayoutData" priority="NeverOverflow" />
-                                        </layoutData>
-                                    </Button>
-                                </content>
-                            </OverflowToolbar>
-                        </headerToolbar>
-                        <columns>
-                            <Column id="supplierId" hAlign="Begin" vAlign="Middle" width="15%" minScreenWidth="Phone" demandPopin="true">
-                                <Label id="Label11" text="{i18n>auditScoreListSupplierIdCol}" design="Bold"/>
-                            </Column>
-                            <Column id="auditType" hAlign="Begin" vAlign="Middle" width="7%" minScreenWidth="Phone" demandPopin="true">
-                                <Label id="Label12" text="{i18n>auditScoreListAuditTypeCol}" design="Bold"/>
-                            </Column>
-                            <Column id="auditScore" hAlign="End" vAlign="Middle" width="7%" minScreenWidth="Tablet" demandPopin="true">
-                                <Label id="Labe13" text="{i18n>auditScoreListAuditScoreCol}" design="Bold"/>
-                            </Column>
-                            <Column id="auditLabel" hAlign="Begin" vAlign="Middle" width="10%" minScreenWidth="Tablet" demandPopin="true">
-                                <Label id="Label14" text="{i18n>auditScoreListAuditLabelCol}" design="Bold"/>
-                            </Column>                                                
-                            <Column id="statusId" hAlign="End" vAlign="Middle" width="5%" minScreenWidth="Tablet" demandPopin="true">
-                                <Label id="Label15" text="{i18n>auditScoreListAuditStatusCol}" design="Bold"/>
-                            </Column>
-                            <Column id="validFrom" hAlign="End" vAlign="Middle" width="7%" minScreenWidth="Tablet" demandPopin="true">
-                                <Label id="Label16" text="{i18n>auditScoreListValidFromCol}" design="Bold"/>
-                            </Column>
-                            <Column id="validTo" hAlign="End" vAlign="Middle" width="7%" minScreenWidth="Tablet" demandPopin="true">
-                                <Label id="Label17" text="{i18n>auditScoreListValidToCol}" design="Bold"/>
-                            </Column>
-                            <!-- <Column hAlign="End" vAlign="Middle" width="10%" minScreenWidth="Tablet" demandPopin="true">
-                                <Label text="{i18n>auditScoreListPCol}" design="Bold"/>
-                            </Column> -->
-                            <Column id="createdAt" hAlign="Begin" vAlign="Middle" width="10%" minScreenWidth="Tablet" demandPopin="true">
-                                <Label id="Label18" text="{i18n>auditScoreListCreatedAtCol}" design="Bold"/>
-                            </Column>
-                            <Column id="createdBy" hAlign="Begin" vAlign="Middle" width="22%" minScreenWidth="Tablet" demandPopin="true">
-                                <Label id="Label19" text="{i18n>auditScoreListCreatedByCol}" design="Bold"/>
-                            </Column>
-                            <Column id="action" hAlign="Center" vAlign="Middle" width="5%" minScreenWidth="Tablet" demandPopin="true">
-                                <Label id="Label4" text="{i18n>auditScoreListActionCol}" design="Bold"/>
-                            </Column>
-                        </columns>
-                        <items>
-                            <ColumnListItem id="ColumnListItem4" type="Navigation" press="onDisplayAuditScoreDetail">
-                                <cells>
-                                    <!-- Leo: Should check permission view supplier for enable/disable later -->
-                                    <ObjectIdentifier id="ObjectIdentifier" titleActive="true" titlePress="onHandleSupplierPress" title="{= ${supplierId} === '' ? '' : ${path: 'supplierId', formatter: '.formatter.fnFormatSupplierId' } }" text="{supplierName}"/>
-                                    <!-- <Link text="{path: 'supplierId', formatter: '.formatter.fnFormatSupplierId'}" press="onHandleSupplierPress" ariaHasPopup="Dialog" /> -->
+                                        <Label id="Label13" text="{i18n>auditScoreDetailValidFrom}" required="true"/>
+                                        <DatePicker id="auditScoreDetailValidFrom" change="onBasicDataValidation" 
+                                        editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_VALID_FROM'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
+                                        placeholder="{i18n>enterDatePlaceHolder}" value="{
+                                                            'path':'auditScoreItemModel>/validFrom',
+                                                            'type':'sap.ui.model.type.Date'
+                                                        }" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScoreValidFromStage}"/>
 
-                                    <!-- <ObjectIdentifier title="{auditType}" text="{auditTypeText}"/> -->
-                                    <Text id="Text8" text="{auditTypeText}" />
+                                        <Label id="Label3" text="{i18n>auditScoreDetailValidTo}" required="true"/>
+                                        <DatePicker id="auditScoreDetailValidTo" change="onBasicDataValidation" 
+                                        editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_VALID_TO'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
+                                        placeholder="{i18n>enterDatePlaceHolder}" value="{
+                                                            'path':'auditScoreItemModel>/validTo',
+                                                            'type':'sap.ui.model.type.Date'
+                                                        }" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScoreValidToStage}"/>
+                                                        
+                                        <Label id="Label2" text="{i18n>auditScoreDetailAuditLabel}" required="false"/>
+                                        <!-- <Input id="auditScoreDetailAuditLabel" 
+                                                editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_AUDIT_LABEL'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}" 
+                                                value="{auditScoreItemModel>/auditLabelText}" class="sapUiSmallMarginBottom" /> -->
+                                        <Select id="auditScoreDetailAuditLabel" 
+                                                selectedKey="{auditScoreItemModel>/auditLabel}" 
+                                                editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_AUDIT_LABEL'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
+                                                items="{susF4HelpSrv>/F4Help_RiskScoreAuditLabel}" 
+                                                class="sapUiSmallMarginBottom">
+                                            <core:Item id="Item4" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                                        </Select>
 
-                                    <Text id="Text7" text="{auditScore}" />
+                                        <!-- <Label text="{i18n>auditScoreDetailAuditDate}" />
+                                        <DatePicker id="auditScoreDetailAuditDate" editable="false" placeholder="{i18n>enterDatePlaceHolder}" value="{
+                                                            'path':'auditScoreItemModel>/auditDate',
+                                                            'type':'sap.ui.model.odata.type.DateTimeOffset',
+                                                            'formatOptions': {
+                                                                'pattern': 'yyyy-MM-dd'
+                                                            }
+                                                        }" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScoreAuditDateStage}"/> -->
 
-                                    <Text id="Text6" text="{auditLabelText}" />
-                                    <!-- <ObjectIdentifier title="{auditLabel}" text="{auditLabelText}"/> -->
-                                    
-                                    <ObjectStatus id="ObjectStatus" text="{statusText}" state="{path:'statusId', formatter:'.formatter.getAuditScoreStatusState'}" />
+                                        <Label id="Label1" text="{i18n>auditScoreDetailAuditScore}" required="true" />
+                                        <Input id="auditScoreDetailAuditScore"
+                                            type="Number"
+                                            placeholder="{i18n>auditScoreDetailEnterNumber}"
+                                            ariaLabelledBy="InputNumberLabel"
+                                            value="{auditScoreItemModel>/auditScore}"
+                                            class="sapUiSmallMarginBottom"
+                                            change="onBasicDataValidation" 
+                                            editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_AUDIT_SCORE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}" />
+                                        <Button id="Button1" width="0.5rem" icon="sap-icon://information" type="Transparent" press="onShowValidInputRequiredInformation"/>
 
-                                    <Text id="Text5" text="{
-                                        path: 'validFrom',
-                                        type: 'sap.ui.model.type.Date',
-                                        formatOptions:{
-                                            source: {
-                                                pattern: 'yyyy-MM-ddTHH:mm:ss.sssZ'
+                                    </f:content>
+                                </f:SimpleForm>
+                            </uxap:ObjectPageSubSection>
+
+                            <uxap:ObjectPageSubSection id="ObjectPageSubSection3">
+                                <f:SimpleForm id="SimpleForm" editable="true" layout="ResponsiveGridLayout" >
+                                    <f:content>
+                                        <TextArea editable="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_DESCRIPTION'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}"
+                                                  id="auditScoreDetailLongText" value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
+                                    </f:content>
+                                </f:SimpleForm>
+                            </uxap:ObjectPageSubSection>
+                            
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection id="ObjectPageSection3" titleUppercase="false" title="{i18n>auditScoreDetailDescriptionTitle}">
+                        <uxap:subSections>
+                            
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection id="ObjectPageSection" titleUppercase="false" title="{i18n>auditScoreDetailDocumentsTitle}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="ObjectPageSubSection" >
+                                <upload:UploadSet   id="AuditScoreDetailUploadCollection" 
+                                                    mode = "None" 
+                                                    instantUpload="true"  
+                                                    terminationEnabled="true" 
+                                                    fileTypeMismatch="onTypeMissmatch" 
+                                                    fileTypes="txt,doc,pdf,xlsx,png,jpg" 
+                                                    sameFilenameAllowed="true" 
+                                                    items="{auditScoreItemModel>/attachments}" 
+                                                    fileNameLengthExceeded="onFileNameLength" 
+                                                    fileSizeExceeded="onFileSizeExceeded" 
+                                                    beforeItemEdited="onHandleBeforeEdit" 
+                                                    afterItemEdited="onHandleAfterEditFile" 
+                                                    beforeItemRemoved="onHandleBeforeRemoveFileUploadForAuditScore" 
+                                                    afterItemRemoved="onHandleAfterRemoveFileUploadForAuditScore" 
+                                                    afterItemAdded="onUploadAttachmentChangeForAuditScore"
+                                                    uploadCompleted="onUploadCompleted"
+                                                    uploadEnabled="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_UPLOAD_FILE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}">
+                                    <upload:items>
+                                        <upload:UploadSetItem id="UploadSetItem" fileName="{auditScoreItemModel>fileName}" 
+                                                                openPressed="onDownloadAttachment" 
+                                                                url="#" 
+                                                                enabledRemove="true" 
+                                                                visibleEdit="false" 
+                                                                visibleRemove="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_REMOVE_FILE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnEnabled'}">
+                                                <upload:statuses>
+                                                    <ObjectStatus id="ObjectStatus2" title="{i18n>uploadedBy}" text="{auditScoreItemModel>createdBy}" active="false"/>
+                                                    <ObjectStatus id="ObjectStatus3" title="{i18n>uploadedOn}" 
+                                                                    text="{
+                                                                        path: 'auditScoreItemModel>createdAt',
+                                                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                                                        constraints: {
+                                                                            precision: 3,
+                                                                            v4: true
+                                                                        }
+                                                                    }" active="false"/>
+                                                    <!-- //#170225-kiennt-Ticket521 - correct german date format -->
+                                                    <!-- <ObjectStatus title="{i18n>uploadedOn}" 
+                                                                    text="{
+                                                                        path: 'auditScoreItemModel>createdAt',
+                                                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                                                        constraints: {
+                                                                            precision: 3,
+                                                                            v4: true
+                                                                        },
+                                                                        formatOptions: {
+                                                                            pattern: 'dd/MM/yyyy HH:mm:ss'
+                                                                        }
+                                                                    }" active="false"/> -->
+                                                </upload:statuses>                
+                                        </upload:UploadSetItem>
+                                    </upload:items>
+                                </upload:UploadSet>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection id="ObjectPageSection2" titleUppercase="false" title="{i18n>auditScoreDetailActivitiesTitle}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="ObjectPageSubSection2" >
+                                <Table busyIndicatorDelay="0" id="idActivityWorklistTable" growing="true" growingThreshold="100" growingScrollToLoad="true" updateFinished="setPoTableHeader" mode="None" sticky="ColumnHeaders,HeaderToolbar" width="auto" items="{
+                                        path: 'auditScoreItemModel>/activities',
+                                        sorter: {
+                                            path: 'activityNo',
+                                            descending: true
+                                        }}">
+                                    <headerToolbar>
+                                        <OverflowToolbar id="OverflowToolbar3">
+                                            <Title id="idTableHeaderText" text="" level="H2"/>
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+
+                                    <columns>
+                                        <Column id="activityNo" width="7%" hAlign="Left" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title11" text="{i18n>activityListActivityIdCol}" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="supplierId" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title12" text="{i18n>activityListSupplierIdCol}" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="supplierName" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title13" text="{i18n>activityListSupplierNameCol}" class="fontWeightBold" />
+                                        </Column>
+                                        <Column id="activityPriorityId" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title14" text="{i18n>activityListPriorityCol}" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="statusId" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title15" text="{i18n>activityListStatusCol}" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="pendingSteps" hAlign="End" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title16" text="{i18n>activityListPendingStepsCol}" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="submittedSteps" hAlign="End" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title17" text="{i18n>activityListSubmittedStepsCol}" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="riskTypeId"  width="10%" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title19" text="{i18n>activityListRiskTypeCol}" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="activityTypeId" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title20" text="{i18n>activityListActivityTypeIdCol}" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="startDate" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title21" text="{i18n>activityListStartDateCol}" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="endDate" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title22" text="{i18n>activityListEndDateCol}" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="coordinatorId" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title23" text="{i18n>activityListCoordinatedByCol}" class="fontWeightBold" />
+                                        </Column>
+                                    </columns>
+
+                                    <items>
+                                        <ColumnListItem id="columnListItemActivity" type="Navigation" press="onItemPressed">
+                                            <cells>
+                                                <Text id="textActivityNo" text="{path: 'auditScoreItemModel>activityNo', type: 'sap.ui.model.odata.type.String'}" />
+                                                <Text id="textSupplierId" text="{path:'auditScoreItemModel>supplierId', formatter:'.formatter.fnFormatSupplierId'}" />
+                                                <Text id="textSupplierName" text="{auditScoreItemModel>supplierName}" />
+                                                <ObjectStatus id="objectPriority1" text="{auditScoreItemModel>activityPriorityText}" 
+                                                    state="{path:'auditScoreItemModel>activityPriorityId', formatter:'.formatter.getActivityPriorityState'}" />
+                                                <ObjectStatus id="objectStatus1" text="{auditScoreItemModel>statusText}" 
+                                                    state="{path:'auditScoreItemModel>statusId', formatter:'.formatter.getActivityStatusState'}" />
+                                                <Text id="textPendingSteps" text="{auditScoreItemModel>pendingSteps}" />
+                                                <Text id="textSubmittedSteps" text="{auditScoreItemModel>submittedSteps}" />
+                                                <Text id="textRiskType" text="{auditScoreItemModel>riskTypeText}" />
+                                                <Text id="textActivityType" text="{auditScoreItemModel>activityTypeText}" />
+                                                <Text id="textStartDate" text="{
+                                                    path: 'auditScoreItemModel>startDate',
+                                                    type: 'sap.ui.model.type.Date',
+                                                    formatOptions:{
+                                                        source: {
+                                                            pattern: 'yyyy-MM-ddTHH:mm:ss.sssZ'
+                                                        },
+                                                        UTC: true
+                                                    } 
+                                                }" />
+                                            <!-- //#170225-kiennt-Ticket521 - correct german date format -->
+                                            <!-- <Text text="{
+                                            path: 'auditScoreItemModel>startDate',
+                                            type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                            constraints: {
+                                                precision: 3,
+                                                v4: true
                                             },
-                                            UTC: true
-                                        } 
-                                    }" />
-
-                                    <Text id="Text4" text="{
-                                        path: 'validTo',
-                                        type: 'sap.ui.model.type.Date',
-                                        formatOptions:{
-                                            source: {
-                                                pattern: 'yyyy-MM-ddTHH:mm:ss.sssZ'
+                                            formatOptions: {
+                                                pattern: 'yyyy/MM/dd'
+                                            }
+                                            }" /> -->
+                                            <Text id="Title24" text="{
+                                                path: 'auditScoreItemModel>endDate',
+                                                type: 'sap.ui.model.type.Date',
+                                                formatOptions:{
+                                                    source: {
+                                                        pattern: 'yyyy-MM-ddTHH:mm:ss.sssZ'
+                                                    },
+                                                    UTC: true
+                                                } 
+                                            }" />
+                                            <!-- //#170225-kiennt-Ticket521 - correct german date format -->
+                                            <!-- <Text text="{
+                                            path: 'auditScoreItemModel>endDate',
+                                            type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                            constraints: {
+                                                precision: 3,
+                                                v4: true
                                             },
-                                            UTC: true
-                                        } 
-                                    }" />
-                                    
-                                    <!-- <Text text="{
-                                        path: 'validFrom',
-                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
-                                        constraints: {
-                                            precision: 3,
-                                            v4: true
-                                        },
-                                        formatOptions: {
-                                            pattern: 'yyyy/MM/dd',
-                                            UTC:true
-                                        }
-                                        }" />
-                                    
-                                    <Text text="{
-                                        path: 'validTo',
-                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
-                                        constraints: {
-                                            precision: 3,
-                                            v4: true
-                                        },
-                                        formatOptions: {
-                                            pattern: 'yyyy/MM/dd',
-                                            UTC:true
-                                        }
-                                        }" /> -->
+                                            formatOptions: {
+                                                pattern: 'yyyy/MM/dd'
+                                            }
+                                            }" /> -->
+                                                <Text id="Title25" text="{auditScoreItemModel>coordinatorName}" />
+                                            </cells>
+                                        </ColumnListItem>
+                                    </items>
 
-                                    <!-- <Text text="{
-                                        path: 'auditDate',
-                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
-                                        constraints: {
-                                            precision: 3,
-                                            v4: true
-                                        },
-                                        formatOptions: {
-                                            pattern: 'yyyy/MM/dd'
-                                        }
-                                        }" /> -->
+                                </Table>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                </uxap:sections>
 
-                                    <Text id="Text2" text="{
-                                        path: 'createdAt',
-                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
-                                        constraints: {
-                                            precision: 3,
-                                            v4: true
-                                        }
-                                    }" />
-                                    <!-- 13.02.25 - kiennt - Ticket 521: use standard date format -->
-                                    <!-- <Text text="{
-                                        path: 'createdAt',
-                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
-                                        constraints: {
-                                            precision: 3,
-                                            v4: true
-                                        },
-                                        formatOptions: {
-                                            pattern: 'yyyy/MM/dd HH:mm:ss'
-                                        }
-                                    }" /> -->
-
-                                    <Text id="Text" text="{createdBy}" />
-
-                                    <Button id="Button" tooltip="{i18n>auditScoreListCreateActivityBtn}" enabled="{= %{statusId} === '20' ? true : false }" icon="sap-icon://add-activity" type="Emphasized" press="onOpenCreateActivityDialog" />
-
-                                </cells>
-                            </ColumnListItem>
-                        </items>
-                    </Table>
-                </layout:VerticalLayout>
-
-                <VBox id="VBox">
-                    <Avatar id="scrollToTopButton" visible="false" src="sap-icon://arrow-top" displaySize="S" showBorder="true" class="scrollToTopButton sapFAvatarS sapFAvatarColorAccent6 sapFAvatarIcon roundClass" press="onScrollToTop"/>
-                </VBox>
-            </ScrollContainer>
+                <uxap:footer>
+                    <OverflowToolbar id="overflowToolbarFooter">
+                        <Button id="btnMessagePopover" icon="sap-icon://alert" text="{=${messagePopoverModel>/message}.length}" type="Emphasized" press="onMessagePopoverPress" />
+                        <ToolbarSpacer id="toolbarSpacerFooter" />
+                        <Button id="btnSubmitAuditScore" type="Emphasized" text="{i18n>auditScoreDetailSubmitBtn}" press="onSubmitAuditScore" 
+                            enabled="{=${auditScoreModel>/bAuditScoreValidInDetailView}}"
+                            visible="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_SUBMIT'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnShowHide'}" />
+                        <Button id="btnSaveAuditScore" type="Default" text="{i18n>auditScoreDetailSaveBtn}" press="onUpdateAuditScore" 
+                            enabled="{=${auditScoreModel>/bAuditScoreValidInDetailView}}"
+                            visible="{parts: [{path: 'global>/viewName/AUDIT_SCORE_DETAIL'}, {path: 'global>/controlName/AUDIT_SCORE_DETAIL_SAVE'}, {path: 'auditScoreItemModel>/statusId' }], formatter: '.formatter.fnShowHide'}" />
+                        <Button id="btnCancelAuditScore" type="Default" text="{i18n>auditScoreDetailCancelBtn}" press="onBackToAuditScoreList" />
+                    </OverflowToolbar>
+                </uxap:footer>
+            </uxap:ObjectPageLayout>
         </content>
-
-        <footer>
-            <OverflowToolbar id="OverflowToolbar">
-                <Button id="messagePopoverBtn" icon="sap-icon://alert" text="{=${messagePopoverModel>/message}.length}" type="Emphasized" press="onMessagePopoverPress" />
-                <ToolbarSpacer id="ToolbarSpacer2" />
-            </OverflowToolbar>
-        </footer>
     </Page>
 </mvc:View>

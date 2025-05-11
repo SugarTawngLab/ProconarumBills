@@ -18,213 +18,122 @@
                 <!-- Filter Bar -->
                 <fb:FilterBar
                     id="filterbar"
-                    persistencyKey="myPersKey"
                     useToolbar="false"
                     search=".onSearch"
                     filterChange=".onFilterChange"
                     afterVariantLoad=".onAfterVariantLoad">
+
                     <fb:filterGroupItems>
 
-                        <fb:FilterGroupItem id="FilterGroupItem"
-                            groupName="Group1"
-                            name="fbDescription"
-                            label="{i18n>filterBarDescription}"
+                        <!-- === Row 1 === -->
+                        <fb:FilterGroupItem id="fgRequestID"
+                            groupName="Row1"
+                            name="requestId"
+                            label="Request ID"
                             visibleInFilterBar="true">
-                            
                             <fb:control>
-                                <MultiInput
-                                    id="fbDescription"
-                                    change="onDescriptionChange"
-                                    valueHelpRequest=".onOpenVHDescription"
-                                    maxSuggestionWidth="25rem"
-                                    showSuggestion="false"
-                                    suggestionRows="{
-                                        path: 'cpSrv>/F4HelpDescriptions1',
-                                        templateShareable: false
-                                    }">
-
-                                    <suggestionColumns>
-                                        <Column id="column" hAlign="Begin">
-                                            <Label id="label" text="{i18n>Description}" />
-                                        </Column>
-                                    </suggestionColumns>
-
-                                    <suggestionRows>
-                                        <ColumnListItem id="ColumnListItem">
-                                            <cells>
-                                                <Label id="Label" text="{cpSrv>description1}" />
-                                            </cells>
-                                        </ColumnListItem>
-                                    </suggestionRows>
-                                </MultiInput>
+                                <Input id="inputRequestId" />
                             </fb:control>
                         </fb:FilterGroupItem>
 
-                        <fb:FilterGroupItem id="FilterGroupItem2"
-                            groupName="Group1"
-                            name="fbCreatedBy"
-                            label="{i18n>filterBarCreatedBy}"
+                        <fb:FilterGroupItem id="fgCreatedBy"
+                            groupName="Row1"
+                            name="createdBy"
+                            label="Created By"
                             visibleInFilterBar="true">
-                            
                             <fb:control>
-                                <MultiInput
-                                    id="fbDescription1"
-                                    change="onDescriptionChange1"
-                                    valueHelpRequest=".onOpenVHDescription1"
-                                    maxSuggestionWidth="25rem"
-                                    showSuggestion="false"
-                                    suggestionRows="{
-                                        path: 'cpSrv>/F4HelpDescriptions2',
-                                        templateShareable: false
-                                    }">
-
-                                    <suggestionColumns>
-                                        <Column id="column1" hAlign="Begin">
-                                            <Label id="label1" text="{i18n>createdBy}" />
-                                        </Column>
-                                    </suggestionColumns>
-
-                                    <suggestionRows>
-                                        <ColumnListItem id="ColumnListItem1">
-                                            <cells>
-                                                <Label id="Label1" text="{cpSrv>description2}" />   
-                                            </cells>
-                                        </ColumnListItem>
-                                    </suggestionRows>
-                                </MultiInput>
+                                <Input id="inputCreatedBy" />
                             </fb:control>
                         </fb:FilterGroupItem>
 
-                        <fb:FilterGroupItem id="FilterGroupItem3"
-                            groupName="Group1"
-                            name="fbChangedBy"
-                            label="{i18n>filterBarChangedBy}"
+                        <fb:FilterGroupItem id="fgChangedBy"
+                            groupName="Row1"
+                            name="changedBy"
+                            label="Changed By"
                             visibleInFilterBar="true">
-                            
                             <fb:control>
-                                <MultiInput
-                                    id="fbDescription2"
-                                    change="onDescriptionChange1"
-                                    valueHelpRequest=".onOpenVHDescription3"
-                                    maxSuggestionWidth="25rem"
-                                    showSuggestion="false"
-                                    suggestionRows="{
-                                        path: 'cpSrv>/F4HelpDescriptions2',
-                                        templateShareable: false
-                                    }">
-
-                                    <suggestionColumns>
-                                        <Column id="column2" hAlign="Begin">
-                                            <Label id="label2" text="{i18n>changedBy}" />
-                                        </Column>
-                                    </suggestionColumns>
-
-                                    <suggestionRows>
-                                        <ColumnListItem id="ColumnListItem2">
-                                            <cells>
-                                                <Label id="Label2" text="{cpSrv>description2}" />   
-                                            </cells>
-                                        </ColumnListItem>
-                                    </suggestionRows>
-                                </MultiInput>
+                                <Input id="inputChangedBy" />
                             </fb:control>
                         </fb:FilterGroupItem>
 
-                        <fb:FilterGroupItem
-                            id="filterGroupItemStatus2"
+                        <fb:FilterGroupItem id="fgPriority"
+                            groupName="Row1"
                             name="priority"
                             label="Priority"
-                            groupName="Group1"
                             visibleInFilterBar="true">
                             <fb:control>
-                                <MultiComboBox
-                                    id="multiComboBoxStatus1"
-                                    name="Priority"
-                                    width="150px"
-                                    selectionChange=".onSelectionChange">
-                                    <core:Item id="itemStatusPaid1" key="PAID" text="PAID" />
-                                    <core:Item id="itemStatusUnPaid1" key="UNPAID" text="UNPAID" />
+                                <MultiComboBox id="multiComboBoxPriority">
+                                    <core:Item id="item1" key="H" text="High"/>
+                                    <core:Item id="item2" key="L" text="Low"/>
                                 </MultiComboBox>
                             </fb:control>
                         </fb:FilterGroupItem>
 
-                        <fb:FilterGroupItem id="FilterGroupItem5"
-                            groupName="Group1"
-                            name="fbApprovedBy"
-                            label="{i18n>filterBarApprovedBy}"
+                        <fb:FilterGroupItem id="fgApprovedBy"
+                            groupName="Row1"
+                            name="approvedBy"
+                            label="Approved By"
                             visibleInFilterBar="true">
-                            
                             <fb:control>
-                                <MultiInput
-                                    id="fbDescription3"
-                                    change="onDescriptionChange1"
-                                    valueHelpRequest=".onOpenVHDescription3"
-                                    maxSuggestionWidth="25rem"
-                                    showSuggestion="false"
-                                    suggestionRows="{
-                                        path: 'cpSrv>/F4HelpDescriptions2',
-                                        templateShareable: false
-                                    }">
-
-                                    <suggestionColumns>
-                                        <Column id="column3" hAlign="Begin">
-                                            <Label id="label3" text="{i18n>approvedBy}" />
-                                        </Column>
-                                    </suggestionColumns>
-
-                                    <suggestionRows>
-                                        <ColumnListItem id="ColumnListItem3">
-                                            <cells>
-                                                <Label id="Label3" text="{cpSrv>description2}" />   
-                                            </cells>
-                                        </ColumnListItem>
-                                    </suggestionRows>
-                                </MultiInput>
+                                <Input id="inputApprovedBy" />
                             </fb:control>
                         </fb:FilterGroupItem>
 
-                        <fb:FilterGroupItem
-                            id="filterGroupItemStatus"
+                        <fb:FilterGroupItem id="fgStatus"
+                            groupName="Row1"
                             name="status"
                             label="Status"
-                            groupName="Group1"
                             visibleInFilterBar="true">
                             <fb:control>
-                                <MultiComboBox
-                                    id="multiComboBoxStatus"
-                                    name="status"
-                                    selectionChange=".onSelectionChange">
-                                    <core:Item id="itemStatusPaid" key="PAID" text="PAID" />
-                                    <core:Item id="itemStatusUnPaid" key="UNPAID" text="UNPAID" />
+                                <MultiComboBox id="multiComboBoxStatus">
+                                    <core:Item id="item3" key="PAID" text="PAID"/>
+                                    <core:Item id="item4" key="UNPAID" text="UNPAID"/>
                                 </MultiComboBox>
                             </fb:control>
                         </fb:FilterGroupItem>
 
-                            <fb:FilterGroupItem id="filterGroupItemCreatedDate" groupName="group2" name="fbValidFrom" label="Created Date" visibleInFilterBar="true">
-                                    <fb:control>
-                                        <DatePicker id="fbValidFrom" change="onFilterChange" />
-                                    </fb:control>
-                            </fb:FilterGroupItem>
+                        <!-- === Row 2 === -->
+                        <fb:FilterGroupItem id="fgCreatedDate"
+                            groupName="Row2"
+                            name="createdDate"
+                            label="Created Date"
+                            visibleInFilterBar="true">
+                            <fb:control>
+                                <DatePicker id="dateCreated"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
 
-                            <fb:FilterGroupItem id="filterGroupItemChangedDate" groupName="group2" name="fbValidFrom2" label="Changed Date" visibleInFilterBar="true">
-                                    <fb:control>
-                                        <DatePicker id="fbValidFrom2" change="onFilterChange" />
-                                    </fb:control>
-                            </fb:FilterGroupItem>
+                        <fb:FilterGroupItem id="fgChangedDate"
+                            groupName="Row2"
+                            name="changedDate"
+                            label="Changed Date"
+                            visibleInFilterBar="true">
+                            <fb:control>
+                                <DatePicker id="dateChanged"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
 
-                            <fb:FilterGroupItem id="filterGroupItemDueDate" groupName="group2" name="fbValidFrom3" label="Changed Date" visibleInFilterBar="true">
-                                    <fb:control>
-                                        <DatePicker id="fbValidFrom3" change="onFilterChange" />
-                                    </fb:control>
-                            </fb:FilterGroupItem>
+                        <fb:FilterGroupItem id="fgDueDate"
+                            groupName="Row2"
+                            name="dueDate"
+                            label="Due Date"
+                            visibleInFilterBar="true">
+                            <fb:control>
+                                <DatePicker id="dateDue"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
 
-                            <fb:FilterGroupItem id="filterGroupItemApprovalDate" groupName="group2" name="fbValidFrom4" label="Changed Date" visibleInFilterBar="true">
-                                    <fb:control>
-                                        <DatePicker id="fbValidFrom4" change="onFilterChange" />
-                                    </fb:control>
-                            </fb:FilterGroupItem>
+                        <fb:FilterGroupItem id="fgApprovalDate"
+                            groupName="Row2"
+                            name="approvalDate"
+                            label="Approval Date"
+                            visibleInFilterBar="true">
+                            <fb:control>
+                                <DatePicker id="dateApproval"/>
+                            </fb:control>
+                        </fb:FilterGroupItem>
+
                     </fb:filterGroupItems>
-                    
                 </fb:FilterBar>
 
                 <!-- Toolbar Actions -->

@@ -1,0 +1,292 @@
+<mvc:View controllerName="ns.proconarumbills.controller.CreateRequest"
+    xmlns:core="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:uxap="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:p13n="sap.m.p13n"
+    xmlns:v="sap.ui.comp.variants"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiSizeCompact">
+    <Page id="AuditScoreWorklist" navButtonPress="onNavBack" showHeader="true" showNavButton="true" title="Hihi" enableScrolling="true">
+        <content>
+            <ScrollContainer id="idAuditScoreScrollContainer" height="100%" width="100%" vertical="true" horizontal="true" focusable="true">
+                <layout:VerticalLayout id="VerticalLayout" width="100%" class="sapUiSmallMarginBottom">
+                    <v:VariantManagement standardItemAuthor="" id="variant" class="sapUiSmallMarginBegin" select="onSelectVar" save="onSaveVar"  manage="onManageVar" showShare="false" variantItems="{VariantModel>/AUDITSCORE_WORKLIST}">
+                        <v:variantItems>
+                            <v:VariantItem id="VariantItem" app:ID="{VariantModel>ID}" key="{VariantModel>variantKey}" text="{VariantModel>variantName}" author=""/>
+                        </v:variantItems>
+                    </v:VariantManagement>
+                    
+                    <fb:FilterBar id="FilterBar" reset="onReset" filterChange="onFilterChange" beforeVariantFetch="onFilterChange" search="onSearchAuditScoreList" showRestoreButton="true" showClearOnFB="true" clear="onClearFilter">
+    <fb:filterGroupItems>
+
+        <fb:FilterGroupItem id="FilterGroupItem4" groupName="group1" name="fbErpSupplier" label="ERP Supplier ID" visibleInFilterBar="true">
+            <fb:control>
+                <MultiInput id="fbErpSupplier" change="onSupplierChange" valueHelpRequest=".onOpenVHERPSup" maxSuggestionWidth="25rem" showSuggestion="false" suggestionRows="{
+                    path: 'cpSrv>/F4HelpErpSupplierAssignments',
+                    templateShareable:false
+                }">
+                    <suggestionColumns>
+                        <Column id="Column" hAlign="Begin" popinDisplay="Inline" demandPopin="true">
+                            <Label id="Label5" text="ERP System" />
+                        </Column>
+                        <Column id="Column1" hAlign="Center" popinDisplay="Inline" demandPopin="true" minScreenWidth="Tablet">
+                            <Label id="Label6" text="ERP Supplier" />
+                        </Column>
+                        <Column id="Column2" hAlign="Center" popinDisplay="Inline" demandPopin="true" minScreenWidth="Tablet">
+                            <Label id="Label7" text="Supplier Name" />
+                        </Column>
+                    </suggestionColumns>
+                    <suggestionRows>
+                        <ColumnListItem id="ColumnListItem5">
+                            <cells>
+                                <Label id="Label8" text="{cpSrv>systemID}" />
+                                <Label id="Label9" text="{path : 'cpSrv>erpSupplier', type : 'sap.ui.model.odata.type.String', constraints: { isDigitSequence : true, maxLength : 10}}" />
+                                <Label id="Label10" text="{cpSrv>supplierName}" />
+                            </cells>
+                        </ColumnListItem>
+                    </suggestionRows>
+                </MultiInput>
+            </fb:control>
+        </fb:FilterGroupItem>
+
+        <fb:FilterGroupItem id="FilterGroupItem6" groupName="group1" name="fbAuditType" label="Audit Type" visibleInFilterBar="true">
+            <fb:control>
+                <MultiComboBox id="fbAuditType" change="onFilterChange" width="150px" items="{path: 'susF4HelpSrv>/F4Help_RiskScoreAuditType'}">
+                    <core:Item id="Item" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                </MultiComboBox>
+            </fb:control>
+        </fb:FilterGroupItem>
+
+        <fb:FilterGroupItem id="FilterGroupItem7" groupName="group1" name="fbAuditScore" label="Audit Score" visibleInFilterBar="true">
+            <fb:control>
+                <RangeSlider id="fbAuditScore" change="onFilterChange" showAdvancedTooltip="true" range="0,100" min="0" max="100" showHandleTooltip="false" inputsAsTooltips="true" />
+            </fb:control>
+        </fb:FilterGroupItem>
+
+        <fb:FilterGroupItem id="FilterGroupItem8" groupName="group1" name="fbAuditLabel" label="Audit Label" visibleInFilterBar="true">
+            <fb:control>
+                <MultiComboBox id="fbAuditLabel" change="onFilterChange" width="150px" items="{path: 'susF4HelpSrv>/F4Help_RiskScoreAuditLabel'}">
+                    <core:Item id="Item2" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                </MultiComboBox>
+            </fb:control>
+        </fb:FilterGroupItem>
+
+        <fb:FilterGroupItem id="FilterGroupItem9" groupName="group1" name="fbAuditStatus" label="Audit Status" visibleInFilterBar="true">
+            <fb:control>
+                <MultiComboBox id="fbAuditStatus" change="onFilterChange" items="{
+                    path: 'susF4HelpSrv>/F4Help_RiskScoreAuditStatus',
+                    sorter: { path: 'fieldValue' }
+                }">
+                    <core:Item id="Item3" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                </MultiComboBox>
+            </fb:control>
+        </fb:FilterGroupItem>
+
+        <fb:FilterGroupItem id="FilterGroupItem10" groupName="group1" name="fbValidFrom" label="Valid From" visibleInFilterBar="true">
+            <fb:control>
+                <DatePicker id="fbValidFrom10" change="onFilterChange" />
+            </fb:control>
+        </fb:FilterGroupItem>
+
+        <fb:FilterGroupItem id="FilterGroupItem11" groupName="group1" name="fbValidTo" label="Valid To" visibleInFilterBar="true">
+            <fb:control>
+                <DatePicker id="fbValidTo" change="onFilterChange" />
+            </fb:control>
+        </fb:FilterGroupItem>
+
+    </fb:filterGroupItems>
+</fb:FilterBar>
+
+
+                </layout:VerticalLayout>
+
+                <layout:VerticalLayout id="VerticalLayout2" width="100%" class="sapUiSmallMarginBottom">
+                    
+                    <Table busyIndicatorDelay="0" id="tblAuditScore" mode="MultiSelect" growing="true" growingThreshold="1000" growingScrollToLoad="true" updateFinished="onUpdateFinished" sticky="ColumnHeaders,HeaderToolbar" width="auto" items="{
+                                    path: '/AuditScores_view',
+                                    parameters : {
+                                        $select: 'erpSystemId,ID,auditLabelText,auditScore,auditTypeText,createdAt,createdBy,statusId,statusText,supplierId,supplierName,validFrom,validTo',
+                                        $count : true,
+                                        $orderby : 'createdAt desc'
+                                    }
+                                }">
+                        <headerToolbar>
+                            <OverflowToolbar id="OverflowToolbar2">
+                                <content>
+                                    <Title id="auditScoreListTitle" level="H2"/>
+                                    <ToolbarSpacer id="ToolbarSpacer3"/>
+                                    <Button id="Button5" visible="{parts: [{path: 'global>/objectAction/AUDIT_SCORE_CREATE'}], formatter: '.formatter.fnIsUserGrandtedAction'}" text="{i18n>auditScoreListCreateBtn}" tooltip="{i18n>auditScoreListCreateBtn}" type="Emphasized" icon="sap-icon://create" press="onCreateAuditScore" />
+                                    <!-- <Button text="{i18n>auditScoreListDeleteBtn}" tooltip="{i18n>auditScoreListDeleteBtn}" type="Reject" icon="sap-icon://delete" press="onDeleteMultipleAuditScore" /> -->
+                                    <ToolbarSeparator id="ToolbarSeparator"/>
+                                    <Button id="print" visible="false" tooltip="{i18n>auditScoreListExportExcelBtn}" icon="sap-icon://print" type="Transparent" press="onExportExcel" />
+                                    <Button id="exportExcel" tooltip="{i18n>auditScoreListExportExcelBtn}" icon="sap-icon://excel-attachment" type="Transparent" press="onExportExcel" />
+                                    <Button id="Button4" tooltip="{i18n>auditScoreListOpenSortOptionsBtn}" icon="sap-icon://sort" press="onSort" />
+                                    <Button id="Button3" tooltip="{i18n>auditScoreListGroupBtn}" icon="sap-icon://group-2" press="onGroup"/>
+                                    <!-- <Button tooltip="{i18n>auditScoreListBackTotTopBtn}" icon="sap-icon://back-to-top" press="onBackToTop"/> -->
+                                    <Button id="Button2" visible="true" icon="sap-icon://action-settings" press="onPersonalization">
+                                        <layoutData>
+                                            <OverflowToolbarLayoutData id="OverflowToolbarLayoutData" priority="NeverOverflow" />
+                                        </layoutData>
+                                    </Button>
+                                </content>
+                            </OverflowToolbar>
+                        </headerToolbar>
+                        <columns>
+                            <Column id="supplierId2" hAlign="Begin" vAlign="Middle" width="15%" minScreenWidth="Phone" demandPopin="true">
+                                <Label id="Label11" text="{i18n>auditScoreListSupplierIdCol}" design="Bold"/>
+                            </Column>
+                            <Column id="auditType" hAlign="Begin" vAlign="Middle" width="7%" minScreenWidth="Phone" demandPopin="true">
+                                <Label id="Label12" text="{i18n>auditScoreListAuditTypeCol}" design="Bold"/>
+                            </Column>
+                            <Column id="auditScore" hAlign="End" vAlign="Middle" width="7%" minScreenWidth="Tablet" demandPopin="true">
+                                <Label id="Labe13" text="{i18n>auditScoreListAuditScoreCol}" design="Bold"/>
+                            </Column>
+                            <Column id="auditLabel" hAlign="Begin" vAlign="Middle" width="10%" minScreenWidth="Tablet" demandPopin="true">
+                                <Label id="Label14" text="{i18n>auditScoreListAuditLabelCol}" design="Bold"/>
+                            </Column>                                                
+                            <Column id="statusId2" hAlign="End" vAlign="Middle" width="5%" minScreenWidth="Tablet" demandPopin="true">
+                                <Label id="Label15" text="{i18n>auditScoreListAuditStatusCol}" design="Bold"/>
+                            </Column>
+                            <Column id="validFrom" hAlign="End" vAlign="Middle" width="7%" minScreenWidth="Tablet" demandPopin="true">
+                                <Label id="Label16" text="{i18n>auditScoreListValidFromCol}" design="Bold"/>
+                            </Column>
+                            <Column id="validTo" hAlign="End" vAlign="Middle" width="7%" minScreenWidth="Tablet" demandPopin="true">
+                                <Label id="Label17" text="{i18n>auditScoreListValidToCol}" design="Bold"/>
+                            </Column>
+                            <!-- <Column hAlign="End" vAlign="Middle" width="10%" minScreenWidth="Tablet" demandPopin="true">
+                                <Label text="{i18n>auditScoreListPCol}" design="Bold"/>
+                            </Column> -->
+                            <Column id="createdAt" hAlign="Begin" vAlign="Middle" width="10%" minScreenWidth="Tablet" demandPopin="true">
+                                <Label id="Label18" text="{i18n>auditScoreListCreatedAtCol}" design="Bold"/>
+                            </Column>
+                            <Column id="createdBy" hAlign="Begin" vAlign="Middle" width="22%" minScreenWidth="Tablet" demandPopin="true">
+                                <Label id="Label19" text="{i18n>auditScoreListCreatedByCol}" design="Bold"/>
+                            </Column>
+                            <Column id="action" hAlign="Center" vAlign="Middle" width="5%" minScreenWidth="Tablet" demandPopin="true">
+                                <Label id="Label4" text="{i18n>auditScoreListActionCol}" design="Bold"/>
+                            </Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem id="ColumnListItem4" type="Navigation" press="onDisplayAuditScoreDetail">
+                                <cells>
+                                    <!-- Leo: Should check permission view supplier for enable/disable later -->
+                                    <ObjectIdentifier id="ObjectIdentifier" titleActive="true" titlePress="onHandleSupplierPress" title="{= ${supplierId} === '' ? '' : ${path: 'supplierId', formatter: '.formatter.fnFormatSupplierId' } }" text="{supplierName}"/>
+                                    <!-- <Link text="{path: 'supplierId', formatter: '.formatter.fnFormatSupplierId'}" press="onHandleSupplierPress" ariaHasPopup="Dialog" /> -->
+
+                                    <!-- <ObjectIdentifier title="{auditType}" text="{auditTypeText}"/> -->
+                                    <Text id="Text8" text="{auditTypeText}" />
+
+                                    <Text id="Text7" text="{auditScore}" />
+
+                                    <Text id="Text6" text="{auditLabelText}" />
+                                    <!-- <ObjectIdentifier title="{auditLabel}" text="{auditLabelText}"/> -->
+                                    
+                                    <ObjectStatus id="ObjectStatus" text="{statusText}" state="{path:'statusId', formatter:'.formatter.getAuditScoreStatusState'}" />
+
+                                    <Text id="Text5" text="{
+                                        path: 'validFrom',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions:{
+                                            source: {
+                                                pattern: 'yyyy-MM-ddTHH:mm:ss.sssZ'
+                                            },
+                                            UTC: true
+                                        } 
+                                    }" />
+
+                                    <Text id="Text4" text="{
+                                        path: 'validTo',
+                                        type: 'sap.ui.model.type.Date',
+                                        formatOptions:{
+                                            source: {
+                                                pattern: 'yyyy-MM-ddTHH:mm:ss.sssZ'
+                                            },
+                                            UTC: true
+                                        } 
+                                    }" />
+                                    
+                                    <!-- <Text text="{
+                                        path: 'validFrom',
+                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                        constraints: {
+                                            precision: 3,
+                                            v4: true
+                                        },
+                                        formatOptions: {
+                                            pattern: 'yyyy/MM/dd',
+                                            UTC:true
+                                        }
+                                        }" />
+                                    
+                                    <Text text="{
+                                        path: 'validTo',
+                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                        constraints: {
+                                            precision: 3,
+                                            v4: true
+                                        },
+                                        formatOptions: {
+                                            pattern: 'yyyy/MM/dd',
+                                            UTC:true
+                                        }
+                                        }" /> -->
+
+                                    <!-- <Text text="{
+                                        path: 'auditDate',
+                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                        constraints: {
+                                            precision: 3,
+                                            v4: true
+                                        },
+                                        formatOptions: {
+                                            pattern: 'yyyy/MM/dd'
+                                        }
+                                        }" /> -->
+
+                                    <Text id="Text2" text="{
+                                        path: 'createdAt',
+                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                        constraints: {
+                                            precision: 3,
+                                            v4: true
+                                        }
+                                    }" />
+                                    <!-- 13.02.25 - kiennt - Ticket 521: use standard date format -->
+                                    <!-- <Text text="{
+                                        path: 'createdAt',
+                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                        constraints: {
+                                            precision: 3,
+                                            v4: true
+                                        },
+                                        formatOptions: {
+                                            pattern: 'yyyy/MM/dd HH:mm:ss'
+                                        }
+                                    }" /> -->
+
+                                    <Text id="Text" text="{createdBy}" />
+
+                                    <Button id="Button" tooltip="{i18n>auditScoreListCreateActivityBtn}" enabled="{= %{statusId} === '20' ? true : false }" icon="sap-icon://add-activity" type="Emphasized" press="onOpenCreateActivityDialog" />
+
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </layout:VerticalLayout>
+
+                <VBox id="VBox">
+                    <Avatar id="scrollToTopButton" visible="false" src="sap-icon://arrow-top" displaySize="S" showBorder="true" class="scrollToTopButton sapFAvatarS sapFAvatarColorAccent6 sapFAvatarIcon roundClass" press="onScrollToTop"/>
+                </VBox>
+            </ScrollContainer>
+        </content>
+
+        <footer>
+            <OverflowToolbar id="OverflowToolbar">
+                <Button id="messagePopoverBtnn" icon="sap-icon://alert" text="{=${messagePopoverModel>/message}.length}" type="Emphasized" press="onMessagePopoverPress" />
+                <ToolbarSpacer id="ToolbarSpacer2" />
+            </OverflowToolbar>
+        </footer>
+    </Page>
+</mvc:View>
