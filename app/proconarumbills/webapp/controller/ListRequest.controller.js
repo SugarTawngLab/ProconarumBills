@@ -83,7 +83,7 @@ sap.ui.define([
             }
         
             // Get the table and its binding
-            var oTable = this.byId("table");
+            var oTable = this.byId("idExpenseRequestWorklist");
             var oBinding = oTable.getBinding("items");
         
             // Apply the filters to the binding
@@ -141,7 +141,7 @@ sap.ui.define([
         
             // === Build filters based on values ===
             if (sRequestId) {
-                oFilters.push(new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.Contains, sRequestId));
+                oFilters.push(new sap.ui.model.Filter("description", sap.ui.model.FilterOperator.Contains, sRequestId));
             }
         
             if (sCreatedBy) {
@@ -149,7 +149,7 @@ sap.ui.define([
             }
         
             if (sChangedBy) {
-                oFilters.push(new sap.ui.model.Filter("changedBy", sap.ui.model.FilterOperator.Contains, sChangedBy));
+                oFilters.push(new sap.ui.model.Filter("modifiedBy", sap.ui.model.FilterOperator.Contains, sChangedBy));
             }
         
             if (sApprovedBy) {
@@ -189,7 +189,7 @@ sap.ui.define([
             }
         
             // === Bind filter to table ===
-            var oTable = this.byId("idActivityWorklistTable");
+            var oTable = this.byId("idExpenseRequestWorklist");
             var oBinding = oTable.getBinding("items");
         
             if (oBinding) {

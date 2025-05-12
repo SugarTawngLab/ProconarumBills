@@ -63,8 +63,9 @@
                             visibleInFilterBar="true">
                             <fb:control>
                                 <MultiComboBox id="multiComboBoxPriority">
-                                    <core:Item id="item1" key="H" text="High"/>
-                                    <core:Item id="item2" key="L" text="Low"/>
+                                    <core:Item id="item1" key="High" text="High"/>
+                                    <core:Item id="item2" key="Medium" text="Medium"/>
+                                    <core:Item id="item3" key="Low" text="Low"/>
                                 </MultiComboBox>
                             </fb:control>
                         </fb:FilterGroupItem>
@@ -85,9 +86,13 @@
                             label="Status"
                             visibleInFilterBar="true">
                             <fb:control>
-                                <MultiComboBox id="multiComboBoxStatus">
-                                    <core:Item id="item3" key="PAID" text="PAID"/>
-                                    <core:Item id="item4" key="UNPAID" text="UNPAID"/>
+                                <MultiComboBox id="multiComboBoxStatus" width="200px">
+                                    <core:Item id="item4" key="Draft" text="Draft"/>
+                                    <core:Item id="item5" key="New" text="New"/>
+                                    <core:Item id="item9" key="InProgress" text="In Progress"/>
+                                    <core:Item id="item6" key="ReOpen" text="ReOpen"/>
+                                    <core:Item id="item7" key="Approved" text="Approved"/>
+                                    <core:Item id="item8" key="Rejected" text="Rejected"/>
                                 </MultiComboBox>
                             </fb:control>
                         </fb:FilterGroupItem>
@@ -145,7 +150,7 @@
 
                 <!-- Table -->
                 <Table
-                    id="table"
+                    id="idExpenseRequestWorklist"
                     inset="false"
                     items="{ path: '/Requests' }"
                     mode="MultiSelect">
