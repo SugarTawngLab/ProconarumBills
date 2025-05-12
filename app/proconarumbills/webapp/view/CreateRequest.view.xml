@@ -95,35 +95,36 @@
                                     <headerToolbar>
                                         <OverflowToolbar id="OverflowToolbar3">
                                             <Title id="idTableHeaderText" text="" level="H2"/>
+                                            <ToolbarSpacer id="toolbarSpacer1" />
+                                            <Button id="_IDGenButton" text="{i18n>add}" icon="sap-icon://add" press="onAddRow" />
                                         </OverflowToolbar>
                                     </headerToolbar>
-
                                     <columns>
                                         <Column id="activityNo" width="7%" hAlign="Left" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
-                                            <Text id="Title11" text="{i18n>activityListActivityIdCol}" class="fontWeightBold" />
+                                            <Text id="Title11" text="No" class="fontWeightBold" />
                                         </Column>
 
                                         <Column id="supplierId" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
-                                            <Text id="Title12" text="{i18n>activityListSupplierIdCol}" class="fontWeightBold" />
+                                            <Text id="Title12" text="Item Description" class="fontWeightBold" />
                                         </Column>
 
                                         <Column id="supplierName" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
-                                            <Text id="Title13" text="{i18n>activityListSupplierNameCol}" class="fontWeightBold" />
+                                            <Text id="Title13" text="Amount" class="fontWeightBold" />
                                         </Column>
                                         <Column id="activityPriorityId" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
-                                            <Text id="Title14" text="{i18n>activityListPriorityCol}" class="fontWeightBold" />
+                                            <Text id="Title14" text="Item Category" class="fontWeightBold" />
                                         </Column>
 
                                         <Column id="statusId" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
-                                            <Text id="Title15" text="{i18n>activityListStatusCol}" class="fontWeightBold" />
+                                            <Text id="Title15" text="Item Date" class="fontWeightBold" />
                                         </Column>
 
                                         <Column id="pendingSteps" hAlign="End" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
-                                            <Text id="Title16" text="{i18n>activityListPendingStepsCol}" class="fontWeightBold" />
+                                            <Text id="Title16" text="Vendor" class="fontWeightBold" />
                                         </Column>
 
                                         <Column id="submittedSteps" hAlign="End" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
-                                            <Text id="Title17" text="{i18n>activityListSubmittedStepsCol}" class="fontWeightBold" />
+                                            <Text id="Title17" text="Remark" class="fontWeightBold" />
                                         </Column>
 
                                         <Column id="riskTypeId"  width="10%" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
