@@ -1,0 +1,174 @@
+<mvc:View
+	controllerName="ns.proconarumbills.controller.RequestDetail"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+	height="100%">
+
+	<f:DynamicPage id="dynamicPageId"
+		stickySubheaderProvider="iconTabBar"
+		class="sapUiNoContentPadding"
+		toggleHeaderOnTitleClick="false">
+
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle id="idDynamicPageTitle">
+				<f:heading>
+					<Title id="idTitleHeader" text="auditScoreDetailAuditScore"/>
+				</f:heading>
+				<f:breadcrumbs>
+					<Breadcrumbs id="idBreadcrumbs">
+						<Link id="idLinkHome" text="Home" />
+						<Link id="idLinkPage1" text="Page 1" />
+						<Link id="idLinkPage2" text="Page 2" />
+					</Breadcrumbs>
+				</f:breadcrumbs>
+				<f:expandedContent>
+					<Label id="idExpandedLabel" text="{desc}"/>
+				</f:expandedContent>
+				<f:snappedContent>
+					<Label id="idSnappedLabel" text="{desc}"/>
+				</f:snappedContent>
+				<f:snappedTitleOnMobile>
+					<Title id="idMobileTitle" text="{desc}"/>
+				</f:snappedTitleOnMobile>
+				<f:content>
+					<OverflowToolbar id="idOverflowToolbar">
+						<GenericTag id="idGenericTag" text="SR"
+							status="Error"
+							press="onGenericTagPress"
+							design="StatusIconHidden">
+							<ObjectNumber id="idObjectNumber" number="2"
+								unit="M"
+								emphasized="false"
+								state="Error"/>
+						</GenericTag>
+					</OverflowToolbar>
+				</f:content>
+				<f:actions>
+					<Button id="idBtnEdit" text="Edit" type="Emphasized"/>
+					<Button id="idBtnDelete" text="Delete" type="Transparent"/>
+					<Button id="idBtnCopy" text="Copy" type="Transparent"/>
+					<Button id="idBtnToggleFooter" text="Toggle Footer" type="Transparent" press="onToggleFooter"/>
+					<Button id="idBtnAction" icon="sap-icon://action" type="Transparent"/>
+				</f:actions>
+				<f:navigationActions>
+          <Button id="idBtnBack" icon="sap-icon://nav-back" type="Transparent" press="onNavBack" />
+				</f:navigationActions>
+			</f:DynamicPageTitle>
+		</f:title>
+
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader id="idDynamicPageHeader" pinnable="true">
+				<layout:HorizontalLayout id="idHorizontalLayout" allowWrapping="true">
+					<layout:VerticalLayout id="idVerticalLayoutLeft" class="sapUiMediumMarginEnd">
+						<ObjectStatus id="idAttrLocation" title="Urgent" text="{= ${urgent} ? 'Yes' : 'No' }" state="{= ${urgent} ? 'Error' : 'Success' }" />
+						<ObjectAttribute id="idAttrAvailability" title="Requester" text="{createdBy}" />
+						<ObjectAttribute id="idAttrRack" title="Reviewer" text="{modifiedBy}"/>
+					</layout:VerticalLayout>
+
+					<layout:VerticalLayout id="idVerticalLayoutRight">
+						<ObjectAttribute id="idAttrHallway" title="Urgent Date" text="{urgentDate}"/>
+						<ObjectAttribute id="idAttrCreatedAt" title="Request Date" text="{createdAt}" />
+						<ObjectAttribute id="idAttrUpdatedAt" title="Review Date" text="{modifiedAt}" />
+					</layout:VerticalLayout>
+				</layout:HorizontalLayout>
+			</f:DynamicPageHeader>
+		</f:header>
+
+		<!-- Content (unchanged) -->
+		<f:content>
+      <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+        <items>
+          <IconTabFilter id="idTabFilterProducts" text="Expenses">
+            <Table id="idProductsTable"
+              inset="false"
+              sticky="HeaderToolbar,ColumnHeaders"
+              items="{
+                path: '/Bills',
+                sorter: { path: 'title' }
+              }"
+              class="sapUiSmallNegativeMarginBeginEnd"
+              width="auto">
+              <headerToolbar>
+                <Toolbar id="idToolbarProducts">
+                  <Label id="idLabelCars" text="Bills" />
+                </Toolbar>
+              </headerToolbar>
+              <columns>
+                <Column id="idColumnProduct" width="12em">
+                  <Text id="idColumnHeaderProduct" text="Title" />
+                </Column>
+                <Column id="idColumnSupplier" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                  <Text id="idColumnHeaderSupplier" text="Category" />
+                </Column>
+                <Column id="idColumnDimensions" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
+                  <Text id="idColumnHeaderDimensions" text="Charge" />
+                </Column>
+              </columns>
+              <items>
+                <ColumnListItem id="idColumnListItemProduct">
+                  <cells>
+                    <Text id="idObjIdentifierProduct" text="{title}"/>
+                    <Text id="idTextCategory" text="{category}" />
+                    <ObjectNumber
+                      id="idObjNumberCharge"
+                      number="{
+                        parts:[{path:'charge'}],
+                        type: 'sap.ui.model.type.Currency',
+                        formatOptions: {showMeasure: false}
+                      }"
+                      unit="VND" />
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </IconTabFilter>
+          <IconTabFilter id="idTabFilterAttachments" text="Comments">
+            <Table id="idProductsTable1"
+              inset="false"
+              sticky="HeaderToolbar,ColumnHeaders"
+              items="{
+                path: '/Comments',
+                sorter: { path: 'createdBy' }
+              }"
+              class="sapUiSmallNegativeMarginBeginEnd"
+              width="auto">
+              <headerToolbar>
+                <Toolbar id="idToolbarProducts1">
+                  <Label id="idLabelCars1" text="Comments table" />
+                </Toolbar>
+              </headerToolbar>
+              <columns>
+                <Column id="idColumnProduct1" width="12em">
+                  <Text id="idColumnHeaderProduct1" text="Person" />
+                </Column>
+                <Column id="idColumnSupplier1" minScreenWidth="Tablet" demandPopin="true" >
+                  <Text id="idColumnHeaderSupplier1" text="Content" />
+                </Column>
+              </columns>
+              <items>
+                <ColumnListItem id="idColumnListItemProduct1">
+                  <cells>
+                    <Text id="idObjIdentifierProduct1" text="{createdBy}" />
+                    <Text id="idTextCategory1" text="{content}" />
+                  </cells>
+                </ColumnListItem>
+              </items>
+            </Table>
+          </IconTabFilter>
+        </items>
+      </IconTabBar>
+    </f:content>
+
+    <f:footer>
+      <OverflowToolbar id="idFooterToolbar">
+        <ToolbarSpacer id="idToolbarSpacer" />
+        <Button id="idBtnAccept" type="Accept" text="Accept" />
+        <Button id="idBtnReject" type="Reject" text="Reject" />
+      </OverflowToolbar>
+    </f:footer>
+	</f:DynamicPage>
+</mvc:View>

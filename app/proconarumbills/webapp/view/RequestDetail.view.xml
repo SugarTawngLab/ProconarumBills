@@ -1,174 +1,276 @@
-<mvc:View
-	controllerName="ns.proconarumbills.controller.RequestDetail"
-	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m"
-	xmlns:f="sap.f"
-	xmlns:layout="sap.ui.layout"
-	height="100%">
+<mvc:View controllerName="ns.proconarumbills.controller.RequestDetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:upload="sap.m.upload"
+    xmlns:goals="sap.uxap.sample.SharedBlocks.goals"
+    xmlns:personal="sap.uxap.sample.SharedBlocks.personal"
+    xmlns:employment="sap.uxap.sample.SharedBlocks.employment" height="100%">
+    <Page id="_IDGenPage"  showHeader="false" enableScrolling="true">
+        <content>
+            <uxap:ObjectPageLayout id="_IDGenObjectPageLayout"  showTitleInHeaderContent="true" showEditHeaderButton="false" editHeaderButtonPress="handleEditBtnPress" upperCaseAnchorBar="false" showFooter="true">
+                <uxap:headerTitle>
+                    <uxap:ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle" >
+                        <uxap:expandedHeading>
+                            <Title id="_IDGenTitle"  text="{description}" wrapping="true"/>
+                        </uxap:expandedHeading>
+                        <uxap:snappedHeading>
+                            <FlexBox id="_IDGenFlexBox" fitContainer="true" alignItems="Center">
+                                <Title id="_IDGenTitle1"  text="{description}" wrapping="true" />
+                            </FlexBox>
+                        </uxap:snappedHeading>                   
 
-	<f:DynamicPage id="dynamicPageId"
-		stickySubheaderProvider="iconTabBar"
-		class="sapUiNoContentPadding"
-		toggleHeaderOnTitleClick="false">
+                        <uxap:expandedContent>
+                            <HBox id="_IDGenHBox">
+                                <Title id="_IDGenTitle2" text="Status: " class="sapUiTinyMarginEnd" />
+                                <ObjectStatus id="auditScoreDetailStatus" text="{status}" />
+                            </HBox>
 
-		<!-- DynamicPage Title -->
-		<f:title>
-			<f:DynamicPageTitle id="idDynamicPageTitle">
-				<f:heading>
-					<Title id="idTitleHeader" text="{title}"/>
-				</f:heading>
-				<f:breadcrumbs>
-					<Breadcrumbs id="idBreadcrumbs">
-						<Link id="idLinkHome" text="Home" />
-						<Link id="idLinkPage1" text="Page 1" />
-						<Link id="idLinkPage2" text="Page 2" />
-					</Breadcrumbs>
-				</f:breadcrumbs>
-				<f:expandedContent>
-					<Label id="idExpandedLabel" text="{desc}"/>
-				</f:expandedContent>
-				<f:snappedContent>
-					<Label id="idSnappedLabel" text="{desc}"/>
-				</f:snappedContent>
-				<f:snappedTitleOnMobile>
-					<Title id="idMobileTitle" text="{desc}"/>
-				</f:snappedTitleOnMobile>
-				<f:content>
-					<OverflowToolbar id="idOverflowToolbar">
-						<GenericTag id="idGenericTag" text="SR"
-							status="Error"
-							press="onGenericTagPress"
-							design="StatusIconHidden">
-							<ObjectNumber id="idObjectNumber" number="2"
-								unit="M"
-								emphasized="false"
-								state="Error"/>
-						</GenericTag>
-					</OverflowToolbar>
-				</f:content>
-				<f:actions>
-					<Button id="idBtnEdit" text="Edit" type="Emphasized"/>
-					<Button id="idBtnDelete" text="Delete" type="Transparent"/>
-					<Button id="idBtnCopy" text="Copy" type="Transparent"/>
-					<Button id="idBtnToggleFooter" text="Toggle Footer" type="Transparent" press="onToggleFooter"/>
-					<Button id="idBtnAction" icon="sap-icon://action" type="Transparent"/>
-				</f:actions>
-				<f:navigationActions>
-          <Button id="idBtnBack" icon="sap-icon://nav-back" type="Transparent" press="onNavBack" />
-				</f:navigationActions>
-			</f:DynamicPageTitle>
-		</f:title>
+                            <HBox id="_IDGenHBox1">
+                                <Title id="_IDGenTitle3" text="Total Amount: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="auditScoreDetailSupplier" text="5.000.000 VND" />
+                            </HBox>
 
-		<!-- DynamicPage Header -->
-		<f:header>
-			<f:DynamicPageHeader id="idDynamicPageHeader" pinnable="true">
-				<layout:HorizontalLayout id="idHorizontalLayout" allowWrapping="true">
-					<layout:VerticalLayout id="idVerticalLayoutLeft" class="sapUiMediumMarginEnd">
-						<ObjectStatus id="idAttrLocation" title="Urgent" text="{= ${urgent} ? 'Yes' : 'No' }" state="{= ${urgent} ? 'Error' : 'Success' }" />
-						<ObjectAttribute id="idAttrAvailability" title="Requester" text="{createdBy}" />
-						<ObjectAttribute id="idAttrRack" title="Reviewer" text="{modifiedBy}"/>
-					</layout:VerticalLayout>
+                            <HBox id="_IDGenHBox2">
+                                <Title id="_IDGenTitle4" text="Created By: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="auditScoreDetailAuditType" text="{CreatedBy}" />
+                            </HBox>
 
-					<layout:VerticalLayout id="idVerticalLayoutRight">
-						<ObjectAttribute id="idAttrHallway" title="Urgent Date" text="{urgentDate}"/>
-						<ObjectAttribute id="idAttrCreatedAt" title="Request Date" text="{createdAt}" />
-						<ObjectAttribute id="idAttrUpdatedAt" title="Review Date" text="{modifiedAt}" />
-					</layout:VerticalLayout>
-				</layout:HorizontalLayout>
-			</f:DynamicPageHeader>
-		</f:header>
+                            <HBox id="_IDGenHBox3">
+                                <Title id="_IDGenTitle5" text="Created At: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="auditScoreDetailCreatedAt" text="{
+                                    path: 'createdAt',
+                                    type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                    constraints: {
+                                        precision: 3,
+                                        v4: true
+                                    }                                
+                                }"/>
+                            </HBox>
 
-		<!-- Content (unchanged) -->
-		<f:content>
-      <IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
-        <items>
-          <IconTabFilter id="idTabFilterProducts" text="Expenses">
-            <Table id="idProductsTable"
-              inset="false"
-              sticky="HeaderToolbar,ColumnHeaders"
-              items="{
-                path: '/Bills',
-                sorter: { path: 'title' }
-              }"
-              class="sapUiSmallNegativeMarginBeginEnd"
-              width="auto">
-              <headerToolbar>
-                <Toolbar id="idToolbarProducts">
-                  <Label id="idLabelCars" text="Bills" />
-                </Toolbar>
-              </headerToolbar>
-              <columns>
-                <Column id="idColumnProduct" width="12em">
-                  <Text id="idColumnHeaderProduct" text="Title" />
-                </Column>
-                <Column id="idColumnSupplier" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
-                  <Text id="idColumnHeaderSupplier" text="Category" />
-                </Column>
-                <Column id="idColumnDimensions" minScreenWidth="Tablet" demandPopin="true" hAlign="End">
-                  <Text id="idColumnHeaderDimensions" text="Charge" />
-                </Column>
-              </columns>
-              <items>
-                <ColumnListItem id="idColumnListItemProduct">
-                  <cells>
-                    <Text id="idObjIdentifierProduct" text="{title}"/>
-                    <Text id="idTextCategory" text="{category}" />
-                    <ObjectNumber
-                      id="idObjNumberCharge"
-                      number="{
-                        parts:[{path:'charge'}],
-                        type: 'sap.ui.model.type.Currency',
-                        formatOptions: {showMeasure: false}
-                      }"
-                      unit="VND" />
-                  </cells>
-                </ColumnListItem>
-              </items>
-            </Table>
-          </IconTabFilter>
-          <IconTabFilter id="idTabFilterAttachments" text="Comments">
-            <Table id="idProductsTable1"
-              inset="false"
-              sticky="HeaderToolbar,ColumnHeaders"
-              items="{
-                path: '/Comments',
-                sorter: { path: 'createdBy' }
-              }"
-              class="sapUiSmallNegativeMarginBeginEnd"
-              width="auto">
-              <headerToolbar>
-                <Toolbar id="idToolbarProducts1">
-                  <Label id="idLabelCars1" text="Comments table" />
-                </Toolbar>
-              </headerToolbar>
-              <columns>
-                <Column id="idColumnProduct1" width="12em">
-                  <Text id="idColumnHeaderProduct1" text="Person" />
-                </Column>
-                <Column id="idColumnSupplier1" minScreenWidth="Tablet" demandPopin="true" >
-                  <Text id="idColumnHeaderSupplier1" text="Content" />
-                </Column>
-              </columns>
-              <items>
-                <ColumnListItem id="idColumnListItemProduct1">
-                  <cells>
-                    <Text id="idObjIdentifierProduct1" text="{createdBy}" />
-                    <Text id="idTextCategory1" text="{content}" />
-                  </cells>
-                </ColumnListItem>
-              </items>
-            </Table>
-          </IconTabFilter>
-        </items>
-      </IconTabBar>
-    </f:content>
+                            <HBox id="_IDGenHBox4">
+                                <Title id="_IDGenTitle6" text="{i18n>auditScoreDetailCreatedBy}: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="auditScoreDetailCreatedBy" text="{auditScoreItemModel>/createdBy}" />
+                            </HBox>
+                        </uxap:expandedContent>
 
-    <f:footer>
-      <OverflowToolbar id="idFooterToolbar">
-        <ToolbarSpacer id="idToolbarSpacer" />
-        <Button id="idBtnAccept" type="Accept" text="Accept" />
-        <Button id="idBtnReject" type="Reject" text="Reject" />
-      </OverflowToolbar>
-    </f:footer>
-	</f:DynamicPage>
+                        <uxap:snappedContent>
+                            <HBox id="_IDGenHBox5">
+                                <Title id="_IDGenTitle7" text="{i18n>auditScoreDetailStatus}: " class="sapUiTinyMarginEnd" />
+                                <ObjectStatus id="_IDGenObjectStatus" text="{auditScoreItemModel>/statusText}" state="{path:'auditScoreItemModel>/statusId', formatter:'.formatter.getAuditScoreStatusState'}" />
+                            </HBox>
+                            
+                            <HBox id="_IDGenHBox6">
+                                <Title id="_IDGenTitle8" text="{i18n>auditScoreDetailSupplier}: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="_IDGenObjectStatus1" text="{= ${auditScoreItemModel>/supplierId} === '' ? '' : ${auditScoreItemModel>/erpSystemId} + ' - ' + ${path: 'auditScoreItemModel>/supplierId', formatter: '.formatter.fnFormatSupplierId'} + ' - ' + ${auditScoreItemModel>/supplierName}}" />
+                            </HBox>
+
+                            <HBox id="_IDGenHBox7">
+                                <Title id="_IDGenTitle9" text="{i18n>auditScoreDetailAuditType}: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="_IDGenObjectStatus2" text="{auditScoreItemModel>/auditTypeText}" />
+                            </HBox>
+                        </uxap:snappedContent>
+
+                    </uxap:ObjectPageDynamicHeaderTitle>
+                </uxap:headerTitle>
+
+                <uxap:sections>
+                    <uxap:ObjectPageSection id="_IDGenObjectPageSection" titleUppercase="false"  title="{i18n>requestHeader}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection" >
+                            <VBox id="_IDGenVBox"  width="100%">
+                                <f:SimpleForm id="_IDGenSimpleForm"  editable="true" layout="ColumnLayout" labelSpanXL="2" labelSpanL="2" labelSpanM="2" labelSpanS="12" adjustLabelSpan="false" emptySpanXL="2" emptySpanL="2" emptySpanM="2" emptySpanS="2" columnsXL="2" columnsL="2" columnsM="2" singleContainerFullSize="false">
+                                    <f:content>
+                                        <Label id="_IDGenLabel"  text="Request Description" required="true"/>
+                                        <Input id="_IDGenInput" 
+                                            placeholder="Transfer Office"
+                                            ariaLabelledBy="InputNumberLabel"
+                                            value="{auditScoreItemModel>/auditScore}"
+                                            class="sapUiSmallMarginBottom"
+                                            change="onBasicDataValidation" 
+                                            editable="true" />
+
+                                        <Label id="_IDGenLabel1"  text="Currency" required="true"/>
+                                        <Select id="_IDGenSelect"  
+                                                selectedKey="{auditScoreItemModel>/auditLabel}" 
+                                                editable="true"
+                                                items="{susF4HelpSrv>/F4Help_RiskScoreAuditLabel}" 
+                                                class="sapUiSmallMarginBottom">
+                                            <core:Item id="_IDGenItem"  key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                                        </Select>
+
+                                        <Label id="_IDGenLabel2"  text="Priority" required="false"/>
+                                        <Select id="_IDGenSelect1"  
+                                                selectedKey="{auditScoreItemModel>/auditLabel}" 
+                                                editable="true"
+                                                items="{susF4HelpSrv>/F4Help_RiskScoreAuditLabel}" 
+                                                class="sapUiSmallMarginBottom">
+                                            <core:Item id="_IDGenItem1"  key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                                        </Select>
+
+                                        <Label id="_IDGenLabel3"  text="Due date" required="true" />
+                                        <DatePicker id="_IDGenDatePicker1"  change="onBasicDataValidation" 
+                                        editable="true"
+                                        placeholder="23/04/2025" value="{
+                                                            'path':'auditScoreItemModel>/validTo',
+                                                            'type':'sap.ui.model.type.Date'
+                                                        }" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScoreValidToStage}"/>
+                                        <Button id="_IDGenButton1"  width="0.5rem" icon="sap-icon://information" type="Transparent" press="onShowValidInputRequiredInformation"/>
+                                    </f:content>
+                                </f:SimpleForm>
+
+                                <f:SimpleForm id="_IDGenSimpleForm1"  editable="true" layout="ResponsiveGridLayout" >
+                                    <f:content>
+                                        <Label id="_IDGenLabel4"  text="Request Information" required="true" />
+                                        <TextArea id="_IDGenTextArea" editable="true"
+                                                 value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="Describe more detail your request" maxLength="5000"/>
+                                    </f:content>
+                                </f:SimpleForm>
+                            </VBox>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection id="_IDGenObjectPageSection1"  titleUppercase="false" title="{i18n>requestItems}">
+                        <uxap:subSections>
+                        	<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection1"  >
+                                <Table id="_IDGenTable" busyIndicatorDelay="0"  growing="true" growingThreshold="100" growingScrollToLoad="true" updateFinished="setPoTableHeader" mode="None" sticky="ColumnHeaders,HeaderToolbar" width="auto" items="{
+                                        path: 'auditScoreItemModel>/activities',
+                                        sorter: {
+                                            path: 'activityNo',
+                                            descending: true
+                                        }}">
+                                    <headerToolbar>
+                                        <OverflowToolbar id="_IDGenOverflowToolbar" >
+                                            <Title id="_IDGenTitle10"  text="" level="H2"/>
+                                            <ToolbarSpacer id="_IDGenToolbarSpacer"  />
+                                            <Button id="_IDGenButton2"  text="Add Item" icon="sap-icon://add" press="onAddRow" />
+                                        </OverflowToolbar>
+                                    </headerToolbar>
+                                    <columns>
+                                        <!-- <Column id="activityNo" width="7%" hAlign="Left" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="Title11" text="No" class="fontWeightBold" />
+                                        </Column> -->
+
+                                        <Column id="_IDGenColumn"  hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="_IDGenText5"  text="Item Description" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="_IDGenColumn1"  hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="_IDGenText"  text="Amount" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="_IDGenColumn2"  hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="_IDGenText1"  text="Item Category" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="_IDGenColumn3"  hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="_IDGenText2"  text="Item Date" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="_IDGenColumn4"  hAlign="End" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="_IDGenText3"  text="Vendor" class="fontWeightBold" />
+                                        </Column>
+
+                                        <Column id="_IDGenColumn5"  hAlign="End" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                            <Text id="_IDGenText4"  text="Remark" class="fontWeightBold" />
+                                        </Column>
+                                    </columns>
+
+                                    <items>
+                                    <ColumnListItem id="_IDGenColumnListItem" >
+                                        <cells>
+                                            <!-- <Input id="_IDGenInput" value="{ExpenseItems>Id}" /> -->
+                                            <Input id="_IDGenInput6"  value="{ExpenseItems>description}" />
+                                            <Input id="_IDGenInput7"  value="{ExpenseItems>category}" />
+                                            <DatePicker id="_IDGenDatePicker2"  value="{ExpenseItems>billDate}" displayFormat="yyyy-MM-dd" />
+                                            <Input id="_IDGenInput8"  value="{ExpenseItems>paymentMethod}" />
+                                            <Input id="_IDGenInput9"  value="{ExpenseItems>ammount}" />
+                                            <Input id="_IDGenInput10"  value="{ExpenseItems>remark}" />
+                                        </cells>
+                                    </ColumnListItem>
+                                    </items>
+                                </Table>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection id="_IDGenObjectPageSection2"  titleUppercase="false" title="{i18n>requestAttachments}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection2"  >
+                                <upload:UploadSet id="_IDGenUploadSet"    
+                                                    mode = "None" 
+                                                    instantUpload="true"  
+                                                    terminationEnabled="true" 
+                                                    fileTypeMismatch="onTypeMissmatch" 
+                                                    fileTypes="txt,doc,pdf,xlsx,png,jpg" 
+                                                    sameFilenameAllowed="true" 
+                                                    items="{auditScoreItemModel>/attachments}" 
+                                                    fileNameLengthExceeded="onFileNameLength" 
+                                                    fileSizeExceeded="onFileSizeExceeded" 
+                                                    beforeItemEdited="onHandleBeforeEdit" 
+                                                    afterItemEdited="onHandleAfterEditFile" 
+                                                    beforeItemRemoved="onHandleBeforeRemoveFileUploadForAuditScore" 
+                                                    afterItemRemoved="onHandleAfterRemoveFileUploadForAuditScore" 
+                                                    afterItemAdded="onUploadAttachmentChangeForAuditScore"
+                                                    uploadCompleted="onUploadCompleted"
+                                                    uploadEnabled="true">
+                                    <upload:items>
+                                        <upload:UploadSetItem id="_IDGenUploadSetItem"  fileName="{auditScoreItemModel>fileName}" 
+                                                                openPressed="onDownloadAttachment" 
+                                                                url="#" 
+                                                                enabledRemove="true" 
+                                                                visibleEdit="false" 
+                                                                visibleRemove="true">
+                                                <upload:statuses>
+                                                    <ObjectStatus id="_IDGenObjectStatus3"  title="{i18n>uploadedBy}" text="{auditScoreItemModel>createdBy}" active="false"/>
+                                                    <ObjectStatus id="_IDGenObjectStatus4"  title="{i18n>uploadedOn}" 
+                                                                    text="{
+                                                                        path: 'auditScoreItemModel>createdAt',
+                                                                        type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                                                        constraints: {
+                                                                            precision: 3,
+                                                                            v4: true
+                                                                        }
+                                                                    }" active="false"/>
+                                                </upload:statuses>                
+                                        </upload:UploadSetItem>
+                                    </upload:items>
+                                </upload:UploadSet>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+
+                    <uxap:ObjectPageSection id="_IDGenObjectPageSection3"  titleUppercase="false" title="{i18n>requestComments}">
+                        <uxap:subSections>
+                            <uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection3" >
+                                <f:SimpleForm id="_IDGenSimpleForm2"  editable="true" layout="ResponsiveGridLayout" >
+                                    <f:content>
+                                        <TextArea id="_IDGenTextArea1" editable="true"
+                                                   value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
+                                    </f:content>
+                                </f:SimpleForm>
+                            </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                    </uxap:ObjectPageSection>
+                </uxap:sections>
+
+                <uxap:footer>
+                    <OverflowToolbar id="_IDGenOverflowToolbar1" >
+                        <ToolbarSpacer id="_IDGenToolbarSpacer1"  />
+                        <Button id="_IDGenButton3"  type="Default" text="Save Draft" press="onSubmitAuditScore"
+                            enabled="{=${auditScoreModel>/bAuditScoreValidInDetailView}}"
+                            visible="true" />
+                        <Button id="_IDGenButton4"  type="Emphasized" text="Submit" press="onUpdateAuditScore" 
+                            enabled="{=${auditScoreModel>/bAuditScoreValidInDetailView}}"
+                            visible="true" />
+                        <Button id="_IDGenButton5"  type="Default" text="Cancel" press="onBackToAuditScoreList" />
+                    </OverflowToolbar>
+                </uxap:footer>
+            </uxap:ObjectPageLayout>
+        </content>
+    </Page>
 </mvc:View>

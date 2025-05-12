@@ -121,6 +121,82 @@ sap.ui.define([
             });
         },
 
+        onSearch: function (oEvent) {
+            var oFilterBar = this.byId("filterbar");
+            var oFilters = [];
+        
+            // === Get filter control values ===
+            var sRequestId = this.byId("inputRequestId").getValue();
+            var sCreatedBy = this.byId("inputCreatedBy").getValue();
+            var sChangedBy = this.byId("inputChangedBy").getValue();
+            var sApprovedBy = this.byId("inputApprovedBy").getValue();
+        
+            var aPriorities = this.byId("multiComboBoxPriority").getSelectedKeys();
+            var aStatuses = this.byId("multiComboBoxStatus").getSelectedKeys();
+        
+            var dCreatedDate = this.byId("dateCreated").getDateValue();
+            var dChangedDate = this.byId("dateChanged").getDateValue();
+            var dDueDate = this.byId("dateDue").getDateValue();
+            var dApprovalDate = this.byId("dateApproval").getDateValue();
+        
+            // === Build filters based on values ===
+            if (sRequestId) {
+                oFilters.push(new sap.ui.model.Filter("ID", sap.ui.model.FilterOperator.Contains, sRequestId));
+            }
+        
+            if (sCreatedBy) {
+                oFilters.push(new sap.ui.model.Filter("createdBy", sap.ui.model.FilterOperator.Contains, sCreatedBy));
+            }
+        
+            if (sChangedBy) {
+                oFilters.push(new sap.ui.model.Filter("changedBy", sap.ui.model.FilterOperator.Contains, sChangedBy));
+            }
+        
+            if (sApprovedBy) {
+                oFilters.push(new sap.ui.model.Filter("approvedBy", sap.ui.model.FilterOperator.Contains, sApprovedBy));
+            }
+        
+            if (aPriorities.length > 0) {
+                oFilters.push(new sap.ui.model.Filter({
+                    path: "priority",
+                    operator: sap.ui.model.FilterOperator.Contains,
+                    value1: aPriorities.join(",")
+                }));
+            }
+        
+            if (aStatuses.length > 0) {
+                oFilters.push(new sap.ui.model.Filter({
+                    path: "status",
+                    operator: sap.ui.model.FilterOperator.Contains,
+                    value1: aStatuses.join(",")
+                }));
+            }
+        
+            if (dCreatedDate) {
+                oFilters.push(new sap.ui.model.Filter("createdAt", sap.ui.model.FilterOperator.EQ, dCreatedDate));
+            }
+        
+            if (dChangedDate) {
+                oFilters.push(new sap.ui.model.Filter("updatedAt", sap.ui.model.FilterOperator.EQ, dChangedDate));
+            }
+        
+            if (dDueDate) {
+                oFilters.push(new sap.ui.model.Filter("dueDate", sap.ui.model.FilterOperator.EQ, dDueDate));
+            }
+        
+            if (dApprovalDate) {
+                oFilters.push(new sap.ui.model.Filter("approvalDate", sap.ui.model.FilterOperator.EQ, dApprovalDate));
+            }
+        
+            // === Bind filter to table ===
+            var oTable = this.byId("idActivityWorklistTable");
+            var oBinding = oTable.getBinding("items");
+        
+            if (oBinding) {
+                oBinding.filter(oFilters);
+            }
+        },
+
         onItemPress: function (oEvent) {
             const oItem = oEvent.getSource();
             const oRouter = this.getOwnerComponent().getRouter();
