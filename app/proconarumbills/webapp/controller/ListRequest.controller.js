@@ -207,44 +207,26 @@ sap.ui.define([
                     value2: sEndChanged
                 }));
             }
-            
+
             if (dDueDate) {
-                var oStartDue = new Date(dDueDate);
-                oStartDue.setHours(0, 0, 0, 0);
+                const sDueDate = [
+                    dDueDate.getFullYear(),
+                    String(dDueDate.getMonth() + 1).padStart(2, '0'),
+                    String(dDueDate.getDate()).padStart(2, '0')
+                ].join('-');
             
-                var oEndDue = new Date(dDueDate);
-                oEndDue.setHours(23, 59, 59, 999);
-            
-                const sStartDue = oStartDue.toISOString();
-                const sEndDue = oEndDue.toISOString();
-            
-                oFilters.push(new sap.ui.model.Filter({
-                    path: "dueDate",
-                    operator: sap.ui.model.FilterOperator.BT,
-                    value1: sStartDue,
-                    value2: sEndDue
-                }));
+                oFilters.push(new sap.ui.model.Filter("dueDate", sap.ui.model.FilterOperator.EQ, sDueDate));
             }
             
             if (dApprovalDate) {
-                var oStartApproval = new Date(dApprovalDate);
-                oStartApproval.setHours(0, 0, 0, 0);
+                const sApprovalDate = [
+                    dApprovalDate.getFullYear(),
+                    String(dApprovalDate.getMonth() + 1).padStart(2, '0'),
+                    String(dApprovalDate.getDate()).padStart(2, '0')
+                ].join('-');
             
-                var oEndApproval = new Date(dApprovalDate);
-                oEndApproval.setHours(23, 59, 59, 999);
-            
-                const sStartApproval = oStartApproval.toISOString();
-                const sEndApproval = oEndApproval.toISOString();
-            
-                oFilters.push(new sap.ui.model.Filter({
-                    path: "approvalDate",
-                    operator: sap.ui.model.FilterOperator.BT,
-                    value1: sStartApproval,
-                    value2: sEndApproval
-                }));
+                oFilters.push(new sap.ui.model.Filter("approvalDate", sap.ui.model.FilterOperator.EQ, sApprovalDate));
             }
-            
-            
         
             // === Bind filter to table ===
             var oTable = this.byId("idExpenseRequestWorklist");
