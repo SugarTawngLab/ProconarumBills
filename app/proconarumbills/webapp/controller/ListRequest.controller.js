@@ -173,20 +173,78 @@ sap.ui.define([
             }
         
             if (dCreatedDate) {
-                oFilters.push(new sap.ui.model.Filter("createdAt", sap.ui.model.FilterOperator.EQ, dCreatedDate));
-            }
+                var oStartDate = new Date(dCreatedDate);
+                oStartDate.setHours(0, 0, 0, 0);
+            
+                var oEndDate = new Date(dCreatedDate);
+                oEndDate.setHours(23, 59, 59, 999);
+            
+                const sStartDate = oStartDate.toISOString();
+                const sEndDate = oEndDate.toISOString();
+            
+                oFilters.push(new sap.ui.model.Filter({
+                    path: "createdAt",
+                    operator: sap.ui.model.FilterOperator.BT,
+                    value1: sStartDate,
+                    value2: sEndDate
+                }));
+            }            
         
             if (dChangedDate) {
-                oFilters.push(new sap.ui.model.Filter("updatedAt", sap.ui.model.FilterOperator.EQ, dChangedDate));
+                var oStartChanged = new Date(dChangedDate);
+                oStartChanged.setHours(0, 0, 0, 0);
+            
+                var oEndChanged = new Date(dChangedDate);
+                oEndChanged.setHours(23, 59, 59, 999);
+            
+                const sStartChanged = oStartChanged.toISOString();
+                const sEndChanged = oEndChanged.toISOString();
+            
+                oFilters.push(new sap.ui.model.Filter({
+                    path: "modifiedAt",
+                    operator: sap.ui.model.FilterOperator.BT,
+                    value1: sStartChanged,
+                    value2: sEndChanged
+                }));
             }
-        
+            
             if (dDueDate) {
-                oFilters.push(new sap.ui.model.Filter("dueDate", sap.ui.model.FilterOperator.EQ, dDueDate));
+                var oStartDue = new Date(dDueDate);
+                oStartDue.setHours(0, 0, 0, 0);
+            
+                var oEndDue = new Date(dDueDate);
+                oEndDue.setHours(23, 59, 59, 999);
+            
+                const sStartDue = oStartDue.toISOString();
+                const sEndDue = oEndDue.toISOString();
+            
+                oFilters.push(new sap.ui.model.Filter({
+                    path: "dueDate",
+                    operator: sap.ui.model.FilterOperator.BT,
+                    value1: sStartDue,
+                    value2: sEndDue
+                }));
             }
-        
+            
             if (dApprovalDate) {
-                oFilters.push(new sap.ui.model.Filter("approvalDate", sap.ui.model.FilterOperator.EQ, dApprovalDate));
+                var oStartApproval = new Date(dApprovalDate);
+                oStartApproval.setHours(0, 0, 0, 0);
+            
+                var oEndApproval = new Date(dApprovalDate);
+                oEndApproval.setHours(23, 59, 59, 999);
+            
+                const sStartApproval = oStartApproval.toISOString();
+                const sEndApproval = oEndApproval.toISOString();
+            
+                oFilters.push(new sap.ui.model.Filter({
+                    path: "approvalDate",
+                    operator: sap.ui.model.FilterOperator.BT,
+                    value1: sStartApproval,
+                    value2: sEndApproval
+                }));
             }
+            
+            
         
             // === Bind filter to table ===
             var oTable = this.byId("idExpenseRequestWorklist");
