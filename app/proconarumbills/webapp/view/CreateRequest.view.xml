@@ -44,20 +44,24 @@
 
                                         <Label id="Label3" text="Currency" required="true"/>
                                         <Select id="currency" 
-                                                selectedKey="{auditScoreItemModel>/auditLabel}" 
                                                 editable="true"
-                                                items="{susF4HelpSrv>/F4Help_RiskScoreAuditLabel}" 
                                                 class="sapUiSmallMarginBottom">
-                                            <core:Item id="currencyItems" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                                            <core:Item id="currencyItems" key="USD" text="USD" />
+                                            <core:Item id="currencyItems1" key="VND" text="VND" />
+                                            <core:Item id="currencyItems2" key="EUR" text="EUR" />
+                                            <core:Item id="currencyItems3" key="JPY" text="JPY" />
                                         </Select>
 
                                         <Label id="Label2" text="Priority" required="false"/>
                                         <Select id="auditScoreDetailAuditLabel" 
-                                                selectedKey="{auditScoreItemModel>/auditLabel}" 
                                                 editable="true"
-                                                items="{susF4HelpSrv>/F4Help_RiskScoreAuditLabel}" 
                                                 class="sapUiSmallMarginBottom">
-                                            <core:Item id="Item4" key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                                            <core:Item id="currencyItems4" key="Draft" text="Draft" />
+                                            <core:Item id="currencyItems5" key="ReOpen" text="ReOpen" />
+                                            <core:Item id="currencyItems6" key="InProgress" text="InProgress" />
+                                            <core:Item id="currencyItems7" key="Approved" text="Approved" />
+                                            <core:Item id="currencyItems8" key="Rejected" text="Rejected" />
+                                            <core:Item id="currencyItems9" key="Completed" text="Completed" />
                                         </Select>
 
                                         <Label id="Label1" text="Due date" required="true" />
@@ -86,12 +90,8 @@
                     <uxap:ObjectPageSection id="ObjectPageSection3" titleUppercase="false" title="{i18n>requestItems}">
                         <uxap:subSections>
                         	<uxap:ObjectPageSubSection id="ObjectPageSubSection2" >
-                                <Table busyIndicatorDelay="0" id="idActivityWorklistTable" growing="true" growingThreshold="100" growingScrollToLoad="true" updateFinished="setPoTableHeader" mode="None" sticky="ColumnHeaders,HeaderToolbar" width="auto" items="{
-                                        path: 'auditScoreItemModel>/activities',
-                                        sorter: {
-                                            path: 'activityNo',
-                                            descending: true
-                                        }}">
+                                <Table busyIndicatorDelay="0" id="idExpenseItemsTable" growing="true" growingThreshold="100" growingScrollToLoad="true" updateFinished="setPoTableHeader" mode="None" sticky="ColumnHeaders,HeaderToolbar" width="auto" items="{
+                                        path: 'ExpenseItems>/items'}">
                                     <headerToolbar>
                                         <OverflowToolbar id="OverflowToolbar3">
                                             <Title id="idTableHeaderText" text="" level="H2"/>
@@ -100,10 +100,6 @@
                                         </OverflowToolbar>
                                     </headerToolbar>
                                     <columns>
-                                        <!-- <Column id="activityNo" width="7%" hAlign="Left" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
-                                            <Text id="Title11" text="No" class="fontWeightBold" />
-                                        </Column> -->
-
                                         <Column id="supplierId" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
                                             <Text id="Title12" text="Item Description" class="fontWeightBold" />
                                         </Column>
@@ -132,7 +128,6 @@
                                     <items>
                                     <ColumnListItem id="columnListItemActivity">
                                         <cells>
-                                            <!-- <Input id="_IDGenInput" value="{ExpenseItems>Id}" /> -->
                                             <Input id="_IDGenInput1" value="{ExpenseItems>description}" />
                                             <Input id="_IDGenInput2" value="{ExpenseItems>category}" />
                                             <DatePicker id="_IDGenDatePicker" value="{ExpenseItems>billDate}" displayFormat="yyyy-MM-dd" />
@@ -199,7 +194,7 @@
                                 <f:SimpleForm id="SimpleForm2" editable="true" layout="ResponsiveGridLayout" >
                                     <f:content>
                                         <TextArea editable="true"
-                                                  id="auditScoreDetailLongText2" value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
+                                                  id="expenseRequestDetailLongText2" value="{expenseRequestItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
                                     </f:content>
                                 </f:SimpleForm>
                             </uxap:ObjectPageSubSection>
@@ -210,13 +205,13 @@
                 <uxap:footer>
                     <OverflowToolbar id="overflowToolbarFooter">
                         <ToolbarSpacer id="toolbarSpacerFooter" />
-                        <Button id="btnSubmitAuditScore" type="Default" text="Save Draft" press="onSubmitAuditScore"
-                            enabled="{=${auditScoreModel>/bAuditScoreValidInDetailView}}"
+                        <Button id="btnSaveDraftExpenseRequest" type="Default" text="Save Draft" press="onSaveDraftExpenseRequest"
+                            enabled="true"
                             visible="true" />
-                        <Button id="btnSaveAuditScore" type="Emphasized" text="Submit" press="onUpdateAuditScore" 
-                            enabled="{=${auditScoreModel>/bAuditScoreValidInDetailView}}"
+                        <Button id="btnSubmitExpenseRequest" type="Emphasized" text="Submit" press="onSubmitExpenseRequest"
+                            enabled="true"
                             visible="true" />
-                        <Button id="btnCancelAuditScore" type="Default" text="Cancel" press="onBackToAuditScoreList" />
+                        <Button id="btnCancelExpenseRequest" type="Default" text="Cancel" press="onBackToExpenseRequestList" />
                     </OverflowToolbar>
                 </uxap:footer>
             </uxap:ObjectPageLayout>
