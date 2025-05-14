@@ -240,8 +240,9 @@ sap.ui.define([
         onItemPress: function (oEvent) {
             const oItem = oEvent.getSource();
             const oRouter = this.getOwnerComponent().getRouter();
+            
             oRouter.navTo("RequestDetail", {
-				RequestId: window.encodeURIComponent(oItem.getBindingContext().getPath().substring(1))
+				RequestId: oEvent.getSource().getBindingContext().getObject().ID
 			});
         },
         

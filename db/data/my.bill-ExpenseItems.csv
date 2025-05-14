@@ -1,1 +1,5 @@
 ID,description,category,billDate,paymentMethod,vendor,currency,ammount,remark,expenseRequest_ID,createdAt,createdBy,modifiedAt,modifiedBy
+6c61dbea-4ac5-4c87-86d3-bf4dbbda939f,Tiền vận chuyển,Others,2025-04-20,BankTransfer,VietNam Moving,VND,2000000,,25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3,2025-04-20T00:00:00Z,AHuy@gmail.com,2025-04-20T00:00:00Z,AHuy@gmail.com
+9ec8e8e2-0f6b-4e2b-8e9c-f5896a1ea7e7,Tiền vệ sinh,Others,2025-04-20,BankTransfer,Building Mgt,VND,250000,,25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3,2025-04-20T00:00:00Z,AHuy@gmail.com,2025-04-20T00:00:00Z,AHuy@gmail.com
+296c3f52-b8e9-4a3c-81e3-670ef2df8c5f,Tiền cà phê,DailyMeal,2025-04-20,Cash,Highlands Coffee,VND,250000,,25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3,2025-04-20T00:00:00Z,AHuy@gmail.com,2025-04-20T00:00:00Z,AHuy@gmail.com
+c4fdc6a1-734d-4f3a-a372-bf44ff07150a,Mua ghế mới,OfficeManagement,2025-04-20,BankTransfer,ABC shop,VND,2500000,,25d9f5e1-1a73-41e9-b5c1-56e6ae4be2b3,2025-04-20T00:00:00Z,AHuy@gmail.com,2025-04-20T00:00:00Z,AHuy@gmail.com

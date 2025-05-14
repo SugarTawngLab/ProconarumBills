@@ -13,12 +13,25 @@ sap.ui.define([
 		},
 
 		onObjectMatched(oEvent) {
-			this.getView().bindElement({
-				path: "/" + window.decodeURIComponent(oEvent.getParameter("arguments").RequestId),
-				parameters: {
-					expand: 'Bills,Comments'
-				  },
-				model: undefined
+			let oArgs = oEvent.getParameter("arguments");
+			let sRequestId = oArgs.RequestId;
+			let sEndPoint = this.getView().getModel().sServiceUrl;
+			let sPath = sEndPoint + `Requests(${sRequestId})` + `?$expand=expenseItems`;
+
+			$.ajax({
+				url: sPath,
+				method: "GET",
+				contentType: "application/json",
+				headers: {
+				  "Accept": "application/json"
+				},
+				success: (data) => {
+				  const oModel = new sap.ui.model.json.JSONModel(data);
+				  this.getView().setModel(oModel, "RequestDetails");
+				},
+				error: (xhr, status, error) => {
+				  console.log("Failed: " + (xhr.responseText || error));
+				}
 			});
 		},
 

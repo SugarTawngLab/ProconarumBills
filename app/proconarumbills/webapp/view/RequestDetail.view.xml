@@ -15,18 +15,18 @@
                 <uxap:headerTitle>
                     <uxap:ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle" >
                         <uxap:expandedHeading>
-                            <Title id="_IDGenTitle"  text="{description}" wrapping="true"/>
+                            <Title id="_IDGenTitle"  text="{RequestDetails>/description}" wrapping="true"/>
                         </uxap:expandedHeading>
                         <uxap:snappedHeading>
                             <FlexBox id="_IDGenFlexBox" fitContainer="true" alignItems="Center">
-                                <Title id="_IDGenTitle1"  text="{description}" wrapping="true" />
+                                <Title id="_IDGenTitle1"  text="{RequestDetails>/description}" wrapping="true" />
                             </FlexBox>
                         </uxap:snappedHeading>                   
 
                         <uxap:expandedContent>
                             <HBox id="_IDGenHBox">
                                 <Title id="_IDGenTitle2" text="Status: " class="sapUiTinyMarginEnd" />
-                                <ObjectStatus id="auditScoreDetailStatus" text="{status}" />
+                                <ObjectStatus id="auditScoreDetailStatus" text="{RequestDetails>/status}" />
                             </HBox>
 
                             <HBox id="_IDGenHBox1">
@@ -36,13 +36,13 @@
 
                             <HBox id="_IDGenHBox2">
                                 <Title id="_IDGenTitle4" text="Created By: " class="sapUiTinyMarginEnd"/>
-                                <ObjectStatus id="auditScoreDetailAuditType" text="{CreatedBy}" />
+                                <ObjectStatus id="auditScoreDetailAuditType" text="{RequestDetails>/createdBy}" />
                             </HBox>
 
                             <HBox id="_IDGenHBox3">
                                 <Title id="_IDGenTitle5" text="Created At: " class="sapUiTinyMarginEnd"/>
                                 <ObjectStatus id="auditScoreDetailCreatedAt" text="{
-                                    path: 'createdAt',
+                                    path: 'RequestDetails>/createdAt',
                                     type: 'sap.ui.model.odata.type.DateTimeOffset',
                                     constraints: {
                                         precision: 3,
@@ -50,27 +50,34 @@
                                     }                                
                                 }"/>
                             </HBox>
-
-                            <HBox id="_IDGenHBox4">
-                                <Title id="_IDGenTitle6" text="{i18n>auditScoreDetailCreatedBy}: " class="sapUiTinyMarginEnd"/>
-                                <ObjectStatus id="auditScoreDetailCreatedBy" text="{auditScoreItemModel>/createdBy}" />
-                            </HBox>
                         </uxap:expandedContent>
 
                         <uxap:snappedContent>
-                            <HBox id="_IDGenHBox5">
-                                <Title id="_IDGenTitle7" text="{i18n>auditScoreDetailStatus}: " class="sapUiTinyMarginEnd" />
-                                <ObjectStatus id="_IDGenObjectStatus" text="{auditScoreItemModel>/statusText}" state="{path:'auditScoreItemModel>/statusId', formatter:'.formatter.getAuditScoreStatusState'}" />
-                            </HBox>
-                            
-                            <HBox id="_IDGenHBox6">
-                                <Title id="_IDGenTitle8" text="{i18n>auditScoreDetailSupplier}: " class="sapUiTinyMarginEnd"/>
-                                <ObjectStatus id="_IDGenObjectStatus1" text="{= ${auditScoreItemModel>/supplierId} === '' ? '' : ${auditScoreItemModel>/erpSystemId} + ' - ' + ${path: 'auditScoreItemModel>/supplierId', formatter: '.formatter.fnFormatSupplierId'} + ' - ' + ${auditScoreItemModel>/supplierName}}" />
+                             <HBox id="_IDGenHBox4">
+                                <Title id="_IDGenTitle6"  text="Status: " class="sapUiTinyMarginEnd" />
+                                <ObjectStatus id="_IDGenObjectStatus"  text="{RequestDetails>/status}" />
                             </HBox>
 
-                            <HBox id="_IDGenHBox7">
-                                <Title id="_IDGenTitle9" text="{i18n>auditScoreDetailAuditType}: " class="sapUiTinyMarginEnd"/>
-                                <ObjectStatus id="_IDGenObjectStatus2" text="{auditScoreItemModel>/auditTypeText}" />
+                            <HBox id="_IDGenHBox5" >
+                                <Title id="_IDGenTitle7"  text="Total Amount: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="_IDGenObjectStatus1"  text="5.000.000 VND" />
+                            </HBox>
+
+                            <HBox id="_IDGenHBox6" >
+                                <Title id="_IDGenTitle8"  text="Created By: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="_IDGenObjectStatus2"  text="{RequestDetails>/createdBy}" />
+                            </HBox>
+
+                            <HBox id="_IDGenHBox7" >
+                                <Title id="_IDGenTitle9"  text="Created At: " class="sapUiTinyMarginEnd"/>
+                                <ObjectStatus id="_IDGenObjectStatus5"  text="{
+                                    path: 'RequestDetails>/createdAt',
+                                    type: 'sap.ui.model.odata.type.DateTimeOffset',
+                                    constraints: {
+                                        precision: 3,
+                                        v4: true
+                                    }                                
+                                }"/>
                             </HBox>
                         </uxap:snappedContent>
 
@@ -88,36 +95,45 @@
                                         <Input id="_IDGenInput" 
                                             placeholder="Transfer Office"
                                             ariaLabelledBy="InputNumberLabel"
-                                            value="{auditScoreItemModel>/auditScore}"
+                                            value="{RequestDetails>/description}"
                                             class="sapUiSmallMarginBottom"
                                             change="onBasicDataValidation" 
                                             editable="true" />
 
                                         <Label id="_IDGenLabel1"  text="Currency" required="true"/>
                                         <Select id="_IDGenSelect"  
-                                                selectedKey="{auditScoreItemModel>/auditLabel}" 
+                                                selectedKey="{RequestDetails>/currency}"
                                                 editable="true"
-                                                items="{susF4HelpSrv>/F4Help_RiskScoreAuditLabel}" 
                                                 class="sapUiSmallMarginBottom">
-                                            <core:Item id="_IDGenItem"  key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                                            <core:Item id="_IDGenItem"  key="{RequestDetails>/currency}" text="{RequestDetails>/currency}" />
                                         </Select>
 
                                         <Label id="_IDGenLabel2"  text="Priority" required="false"/>
                                         <Select id="_IDGenSelect1"  
-                                                selectedKey="{auditScoreItemModel>/auditLabel}" 
+                                                selectedKey="{RequestDetails>/priority}"
                                                 editable="true"
-                                                items="{susF4HelpSrv>/F4Help_RiskScoreAuditLabel}" 
                                                 class="sapUiSmallMarginBottom">
-                                            <core:Item id="_IDGenItem1"  key="{susF4HelpSrv>fieldValue}" text="{susF4HelpSrv>valueDescription}" />
+                                            <core:Item id="_IDGenItem1"  key="{RequestDetails>/priority}" text="{RequestDetails>/priority}" />
                                         </Select>
 
                                         <Label id="_IDGenLabel3"  text="Due date" required="true" />
-                                        <DatePicker id="_IDGenDatePicker1"  change="onBasicDataValidation" 
-                                        editable="true"
-                                        placeholder="23/04/2025" value="{
-                                                            'path':'auditScoreItemModel>/validTo',
-                                                            'type':'sap.ui.model.type.Date'
-                                                        }" class="sapUiSmallMarginBottom" valueState="{fieldValueStateModel>/auditScoreValidToStage}"/>
+                                        <DatePicker
+                                            id="_IDGenDatePicker1"
+                                            change="onBasicDataValidation"
+                                            editable="true"
+                                            placeholder="23/04/2025"
+                                            value="{
+                                                path: 'RequestDetails>/dueDate',
+                                                type: 'sap.ui.model.type.Date',
+                                                formatOptions: {
+                                                    source: {
+                                                    pattern: 'dd/MM/yyyy'
+                                                    },
+                                                    pattern: 'dd/MM/yyyy'
+                                                }
+                                            }"
+                                            class="sapUiSmallMarginBottom" />
+
                                         <Button id="_IDGenButton1"  width="0.5rem" icon="sap-icon://information" type="Transparent" press="onShowValidInputRequiredInformation"/>
                                     </f:content>
                                 </f:SimpleForm>
@@ -126,7 +142,7 @@
                                     <f:content>
                                         <Label id="_IDGenLabel4"  text="Request Information" required="true" />
                                         <TextArea id="_IDGenTextArea" editable="true"
-                                                 value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="Describe more detail your request" maxLength="5000"/>
+                                                 value="{RequestDetails>/longDescription}" width="100%" rows="6" placeholder="Describe more detail your request" maxLength="5000"/>
                                     </f:content>
                                 </f:SimpleForm>
                             </VBox>
@@ -138,7 +154,7 @@
                         <uxap:subSections>
                         	<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection1"  >
                                 <Table id="_IDGenTable" busyIndicatorDelay="0"  growing="true" growingThreshold="100" growingScrollToLoad="true" updateFinished="setPoTableHeader" mode="None" sticky="ColumnHeaders,HeaderToolbar" width="auto" items="{
-                                        path: 'auditScoreItemModel>/activities',
+                                        path: 'RequestDetails>/expenseItems',
                                         sorter: {
                                             path: 'activityNo',
                                             descending: true
@@ -184,12 +200,12 @@
                                     <ColumnListItem id="_IDGenColumnListItem" >
                                         <cells>
                                             <!-- <Input id="_IDGenInput" value="{ExpenseItems>Id}" /> -->
-                                            <Input id="_IDGenInput6"  value="{ExpenseItems>description}" />
-                                            <Input id="_IDGenInput7"  value="{ExpenseItems>category}" />
-                                            <DatePicker id="_IDGenDatePicker2"  value="{ExpenseItems>billDate}" displayFormat="yyyy-MM-dd" />
-                                            <Input id="_IDGenInput8"  value="{ExpenseItems>paymentMethod}" />
-                                            <Input id="_IDGenInput9"  value="{ExpenseItems>ammount}" />
-                                            <Input id="_IDGenInput10"  value="{ExpenseItems>remark}" />
+                                            <Input id="_IDGenInput6"  value="{RequestDetails>description}" />
+                                            <Input id="_IDGenInput7"  value="{RequestDetails>category}" />
+                                            <DatePicker id="_IDGenDatePicker2"  value="{RequestDetails>billDate}" displayFormat="yyyy-MM-dd" />
+                                            <Input id="_IDGenInput8"  value="{RequestDetails>paymentMethod}" />
+                                            <Input id="_IDGenInput9"  value="{RequestDetails>ammount}" />
+                                            <Input id="_IDGenInput10"  value="{RequestDetails>remark}" />
                                         </cells>
                                     </ColumnListItem>
                                     </items>

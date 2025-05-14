@@ -112,7 +112,8 @@ createdAt: 2025-04-20T10:30:00Z
 
 
 ### Retrieve Bill Information by ID
-GET http://localhost:8080/odata/v4/CustomerService/Bills(ID=e2626401-bba4-4607-a690-ce8d715eca7e)?$expand=items
+GET /odata/v4/CustomerService/Requests(ID=e2626401-bba4-4607-a690-ce8d715eca7e)?$expand=expenseItems
+
 
 
 
