@@ -153,17 +153,29 @@
                     <uxap:ObjectPageSection id="_IDGenObjectPageSection1"  titleUppercase="false" title="{i18n>requestItems}">
                         <uxap:subSections>
                         	<uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection1"  >
-                                <Table id="_IDGenTable" busyIndicatorDelay="0"  growing="true" growingThreshold="100" growingScrollToLoad="true" updateFinished="setPoTableHeader" mode="None" sticky="ColumnHeaders,HeaderToolbar" width="auto" items="{
+                                <Table 
+                                    id="_IDGenTable"
+                                    busyIndicatorDelay="0"
+                                    growing="true"
+                                    growingThreshold="100"
+                                    growingScrollToLoad="true"
+                                    updateFinished="setPoTableHeader"
+                                    mode="MultiSelect"
+                                    sticky="ColumnHeaders,HeaderToolbar"
+                                    width="auto"
+                                    items="{
                                         path: 'RequestDetails>/expenseItems',
                                         sorter: {
                                             path: 'activityNo',
                                             descending: true
-                                        }}">
+                                        }
+                                    }">
                                     <headerToolbar>
                                         <OverflowToolbar id="_IDGenOverflowToolbar" >
                                             <Title id="_IDGenTitle10"  text="" level="H2"/>
                                             <ToolbarSpacer id="_IDGenToolbarSpacer"  />
                                             <Button id="_IDGenButton2"  text="Add Item" icon="sap-icon://add" press="onAddRow" />
+                                            <Button id="_IDGenButton6"  text="Delete" icon="sap-icon://delete" press=".onDelete" />
                                         </OverflowToolbar>
                                     </headerToolbar>
                                     <columns>
@@ -260,15 +272,33 @@
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
 
-                    <uxap:ObjectPageSection id="_IDGenObjectPageSection3"  titleUppercase="false" title="{i18n>requestComments}">
+                    <uxap:ObjectPageSection id="_IDGenObjectPageSection3"  titleUppercase="false" title="{i18n>commentOnDetailRequest}">
                         <uxap:subSections>
-                            <uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection3" >
-                                <f:SimpleForm id="_IDGenSimpleForm2"  editable="true" layout="ResponsiveGridLayout" >
-                                    <f:content>
-                                        <TextArea id="_IDGenTextArea1" editable="true"
-                                                   value="{auditScoreItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
-                                    </f:content>
-                                </f:SimpleForm>
+                            <uxap:ObjectPageSubSection id="ObjectPageSubSectionComments">
+                                <VBox id="_IDGenVBox1">
+                                    <Panel id="_IDGenPanel"
+                                        backgroundDesign="Transparent"
+                                        headerText="">
+                                        <content>
+                                            <FeedInput id="_IDGenFeedInput" post=".onPostComment" placeholder="{i18n>EnterYourComment}" />
+                                            <List
+                                                id="idCommentsList"
+                                                noDataText="{i18n>ObjectCommentNoData}"
+                                                showSeparators="Inner"
+                                                items="{
+                                                    path: 'RequestDetails>/comments',
+                                                    sorter: {
+                                                        path: 'createdAt',
+                                                        descending: true
+                                                    }
+                                                }">
+                                                <FeedListItem id="_IDGenFeedListItem"
+                                                    text="{RequestDetails>content}"
+                                                    timestamp="{RequestDetails>createdAt}" />
+                                            </List>
+                                        </content>
+                                    </Panel>
+                                </VBox>
                             </uxap:ObjectPageSubSection>
                         </uxap:subSections>
                     </uxap:ObjectPageSection>

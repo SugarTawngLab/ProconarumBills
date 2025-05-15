@@ -8,6 +8,19 @@ sap.ui.define([
 
 	return Controller.extend("ns.proconarumbills.controller.RequestDetail", {
 		onInit() {
+			var oData = {
+                items: []
+            };
+
+            var oData2 = {
+                attachments: [],
+            }
+        
+            var oModel = new sap.ui.model.json.JSONModel(oData);
+            var oModel2 = new sap.ui.model.json.JSONModel(oData2);
+            this.getView().setModel(oModel, "ExpenseItems");
+            this.getView().setModel(oModel2, "AttachmentItems");
+
 			const oRouter = this.getOwnerComponent().getRouter();
 			oRouter.getRoute("RequestDetail").attachPatternMatched(this.onObjectMatched, this);
 		},
@@ -45,6 +58,23 @@ sap.ui.define([
 				const oRouter = this.getOwnerComponent().getRouter();
 				oRouter.navTo("ListRequest", {}, true);
 			}
-		}
+		},
+
+		onAddRow: function () {
+			var oModel = this.getView().getModel("RequestDetails");
+			var aItems = oModel.getProperty("/expenseItems") || [];
+		
+			var oNewItem = {
+				description: "",
+				category: "",
+				billDate: null,
+				paymentMethod: "",
+				ammount: 0,
+				remark: ""
+			};
+		
+			aItems.push(oNewItem);
+			oModel.setProperty("/expenseItems", aItems);
+        },
 	});
 });

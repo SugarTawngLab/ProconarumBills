@@ -22,7 +22,6 @@
                                 <Title id="Title2" text="{i18n>createExpenseRequest}" wrapping="true" />
                             </FlexBox>
                         </uxap:snappedHeading>
-                        
                     </uxap:ObjectPageDynamicHeaderTitle>
                 </uxap:headerTitle>
 
@@ -90,13 +89,25 @@
                     <uxap:ObjectPageSection id="ObjectPageSection3" titleUppercase="false" title="{i18n>requestItems}">
                         <uxap:subSections>
                         	<uxap:ObjectPageSubSection id="ObjectPageSubSection2" >
-                                <Table busyIndicatorDelay="0" id="idExpenseItemsTable" growing="true" growingThreshold="100" growingScrollToLoad="true" updateFinished="setPoTableHeader" mode="None" sticky="ColumnHeaders,HeaderToolbar" width="auto" items="{
-                                        path: 'ExpenseItems>/items'}">
+                                <Table 
+                                    busyIndicatorDelay="0" 
+                                    id="idExpenseItemsTable" 
+                                    growing="true"
+                                    growingThreshold="100"
+                                    growingScrollToLoad="true"
+                                    updateFinished="setPoTableHeader"
+                                    mode="MultiSelect"
+                                    sticky="ColumnHeaders,HeaderToolbar"
+                                    width="auto"
+                                    items="{path: 'ExpenseItems>/items'}"
+                                    itemPress=".onItemPress"
+                                    >
                                     <headerToolbar>
                                         <OverflowToolbar id="OverflowToolbar3">
                                             <Title id="idTableHeaderText" text="" level="H2"/>
                                             <ToolbarSpacer id="toolbarSpacer1" />
                                             <Button id="_IDGenButton" text="Add Item" icon="sap-icon://add" press="onAddRow" />
+                                            <Button id="btnDeleteExpenseItems" text="Delete" icon="sap-icon://delete" press=".onDelete" />
                                         </OverflowToolbar>
                                     </headerToolbar>
                                     <columns>
@@ -116,26 +127,26 @@
                                             <Text id="Title15" text="Item Date" class="fontWeightBold" />
                                         </Column>
 
-                                        <Column id="pendingSteps" hAlign="End" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                        <Column id="pendingSteps" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
                                             <Text id="Title16" text="Vendor" class="fontWeightBold" />
                                         </Column>
 
-                                        <Column id="submittedSteps" hAlign="End" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
+                                        <Column id="submittedSteps" hAlign="Begin" vAlign="Middle" minScreenWidth="Desktop" demandPopin="true">
                                             <Text id="Title17" text="Remark" class="fontWeightBold" />
                                         </Column>
-                                    </columns>
 
+                                    </columns>
                                     <items>
-                                    <ColumnListItem id="columnListItemActivity">
-                                        <cells>
-                                            <Input id="_IDGenInput1" value="{ExpenseItems>description}" />
-                                            <Input id="_IDGenInput2" value="{ExpenseItems>category}" />
-                                            <DatePicker id="_IDGenDatePicker" value="{ExpenseItems>billDate}" displayFormat="yyyy-MM-dd" />
-                                            <Input id="_IDGenInput3" value="{ExpenseItems>paymentMethod}" />
-                                            <Input id="_IDGenInput4" value="{ExpenseItems>ammount}" />
-                                            <Input id="_IDGenInput5" value="{ExpenseItems>remark}" />
-                                        </cells>
-                                    </ColumnListItem>
+                                        <ColumnListItem id="columnListItemActivity">
+                                            <cells>
+                                                <Input id="_IDGenInput1" value="{ExpenseItems>description}" />
+                                                <Input id="_IDGenInput2" value="{ExpenseItems>category}" />
+                                                <DatePicker id="_IDGenDatePicker" value="{ExpenseItems>billDate}" displayFormat="yyyy-MM-dd" />
+                                                <Input id="_IDGenInput3" value="{ExpenseItems>paymentMethod}" />
+                                                <Input id="_IDGenInput4" value="{ExpenseItems>ammount}" />
+                                                <Input id="_IDGenInput5" value="{ExpenseItems>remark}" />
+                                            </cells>
+                                        </ColumnListItem>
                                     </items>
                                 </Table>
                             </uxap:ObjectPageSubSection>
@@ -152,28 +163,28 @@
                                                     fileTypeMismatch="onTypeMissmatch" 
                                                     fileTypes="txt,doc,pdf,xlsx,png,jpg" 
                                                     sameFilenameAllowed="true" 
-                                                    items="{auditScoreItemModel>/attachments}" 
+                                                    items="{AttachmentItems>/attachments}" 
                                                     fileNameLengthExceeded="onFileNameLength" 
                                                     fileSizeExceeded="onFileSizeExceeded" 
                                                     beforeItemEdited="onHandleBeforeEdit" 
                                                     afterItemEdited="onHandleAfterEditFile" 
                                                     beforeItemRemoved="onHandleBeforeRemoveFileUploadForAuditScore" 
                                                     afterItemRemoved="onHandleAfterRemoveFileUploadForAuditScore" 
-                                                    afterItemAdded="onUploadAttachmentChangeForAuditScore"
+                                                    afterItemAdded="onUploadItemAttachments"
                                                     uploadCompleted="onUploadCompleted"
                                                     uploadEnabled="true">
                                     <upload:items>
-                                        <upload:UploadSetItem id="UploadSetItem" fileName="{auditScoreItemModel>fileName}" 
+                                        <upload:UploadSetItem id="UploadSetItem" fileName="{AttachmentItems>fileName}" 
                                                                 openPressed="onDownloadAttachment" 
-                                                                url="#" 
-                                                                enabledRemove="true" 
+                                                                url="#"
+                                                                enabledRemove="true"
                                                                 visibleEdit="false" 
                                                                 visibleRemove="true">
                                                 <upload:statuses>
-                                                    <ObjectStatus id="ObjectStatus2" title="{i18n>uploadedBy}" text="{auditScoreItemModel>createdBy}" active="false"/>
-                                                    <ObjectStatus id="ObjectStatus3" title="{i18n>uploadedOn}" 
+                                                    <ObjectStatus id="ObjectStatus2" title="{AttachmentItems>uploadedBy}" text="{AttachmentItems>createdBy}" active="false"/>
+                                                    <ObjectStatus id="ObjectStatus3" title="{AttachmentItems>uploadedOn}" 
                                                                     text="{
-                                                                        path: 'auditScoreItemModel>createdAt',
+                                                                        path: 'AttachmentItems>createdAt',
                                                                         type: 'sap.ui.model.odata.type.DateTimeOffset',
                                                                         constraints: {
                                                                             precision: 3,
@@ -188,13 +199,13 @@
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
 
-                    <uxap:ObjectPageSection id="ObjectPageSection2" titleUppercase="false" title="{i18n>requestComments}">
+                    <uxap:ObjectPageSection id="ObjectPageSection2" titleUppercase="false" title="{i18n>requesterNote}">
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection id="ObjectPageSubSection4">
                                 <f:SimpleForm id="SimpleForm2" editable="true" layout="ResponsiveGridLayout" >
                                     <f:content>
                                         <TextArea editable="true"
-                                                  id="expenseRequestDetailLongText2" value="{expenseRequestItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>longDescMaxLength}" maxLength="5000"/>
+                                                  id="expenseRequestDetailLongText2" value="{expenseRequestItemModel>/longText}" width="100%" rows="6" placeholder="{i18n>requesterNoteContent}" maxLength="5000"/>
                                     </f:content>
                                 </f:SimpleForm>
                             </uxap:ObjectPageSubSection>
