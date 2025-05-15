@@ -70,5 +70,32 @@ sap.ui.define([
 			aItems.push(oNewItem);
 			oModel.setProperty("/expenseItems", aItems);
         },
+
+		onDelete: function () {
+            const oTable = this.byId("_IDGenTable");
+            const aSelectedItems = oTable.getSelectedItems();
+        
+            if (!aSelectedItems.length) {
+                sap.m.MessageToast.show("Please select at least one item to delete.");
+                return;
+            }
+        
+            const oModel = this.getView().getModel("RequestDetails");
+            const aItems = oModel.getProperty("/expenseItems");
+        
+            // Sort indexes descending so splicing doesn't shift indices
+            const aIndexesToRemove = aSelectedItems
+                .map(oItem => oItem.getBindingContext("RequestDetails").getPath())
+                .map(sPath => parseInt(sPath.split("/").pop(), 10))
+                .sort((a, b) => b - a); // important: remove from last to first
+        
+            aIndexesToRemove.forEach(iIndex => {
+                aItems.splice(iIndex, 1);
+            });
+        
+            oModel.setProperty("/expenseItems", aItems); // update the model
+        
+            sap.m.MessageToast.show(`${aIndexesToRemove.length} item(s) deleted.`);
+        },
 	});
 });
