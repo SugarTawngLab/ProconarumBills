@@ -114,6 +114,35 @@ sap.ui.define([
           
             aAttachments.push(oNewAttachment);
             oModel.setProperty("/attachments", aAttachments);
-        }
+        },
+
+		onHandleBeforeRemoveFileUploadForItemAttachments: function (oEvent) {
+			const oUploadSet = oEvent.getSource();
+			const oItem = oEvent.getParameter("item");
+		
+			// Cancel automatic deletion
+			oEvent.preventDefault();
+		
+			// Ask for confirmation
+			sap.m.MessageBox.confirm("Are you sure you want to delete this file?", {
+				actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+				onClose: (sAction) => {
+					if (sAction === sap.m.MessageBox.Action.OK) {
+						// Manually delete from model
+						const sFileName = oItem.getFileName();
+						const oModel = this.getView().getModel("AttachmentItems");
+						const aItems = oModel.getProperty("/attachments");
+						const iIndex = aItems.findIndex(item => item.fileName === sFileName);
+						if (iIndex > -1) {
+							aItems.splice(iIndex, 1);
+							oModel.setProperty("/attachments", aItems);
+						}
+		
+						// Also remove the item from UploadSet UI
+						oUploadSet.removeItem(oItem);
+					}
+				}
+			});
+		}
 	});
 });

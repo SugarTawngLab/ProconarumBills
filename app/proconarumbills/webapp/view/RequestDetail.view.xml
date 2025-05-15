@@ -241,8 +241,8 @@
                                                     fileSizeExceeded="onFileSizeExceeded" 
                                                     beforeItemEdited="onHandleBeforeEdit" 
                                                     afterItemEdited="onHandleAfterEditFile" 
-                                                    beforeItemRemoved="onHandleBeforeRemoveFileUploadForAuditScore" 
-                                                    afterItemRemoved="onHandleAfterRemoveFileUploadForAuditScore" 
+                                                    beforeItemRemoved="onHandleBeforeRemoveFileUploadForItemAttachments"
+                                                    afterItemRemoved="onHandleAfterRemoveFileUploadForAuditScore"
                                                     afterItemAdded="onUploadItemAttachments"
                                                     uploadCompleted="onUploadCompleted"
                                                     uploadEnabled="true">
