@@ -168,7 +168,7 @@
                                                     fileSizeExceeded="onFileSizeExceeded" 
                                                     beforeItemEdited="onHandleBeforeEdit" 
                                                     afterItemEdited="onHandleAfterEditFile" 
-                                                    beforeItemRemoved="onHandleBeforeRemoveFileUploadForAuditScore" 
+                                                    beforeItemRemoved="onHandleBeforeRemoveFileUploadForItemAttachments" 
                                                     afterItemRemoved="onHandleAfterRemoveFileUploadForAuditScore" 
                                                     afterItemAdded="onUploadItemAttachments"
                                                     uploadCompleted="onUploadCompleted"

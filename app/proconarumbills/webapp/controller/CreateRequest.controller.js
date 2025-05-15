@@ -97,6 +97,30 @@ sap.ui.define([
           
             aAttachments.push(oNewAttachment);
             oModel.setProperty("/attachments", aAttachments);
-        }  
+        },
+        
+        onHandleBeforeRemoveFileUploadForItemAttachments: function (oEvent) {
+			const oItem = oEvent.getParameter("item");
+			const sFileName = oItem.getFileName();
+			const oModel = this.getView().getModel("AttachmentItems");
+		
+			// Clone array (deep clone recommended if nested data)
+			const aItems = JSON.parse(JSON.stringify(oModel.getProperty("/attachments")));
+		
+			// Ask user for confirmation
+			oEvent.preventDefault();
+			sap.m.MessageBox.confirm("Are you sure you want to delete this file?", {
+				actions: [sap.m.MessageBox.Action.OK, sap.m.MessageBox.Action.CANCEL],
+				onClose: (sAction) => {
+					if (sAction === sap.m.MessageBox.Action.OK) {
+						const iIndex = aItems.findIndex(item => item.fileName === sFileName);
+						if (iIndex > -1) {
+							aItems.splice(iIndex, 1);
+							oModel.setProperty("/attachments", aItems);
+						}
+					}
+				}
+			});
+		}
     });
 });
