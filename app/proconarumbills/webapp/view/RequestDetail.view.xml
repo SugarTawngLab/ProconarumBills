@@ -226,7 +226,7 @@
                         </uxap:subSections>
                     </uxap:ObjectPageSection>
 
-                    <uxap:ObjectPageSection id="_IDGenObjectPageSection2"  titleUppercase="false" title="{i18n>requestAttachments}">
+                    <uxap:ObjectPageSection id="_IDGenObjectPageSection2" titleUppercase="false" title="{i18n>requestAttachments}">
                         <uxap:subSections>
                             <uxap:ObjectPageSubSection id="_IDGenObjectPageSubSection2"  >
                                 <upload:UploadSet id="_IDGenUploadSet"    
@@ -236,28 +236,28 @@
                                                     fileTypeMismatch="onTypeMissmatch" 
                                                     fileTypes="txt,doc,pdf,xlsx,png,jpg" 
                                                     sameFilenameAllowed="true" 
-                                                    items="{auditScoreItemModel>/attachments}" 
+                                                    items="{AttachmentItems>/attachments}" 
                                                     fileNameLengthExceeded="onFileNameLength" 
                                                     fileSizeExceeded="onFileSizeExceeded" 
                                                     beforeItemEdited="onHandleBeforeEdit" 
                                                     afterItemEdited="onHandleAfterEditFile" 
                                                     beforeItemRemoved="onHandleBeforeRemoveFileUploadForAuditScore" 
                                                     afterItemRemoved="onHandleAfterRemoveFileUploadForAuditScore" 
-                                                    afterItemAdded="onUploadAttachmentChangeForAuditScore"
+                                                    afterItemAdded="onUploadItemAttachments"
                                                     uploadCompleted="onUploadCompleted"
                                                     uploadEnabled="true">
                                     <upload:items>
-                                        <upload:UploadSetItem id="_IDGenUploadSetItem"  fileName="{auditScoreItemModel>fileName}" 
+                                        <upload:UploadSetItem id="_IDGenUploadSetItem"  fileName="{AttachmentItems>fileName}" 
                                                                 openPressed="onDownloadAttachment" 
-                                                                url="#" 
-                                                                enabledRemove="true" 
+                                                                url="#"
+                                                                enabledRemove="true"
                                                                 visibleEdit="false" 
                                                                 visibleRemove="true">
                                                 <upload:statuses>
-                                                    <ObjectStatus id="_IDGenObjectStatus3"  title="{i18n>uploadedBy}" text="{auditScoreItemModel>createdBy}" active="false"/>
-                                                    <ObjectStatus id="_IDGenObjectStatus4"  title="{i18n>uploadedOn}" 
+                                                    <ObjectStatus id="_IDGenObjectStatus3"  title="{AttachmentItems>uploadedBy}" text="{AttachmentItems>createdBy}" active="false"/>
+                                                    <ObjectStatus id="_IDGenObjectStatus4"  title="{AttachmentItems>uploadedOn}" 
                                                                     text="{
-                                                                        path: 'auditScoreItemModel>createdAt',
+                                                                        path: 'AttachmentItems>createdAt',
                                                                         type: 'sap.ui.model.odata.type.DateTimeOffset',
                                                                         constraints: {
                                                                             precision: 3,

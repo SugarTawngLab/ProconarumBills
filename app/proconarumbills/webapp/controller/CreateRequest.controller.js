@@ -97,7 +97,6 @@ sap.ui.define([
           
             aAttachments.push(oNewAttachment);
             oModel.setProperty("/attachments", aAttachments);
-          }
-          
+        }  
     });
 });

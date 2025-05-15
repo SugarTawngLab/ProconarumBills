@@ -97,5 +97,23 @@ sap.ui.define([
         
             sap.m.MessageToast.show(`${aIndexesToRemove.length} item(s) deleted.`);
         },
+
+		onUploadItemAttachments: function (oEvent) {
+            const oUploadItem = oEvent.getParameter("item");
+            const sFileName = oUploadItem.getFileName();
+          
+            const oModel = this.getView().getModel("AttachmentItems");
+            const aAttachments = oModel.getProperty("/attachments") || [];
+          
+            const oNewAttachment = {
+              fileName: sFileName,
+              mimeType: oUploadItem.getMediaType(),
+              createdBy: "AHuy@gmail.com", // Get from auth token or model
+              createdAt: new Date().toISOString()
+            };
+          
+            aAttachments.push(oNewAttachment);
+            oModel.setProperty("/attachments", aAttachments);
+        }
 	});
 });
